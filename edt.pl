@@ -49,10 +49,10 @@ prof(PICAROUGNE).
 
 plage(1, 08.00, 09.50).
 plage(2, 09.75, 11.25).
-plage(2, 11.50, 13.00).
-plage(2, 14.00, 15.50).
-plage(2, 15.75, 17.25).
-plage(2, 17.50, 19.00).
+plage(3, 11.50, 13.00).
+plage(4, 14.00, 15.50).
+plage(5, 15.75, 17.25).
+plage(6, 17.50, 19.00).
 
 ################################################################################
 #                                    Jour                                      #
@@ -121,4 +121,33 @@ accueille(E202, TD).
 #                                  Séances                                     #
 ################################################################################
 
+# Séances IA #
+seance(1, CM, MARTINEZ, IA, INFO).
+seance(2, TD, MARTINEZ, IA, SILR2).
+seance(3, TP, MARTINEZ, IA, SILR2).
+seance(4, TD, LECAPITAINE, IA, ID).
+seance(5, TP, LECAPITAINE, IA, ID).
+seance(6, TD, RASCHIA, IA, SILR1).
+seance(7, TP, RASCHIA, IA, SILR1).
 
+# Séances Projet IA# 
+seance(8, TP, MARTINEZ, PROJET_IA, SILR2).
+seance(9, TP, LECAPITAINE, PROJET_IA, ID).
+seance(10, TP, RASCHIA, PROJET_IA, SILR1).
+
+# Séances Analyse de données # 
+seance(11, CM, KUNTZ, ANALYSE_DONNEES, ID).
+seance(12, TD, LECAPITAINE, ANALYSE_DONNEES, ID).
+
+# Séances Réseau #
+seance(13, CM, LEHN, RESEAU, SILR).
+seance(14, TP, LEHN, RESEAU, SILR1).
+seance(15, TP, PARREIN, RESEAU, SILR2).
+
+# Séances Parallélisme #
+seance(16, CM, MARTINEZ, PARALLELISME, SILR_PARA).
+seance(17, TD, MARTINEZ, PARALLELISME, SILR_PARA).
+
+# Séances Code #
+seance(18, CM, PICAROUGNE, CODE, SILR_CODE).
+seance(19, TP, PICAROUGNE, CODE, SILR_CODE).
