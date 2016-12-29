@@ -130,7 +130,7 @@ seance(5, TP, LECAPITAINE, IA, ID).
 seance(6, TD, RASCHIA, IA, SILR1).
 seance(7, TP, RASCHIA, IA, SILR1).
 
-# Séances Projet IA# 
+# Séances Projet IA # 
 seance(8, TP, MARTINEZ, PROJET_IA, SILR2).
 seance(9, TP, LECAPITAINE, PROJET_IA, ID).
 seance(10, TP, RASCHIA, PROJET_IA, SILR1).
@@ -151,3 +151,23 @@ seance(17, TD, MARTINEZ, PARALLELISME, SILR_PARA).
 # Séances Code #
 seance(18, CM, PICAROUGNE, CODE, SILR_CODE).
 seance(19, TP, PICAROUGNE, CODE, SILR_CODE).
+
+
+# suit( ID_suivante, ID_suivie )
+suit(2, 1).
+suit(3, 1).
+suit(4, 1).
+suit(5, 1).
+suit(6, 1).
+suit(7, 1).
+suit(8, 2).
+suit(8, 3).
+suit(9, 4).
+suit(9, 5).
+suit(10, 6).
+suit(10, 7).
+suit(12, 11).
+suit(14, 13).
+suit(15, 13).
+suit(17, 16).
+suit(19, 18).
