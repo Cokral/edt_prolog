@@ -3,43 +3,43 @@
 #                               Groupes                                        #
 ################################################################################
 
-groupe(INFO,      62).
-groupe(ID,        24).
-groupe(SILR,      38).
-groupe(SILR1,     18).
-groupe(SILR2,     20).
-groupe(SILR_PARA, 14).
-groupe(SILR_CODE, 24).
+groupe(info,      62).
+groupe(id,        24).
+groupe(silr,      38).
+groupe(silr1,     18).
+groupe(silr2,     20).
+groupe(silr_para, 14).
+groupe(silr_code, 24).
 
-groupe_appartient(ID, INFO).
-groupe_appartient(SILR, INFO).
-groupe_appartient(SILR1, SILR).
-groupe_appartient(SILR2, SILR).
-groupe_appartient(SILR_PARA, SILR).
-groupe_appartient(SILR_CODE, SILR).
+groupe_appartient(id, info).
+groupe_appartient(silr, info).
+groupe_appartient(silr1, silr).
+groupe_appartient(silr2, silr).
+groupe_appartient(silr_para, silr).
+groupe_appartient(silr_code, silr).
 
 ################################################################################
 #                               Matières                                       #
 ################################################################################
 
-matiere(IA).
-matiere(PROJET_IA).
-matiere(ANALYSE_DONNEES).
-matiere(RESEAU).
-matiere(PARALLELISME).
-matiere(CODE).
+matiere(ia).
+matiere(projet_ia).
+matiere(analyse_donnees).
+matiere(reseau).
+matiere(parallelisme).
+matiere(code).
 
 ################################################################################
 #                                   Profs                                      #
 ################################################################################
 
-prof(MARTINEZ).
-prof(LECAPITAINE).
-prof(RASCHIA).
-prof(KUNTZ).
-prof(LEHN).
-prof(PARREIN).
-prof(PICAROUGNE).
+prof(martinez).
+prof(lecapitaine).
+prof(raschia).
+prof(kuntz).
+prof(lehn).
+prof(parrein).
+prof(picarougne).
 
 ################################################################################
 #                                   Plages                                     #
@@ -68,89 +68,89 @@ jour(5).
 #                               Type de cours                                  #
 ################################################################################
 
-typeCours(CM).
-typeCours(TD).
-typeCours(TP).
-typeCours(DS).
-typeCours(MP).
-typeCours(TP_PARA).
-typeCours(TP_REZ).
-typeCours(DS_MACHINE).
+typeCours(cm).
+typeCours(td).
+typeCours(tp).
+typeCours(ds).
+typeCours(mp).
+typeCours(tp_para).
+typeCours(tp_rez).
+typeCours(ds_machine).
 
 ################################################################################
 #                                   Salle                                      #
 ################################################################################
 
-salle(A1, 300).
-salle(A2, 200).
-salle(B001, 26).
-salle(C008, 50).
-salle(C009, 26).
-salle(C007, 10).
-salle(E101, 24).
-salle(E102, 24).
-salle(E103, 24).
-salle(E104, 24).
-salle(E202, 50).
+salle(a1, 300).
+salle(a2, 200).
+salle(b001, 26).
+salle(c008, 50).
+salle(c009, 26).
+salle(c007, 10).
+salle(e101, 24).
+salle(e102, 24).
+salle(e103, 24).
+salle(e104, 24).
+salle(e202, 50).
 
-accueille(A1, CM).
-accueille(A1, DS).
-accueille(A2, CM).
-accueille(A2, DS).
-accueille(B001, TP).
-accueille(B001, MP).
-accueille(B001, DS_MACHINE).
-accueille(C008, CM).
-accueille(C008, TD).
-accueille(C008, DS).
-accueille(C009, TP).
-accueille(C009, TP_PARA).
-accueille(C009, MP).
-accueille(C009, DS_MACHINE).
-accueille(C007, TP_REZ).
-accueille(E101, CM).
-accueille(E101, TD).
-accueille(E102, CM).
-accueille(E102, TD).
-accueille(E103, TD).
-accueille(E104, TD).
-accueille(E202, CM).
-accueille(E202, TD).
+accueille(a1, cm).
+accueille(a1, ds).
+accueille(a2, cm).
+accueille(a2, ds).
+accueille(b001, tp).
+accueille(b001, mp).
+accueille(b001, ds_machine).
+accueille(c008, cm).
+accueille(c008, td).
+accueille(c008, ds).
+accueille(c009, tp).
+accueille(c009, tp_para).
+accueille(c009, mp).
+accueille(c009, ds_machine).
+accueille(c007, tp_rez).
+accueille(e101, cm).
+accueille(e101, td).
+accueille(e102, cm).
+accueille(e102, td).
+accueille(e103, td).
+accueille(e104, td).
+accueille(e202, cm).
+accueille(e202, td).
 
 ################################################################################
 #                                  Séances                                     #
 ################################################################################
 
-# Séances IA #
-seance(1, CM, MARTINEZ, IA, INFO).
-seance(2, TD, MARTINEZ, IA, SILR2).
-seance(3, TP, MARTINEZ, IA, SILR2).
-seance(4, TD, LECAPITAINE, IA, ID).
-seance(5, TP, LECAPITAINE, IA, ID).
-seance(6, TD, RASCHIA, IA, SILR1).
-seance(7, TP, RASCHIA, IA, SILR1).
+# Séances ia #
+seance(1, cm, martinez, ia, info).
+seance(2, td, martinez, ia, silr2).
+seance(3, tp, martinez, ia, silr2).
+seance(4, td, lecapitaine, ia, id).
+seance(5, tp, lecapitaine, ia, id).
+seance(6, td, raschia, ia, silr1).
+seance(7, tp, raschia, ia, silr1).
 
-# Séances Projet IA # 
-seance(8, TP, MARTINEZ, PROJET_IA, SILR2).
-seance(9, TP, LECAPITAINE, PROJET_IA, ID).
-seance(10, TP, RASCHIA, PROJET_IA, SILR1).
+# Séances Projet ia #
+seance(8, tp, martinez, projet_ia, silr2).
+seance(9, tp, lecapitaine, projet_ia, id).
+seance(10, tp, raschia, projet_ia, silr1).
 
-# Séances Analyse de données # 
-seance(11, CM, KUNTZ, ANALYSE_DONNEES, ID).
-seance(12, TD, LECAPITAINE, ANALYSE_DONNEES, ID).
+# Séances Analyse de données #
+seance(11, cm, kuntz, analyse_donnees, id).
+seance(12, td, lecapitaine, analyse_donnees, id).
 
 # Séances Réseau #
-seance(13, CM, LEHN, RESEAU, SILR).
-seance(14, TP, LEHN, RESEAU, SILR1).
-seance(15, TP, PARREIN, RESEAU, SILR2).
+seance(13, cm, lehn, reseau, silr).
+seance(14, tp, lehn, reseau, silr1).
+seance(15, tp, parrein, reseau, silr2).
 
 # Séances Parallélisme #
-seance(16, CM, MARTINEZ, PARALLELISME, SILR_PARA).
-seance(17, TD, MARTINEZ, PARALLELISME, SILR_PARA).
+seance(16, cm, martinez, parallelisme, silr_para).
+seance(17, td, martinez, parallelisme, silr_para).
 
 # Séances Code #
-seance(18, CM, PICAROUGNE, CODE, SILR_CODE).
-seance(19, TP, PICAROUGNE, CODE, SILR_CODE).
+seance(18, cm, picarougne, code, silr_code).
+seance(19, tp, picarougne, code, silr_code).
 
 
 # suit( ID_suivante, ID_suivie )
