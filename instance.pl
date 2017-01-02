@@ -1,6 +1,8 @@
 /* instance.pl
 
 @changelog
+837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
+569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
 47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
 9443ae1 Guillaume Clochard      Mon Jan 2 08:03:18 2017 +0100   Convertion # --> %
 00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
@@ -40,11 +42,17 @@ groupe(silr_code, 24).
 incomp(id, info).
 incomp(silr, info).
 incomp(silr1, silr).
+incomp(silr1, info).
 incomp(silr2, silr).
+incomp(silr2, info).
 incomp(silr_para, silr1).
-incomp(silr_code, silr1).
 incomp(silr_para, silr2).
+incomp(silr_para, silr).
+incomp(silr_para, info).
+incomp(silr_code, silr1).
 incomp(silr_code, silr2).
+incomp(silr_code, silr).
+incomp(silr_code, info).
 
 % reflexive
 incompatibles(X, X).
@@ -52,10 +60,6 @@ incompatibles(X, X).
 % symétrique
 incompatibles(X, Y) :- incomp(X, Y).
 incompatibles(X, Y) :- incomp(Y, X).
-
-% relation hiérarchique
-incompatibles(X, Z) :- incomp(X, Y), incomp(Y, Z).
-incompatibles(Z, X) :- incomp(X, Y), incomp(Y, Z).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Matières                                       %
@@ -200,42 +204,43 @@ accueille(e202, td).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * seances(Id, TypeCours, Matiere)
+ * seances(Id, TypeCours, Matiere, Nom)
  *
  * @arg Id          Id de la séance
  * @arg TypeCours   Type de cours de la séance
  * @arg Matiere     Matiere à laquelle la séance appartient
+ * @arg Nom         Nom de la séance
  */
 % Séances ia
-seance(1, cm, ia).
-seance(2, td, ia).
-seance(3, tp, ia).
-seance(4, td, ia).
-seance(5, tp, ia).
-seance(6, td, ia).
-seance(7, tp, ia).
+seance(1, cm, ia, 'CM').
+seance(2, td, ia, 'TD 1 - SILR2').
+seance(3, tp, ia, 'TP 1 - SILR2').
+seance(4, td, ia, 'TD 1 - ID').
+seance(5, tp, ia, 'TP 1 - ID').
+seance(6, td, ia, 'TD 1 - SILR').
+seance(7, tp, ia, 'TP 1 - SILR1').
 
 % Séances Projet ia
-seance(8, tp, projet_ia).
-seance(9, tp, projet_ia).
-seance(10, tp, projet_ia).
+seance(8, tp, projet_ia, 'TP - SILR2').
+seance(9, tp, projet_ia, 'TP - ID').
+seance(10, tp, projet_ia, 'TP - SILR').
 
 % Séances Analyse de données
-seance(11, cm, analyse_donnees).
-seance(12, td, analyse_donnees).
+seance(11, cm, analyse_donnees, 'CM').
+seance(12, td, analyse_donnees, 'TD').
 
 % Séances Réseau
-seance(13, cm, reseau).
-seance(14, tp, reseau).
-seance(15, tp, reseau).
+seance(13, cm, reseau, 'CM').
+seance(14, tp, reseau, 'TP - SILR1').
+seance(15, tp, reseau, 'TP - SILR2').
 
 % Séances Parallélisme
-seance(16, cm, parallelisme).
-seance(17, td, parallelisme).
+seance(16, cm, parallelisme, 'CM').
+seance(17, td, parallelisme, 'TD').
 
 % Séances Code
-seance(18, cm, code).
-seance(19, tp, code).
+seance(18, cm, code, 'CM').
+seance(19, tp, code, 'TP').
 
 /**
  * groupeSeance(Groupe, Seance)
