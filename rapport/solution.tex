@@ -126,6 +126,14 @@ de la modélisations UML et de l'ajout de détails comme :
 \subsection{Algorithme non déterministe}
 
 Nous avons choisit de formuler notre solution sous forme d'un algorithme non déterministe.
+Dans l'algorithme \ref{alg1} ci-dessous, on va déterminer une séance, un horaire, un jour ainsi qu'une salle de manière aléatoire.
+
+Puis on teste si les post-conditions données au-dessus sont respectées. 
+
+Si c'est le cas, on ajoute le créneau composé de ces données dans la liste des créneaux.
+Et on enlève la séance de la liste des séance.
+
+Puis on recommence jusqu'à ce qu'il n'y ait plus de séances disponibles.
 
 \begin{algorithm}                    
 \caption{basique}      
