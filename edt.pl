@@ -1,7 +1,7 @@
 
-################################################################################
-#                               Groupes                                        #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Groupes                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * groupe(Groupe, Effectif)
@@ -17,7 +17,7 @@ groupe(silr2,     20).
 groupe(silr_para, 14).
 groupe(silr_code, 24).
 
-# TODO changer en incompatibles
+% TODO changer en incompatibles
 groupe_appartient(id, info).
 groupe_appartient(silr, info).
 groupe_appartient(silr1, silr).
@@ -25,9 +25,9 @@ groupe_appartient(silr2, silr).
 groupe_appartient(silr_para, silr).
 groupe_appartient(silr_code, silr).
 
-################################################################################
-#                               Matières                                       #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Matières                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * matiere(Matiere)
@@ -41,9 +41,9 @@ matiere(reseau).
 matiere(parallelisme).
 matiere(code).
 
-################################################################################
-#                                   Profs                                      #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Profs                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * prof(Prof)
@@ -58,11 +58,11 @@ prof(lehn).
 prof(parrein).
 prof(picarougne).
 
-################################################################################
-#                                   Plages                                     #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Plages                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-# Selon les conseils de M. Le Capitaine, nous avons modifié les plages horaires
+% Selon les conseils de M. Le Capitaine, nous avons modifié les plages horaires
 
 /**
  * plage(Id, Start:int, End:int)
@@ -78,9 +78,9 @@ plage(4, 14.00, 15.50).
 plage(5, 15.75, 17.25).
 plage(6, 17.50, 19.00).
 
-################################################################################
-#                                    Jour                                      #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    Jour                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * jour(Id)
@@ -93,9 +93,9 @@ jour(3).
 jour(4).
 jour(5).
 
-################################################################################
-#                               Type de cours                                  #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Type de cours                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * typeCours(Type)
@@ -111,9 +111,9 @@ typeCours(tp_para).
 typeCours(tp_rez).
 typeCours(ds_machine).
 
-################################################################################
-#                                   Salle                                      #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Salle                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * salle(Nom, Effectif)
@@ -163,9 +163,9 @@ accueille(e104, td).
 accueille(e202, cm).
 accueille(e202, td).
 
-################################################################################
-#                                  Séances                                     #
-################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Séances                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
  * seances(Id, TypeCours, Matiere)
@@ -174,7 +174,7 @@ accueille(e202, td).
  * @arg TypeCours   Type de cours de la séance
  * @arg Matiere     Matiere à laquelle la séance appartient
  */
-# Séances ia
+% Séances ia
 seance(1, cm, ia).
 seance(2, td, ia).
 seance(3, tp, ia).
@@ -183,25 +183,25 @@ seance(5, tp, ia).
 seance(6, td, ia).
 seance(7, tp, ia).
 
-# Séances Projet ia
+% Séances Projet ia
 seance(8, tp, projet_ia).
 seance(9, tp, projet_ia).
 seance(10, tp, projet_ia).
 
-# Séances Analyse de données
+% Séances Analyse de données
 seance(11, cm, analyse_donnees).
 seance(12, td, analyse_donnees).
 
-# Séances Réseau
+% Séances Réseau
 seance(13, cm, reseau).
 seance(14, tp, reseau).
 seance(15, tp, reseau).
 
-# Séances Parallélisme
+% Séances Parallélisme
 seance(16, cm, parallelisme).
 seance(17, td, parallelisme).
 
-# Séances Code
+% Séances Code
 seance(18, cm, code).
 seance(19, tp, code).
 
@@ -213,7 +213,7 @@ seance(19, tp, code).
  * @arg Groupe      Nom du groupe
  * @arg Seance      Id de la séance
  */
-# Séances ia
+% Séances ia
 groupeSeance(info, 1).
 groupeSeance(silr2, 2).
 groupeSeance(silr2, 3).
@@ -222,25 +222,25 @@ groupeSeance(id, 5).
 groupeSeance(silr1, 6).
 groupeSeance(silr1, 7).
 
-# Séances Projet ia
+% Séances Projet ia
 groupeSeance(silr2, 8).
 groupeSeance(id, 9).
 groupeSeance(silr1, 10).
 
-# Séances Analyse de données
+% Séances Analyse de données
 groupeSeance(id, 11).
 groupeSeance(id, 12).
 
-# Séances Réseau
+% Séances Réseau
 groupeSeance(silr, 13).
 groupeSeance(silr1, 14).
 groupeSeance(silr2, 15).
 
-# Séances Parallélisme
+% Séances Parallélisme
 groupeSeance(silr_para, 16).
 groupeSeance(silr_para, 17).
 
-# Séances Code
+% Séances Code
 groupeSeance(silr_code, 18).
 groupeSeance(silr_code, 19).
 
@@ -252,7 +252,7 @@ groupeSeance(silr_code, 19).
  * @arg Prof        Nom de l'enseignant
  * @arg Seance      Id de la séance
  */
-# Séances ia
+% Séances ia
 profSeance(martinez, 1).
 profSeance(martinez, 2).
 profSeance(martinez, 3).
@@ -261,25 +261,25 @@ profSeance(lecapitaine, 5).
 profSeance(rashia, 6).
 profSeance(rashia, 7).
 
-# Séances Projet ia
+% Séances Projet ia
 profSeance(martinez, 8).
 profSeance(lecapitaine, 9).
 profSeance(raschia, 10).
 
-# Séances Analyse de données
+% Séances Analyse de données
 profSeance(kuntz, 11).
 profSeance(lecapitaine, 12).
 
-# Séances Réseau
+% Séances Réseau
 profSeance(lehn, 13).
 profSeance(lehn, 14).
 profSeance(parrein, 15).
 
-# Séances Parallélisme
+% Séances Parallélisme
 profSeance(martinez, 16).
 profSeance(martinez, 17).
 
-# Séances Code
+% Séances Code
 profSeance(picarougne, 18).
 profSeance(picarougne, 19).
 
