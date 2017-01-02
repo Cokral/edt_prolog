@@ -130,14 +130,14 @@ Nous avons choisit de formuler notre solution sous forme d'un algorithme non dé
 \begin{algorithm}                    
 \caption{basique}      
 \label{alg1}                           
-\begin{algorithmic}                    % enter the algorithmic environment
+\begin{algorithmic}                
     \REQUIRE $C = \emptyset$
     \WHILE{$|S| > 0$}
         \STATE $s \Leftarrow choix_nd(S)$
         \STATE $h \Leftarrow choix_nd(H)$
         \STATE $j \Leftarrow choix_nd(J)$
         \STATE $l \Leftarrow choix_nd(L)$
-        \STATE $C \Leftarrow (s, h, j, l)$
+        \STATE $c \Leftarrow (s, h, j, l)$
         \IF{les conditions sont respectées avec $c$}
             \STATE $C \Leftarrow c \cup C$
             \STATE $S \Leftarrow S / s$
