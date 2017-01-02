@@ -123,35 +123,43 @@ de la modélisations UML et de l'ajout de détails comme :
 
 \end{itemize}
 
+\newpage
 \subsection{Algorithme non déterministe}
 
-Nous avons choisit de formuler notre solution sous forme d'un algorithme non déterministe.
-Dans l'algorithme \ref{alg1} ci-dessous, on va déterminer une séance, un horaire, un jour ainsi qu'une salle de manière aléatoire.
+Nous avons choisit de formuler notre solution sous forme d'un algorithme non
+déterministe.
 
-Puis on teste si les post-conditions données au-dessus sont respectées. 
+Dans l'algorithme \ref{algo:algo1}, on construit des créneaux liant correctement
+une séance, un horaire, un jour ainsi qu'une salle à l'aide de l'\emph{oracle}
+\texttt{choix\_nd}.
 
-Si c'est le cas, on ajoute le créneau composé de ces données dans la liste des créneaux.
-Et on enlève la séance de la liste des séance.
+À chaque nouveau choix, on teste si les post-conditions $P_i$ données au-dessus
+sont respectées.
+Si c'est le cas, on ajoute le créneau composé de ces données
+dans la liste des créneaux et on enlève la séance de la liste des séance.
+Si ces les post-conditions ne sont pas respectées par le nouvel ajout, on
+retourne $\perp$ afin de marquer l'échec de ce créneau.
 
-Puis on recommence jusqu'à ce qu'il n'y ait plus de séances disponibles.
+On continue ainsi jusqu'à ce qu'il n'y ait plus de séances à placer.
 
-\begin{algorithm}                    
-\caption{basique}      
-\label{alg1}                           
-\begin{algorithmic}                
-    \REQUIRE $C = \emptyset$
+\begin{algorithm}
+\caption{Proposition de solution}
+\label{algo:algo1}
+\begin{algorithmic}
+    \STATE $C \Leftarrow \emptyset$
     \WHILE{$|S| > 0$}
         \STATE $s \Leftarrow choix\_nd(S)$
         \STATE $h \Leftarrow choix\_nd(H)$
         \STATE $j \Leftarrow choix\_nd(J)$
         \STATE $l \Leftarrow choix\_nd(L)$
         \STATE $c \Leftarrow (s, h, j, l)$
-        \IF{les conditions sont respectées avec $c$}
+        \IF{les post-conditions $P_i$ sont respectées avec $c$}
             \STATE $C \Leftarrow c \cup C$
-            \STATE $S \Leftarrow S / s$
+            \STATE $S \Leftarrow S \backslash s$
         \ELSE
             \RETURN $\perp$
         \ENDIF
     \ENDWHILE
 \end{algorithmic}
 \end{algorithm}
+
