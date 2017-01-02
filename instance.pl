@@ -1,3 +1,15 @@
+/* instance.pl
+
+@changelog
+47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
+9443ae1 Guillaume Clochard      Mon Jan 2 08:03:18 2017 +0100   Convertion # --> %
+00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
+a57af32 Guillaume Clochard      Mon Jan 2 06:38:22 2017 +0100   Ajout description prédicats
+88a4bd3 Guillaume Clochard      Sun Jan 1 21:28:08 2017 +0100   Fix case des constantes
+7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
+935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
+a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
+*/
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Groupes                                        %
