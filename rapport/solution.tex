@@ -3,7 +3,7 @@
 
 Il convient à présent de définir une première proposition de solution.
 
-Imaginons qu’on dispose d’une fonction $\text{PLANIFIER}$ en charge de créer
+Imaginons qu’on dispose d’une fonction $\textsc{Planifier}$ en charge de créer
 l’emploi du temps.
 
 Sa signature serait grossièrement :
@@ -12,9 +12,117 @@ Sa signature serait grossièrement :
 
 \item[Entrées] les séances $S$, les plages horaires $H$, les jours de
 travail $J$ et les salles $L$
-\item[Sortie] les créneaux $C$
+\item[Sortie] un sous-ensemble de tous les créneaux $C$
 
 \end{description}
 
+\begin{center}
+
+$ \begin{array}{ll}
+\textsc{Planifier} : S \times H \times J \times L \quad \not\to \quad C
+\end{array}$
+
+\end{center}
+
 On retrouve donc les objets modélisés à la Figure \ref{fig:uml}.
+
+\subsection{Pré-conditions}
+
+Les pré-conditions de la fonction $\textsc{Planifier}$ sont formées par le respect
+de la modélisations UML et de l'ajout de détails comme :
+
+\begin{itemize}
+
+    \item les jours sont des nombres entiers appartenant à $\mathbb{N}_{+}$
+    \item les plages horaires ne débordent pas des 24h et ne se recouvrent pas
+
+        \[
+            \forall(h_0, h_1) \in H, h_0 \leq 0h00, h_1 \leq 23h59
+        \]
+
+        \[
+            \forall(h_0, h_1),(h_2, h_3) \in H, \;
+            h_0 < h_1 \leq h_2 < h_3 \;
+            \text{ou} \; h_2 < h_3 \leq h_0 < h_1
+        \]
+
+    \item tous les types de cours des séances voient une salle compatible
+
+        \[
+            \forall s \in S, \exists l \in L, \text{typeCours}(s) =
+            \text{typeCours}(l)
+        \]
+
+\end{itemize}
+
+\subsection{Post-conditions}
+
+\begin{itemize}
+
+    \item les créneaux ne débordent pas sur des horaires, des jours ou des
+        salles différents des entrés
+
+        \begin{equation}\label{eqn:p1}
+            \forall(s, h, j, l) \in \textsc{Planifier}(S, H, L, L),
+            s \in S, h \in H, j \in J, l \in L
+            \tag{P1}
+        \end{equation}
+
+    \item toutes les séances sont affectées à un créneau
+
+        \begin{equation}\label{eqn:p2}
+            \forall s \in S,
+            \exists(s, h, j, l) \in \textsc{Planifier}(S, H, L, L)
+            \tag{P2}
+        \end{equation}
+
+    \item toute séance est affectée à une salle qui respecte son type de cours
+        et son effectif
+
+        \begin{equation}\label{eqn:p3}
+            \forall(s, h, j, l) \in \textsc{Planifier}(S, H, L, L),\;
+            \text{typeCours}(s) = \text{typeCours}(l)
+            \  \text{et} \  \text{effectif}(s) \leq \text{taille}(l)
+            \tag{P3}
+        \end{equation}
+
+    \item un enseignant n'a pas deux séances en même temps
+
+        \begin{equation}\label{eqn:p4}
+            \forall(s_1, h, j, l_1), (s_2, h, j, l_2)
+            \in \textsc{Planifier}(S, H, L, L),\;
+            \text{prof}(s_1) \not= \text{prof}(l_2)
+            \tag{P4}
+        \end{equation}
+
+    \item des groupes incompatibles n'ont pas cours en même temps
+
+        \begin{equation}\label{eqn:p5}
+            \begin{split}
+                & \forall(s_1, h, j, l_1), (s_2, h, j, l_2)
+                \in \textsc{Planifier}(S, H, L, L),\;\\
+                & \lnot\text{incompatibles}(g_1, g_2)
+                \quad \forall g_1 \in groupes(s_1), \forall g_2 \in groupes(s_2)
+            \end{split}
+            \tag{P5}
+        \end{equation}
+
+    \item les créneaux respectent le séquencement des séances et des matières
+
+        \begin{equation}\label{eqn:p6}
+            \begin{split}
+                & \forall(s_1, h_1, j_1, l_1), (s_2, h_2, j_2, l_2)
+                \in \textsc{Planifier}(S, H, L, L),
+                \text{tel que} \  \text{suit}(s_2, s_1)\\
+                & \text{alors} \  j_2 \in O
+                \  \text{où} \  O = intervalleJours(s_1, s_2)\\
+                & \text{et si} \  j_2 = j_1 \  \text{alors} \  h_2 > h_1
+            \end{split}
+            \tag{P6}
+        \end{equation}
+
+\end{itemize}
+
+\subsection{Algorithme non déterministe}
+
 
