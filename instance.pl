@@ -330,12 +330,7 @@ profSeance(picarougne, 19).
  * @arg Seance_suivante     Id de la séance qui suit
  * @arg Seance_suivie       Id de la séance suivit
  */
-suitSeance(2, 1).
-suitSeance(3, 1).
-suitSeance(4, 1).
-suitSeance(5, 1).
-suitSeance(6, 1).
-suitSeance(7, 1).
+
 suitSeance(8, 2).
 suitSeance(8, 3).
 suitSeance(9, 4).
@@ -347,3 +342,19 @@ suitSeance(14, 13).
 suitSeance(15, 13).
 suitSeance(17, 16).
 suitSeance(19, 18).
+
+/**
+ * suitSeance(Seance_suivante, Seance_suivie, tempsMin, tempsMax)
+ *
+ * @arg Seance_suivante     Id de la séance qui suit
+ * @arg Seance_suivie       Id de la séance suivit
+ * @arg tempsMin     		Nombre de jours min avant la prochaine séance
+ * @arg tempsMax       		Nombre de jours max avant la prochaine séance
+ */
+
+suitSeance(2, 1, 1, 1).
+suitSeance(3, 1, 1, 2).
+suitSeance(4, 1, 2, 5).
+suitSeance(5, 1, 1, 3).
+suitSeance(6, 1, 2, 2).
+suitSeance(7, 1, 1, 5).
