@@ -17,13 +17,33 @@ groupe(silr2,     20).
 groupe(silr_para, 14).
 groupe(silr_code, 24).
 
-% TODO changer en incompatibles
-groupe_appartient(id, info).
-groupe_appartient(silr, info).
-groupe_appartient(silr1, silr).
-groupe_appartient(silr2, silr).
-groupe_appartient(silr_para, silr).
-groupe_appartient(silr_code, silr).
+/**
+ * incompatibles(Groupe1, Groupe2)
+ *
+ * Définit l'incompatibilité entre 2 groupes (si il y a des étudiants en commun)
+ *
+ * @arg Groupe1     Nom du groupe 1
+ * @arg Groupe2     Nom du groupe 2
+ */
+incomp(id, info).
+incomp(silr, info).
+incomp(silr1, silr).
+incomp(silr2, silr).
+incomp(silr_para, silr1).
+incomp(silr_code, silr1).
+incomp(silr_para, silr2).
+incomp(silr_code, silr2).
+
+% reflexive
+incompatibles(X, X).
+
+% symétrique
+incompatibles(X, Y) :- incomp(X, Y).
+incompatibles(X, Y) :- incomp(Y, X).
+
+% relation hiérarchique
+incompatibles(X, Z) :- incomp(X, Y), incomp(Y, Z).
+incompatibles(Z, X) :- incomp(X, Y), incomp(Y, Z).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Matières                                       %
