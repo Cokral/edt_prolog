@@ -40,11 +40,17 @@ groupe(silr_code, 24).
 incomp(id, info).
 incomp(silr, info).
 incomp(silr1, silr).
+incomp(silr1, info).
 incomp(silr2, silr).
+incomp(silr2, info).
 incomp(silr_para, silr1).
-incomp(silr_code, silr1).
 incomp(silr_para, silr2).
+incomp(silr_para, silr).
+incomp(silr_para, info).
+incomp(silr_code, silr1).
 incomp(silr_code, silr2).
+incomp(silr_code, silr).
+incomp(silr_code, info).
 
 % reflexive
 incompatibles(X, X).
@@ -52,10 +58,6 @@ incompatibles(X, X).
 % symétrique
 incompatibles(X, Y) :- incomp(X, Y).
 incompatibles(X, Y) :- incomp(Y, X).
-
-% relation hiérarchique
-incompatibles(X, Z) :- incomp(X, Y), incomp(Y, Z).
-incompatibles(Z, X) :- incomp(X, Y), incomp(Y, Z).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Matières                                       %
