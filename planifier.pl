@@ -48,40 +48,40 @@ profDisponible(P, H, J, M, [C|Cs]) :-
     profDisponible(P, H, H, M, Cs),
     !.
 
-/**
- * planifier(+Ss, -Cs).
- *
- * @arg S   Listes des séances à planifier
- * @arg C   Listes des créneaux construits
- */
-% planifier([], Cs).
+*
+planifier(+Ss, -Cs).
 
-% planifier(Ss, Cs) :-
+@arg S   Listes des séances à planifier
+@arg C   Listes des créneaux construits
+planifier([], Cs).
 
-    % member(S, Ss),  % la séance
-    % seance(S, TypeS, _, _),
+planifier(Ss, Cs) :-
 
-    % plage(H, _, _), % une plage horaire
-    % date(J, M),     % une date
+    member(S, Ss),  % la séance
+    seance(S, TypeS, _, _),
 
-    % salle(L, TailleL),  % une salle
-    % accueille(L, TypeL),
+    plage(H, _, _), % une plage horaire
+    date(J, M),     % une date
 
-    % findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
-    % findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
+    salle(L, TailleL),  % une salle
+    accueille(L, TypeL),
 
-    % % Tests des conditions
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
-    % typesCoursIdentiques(TypeS, TypeL), % salle valide
+    % Tests des conditions
 
-    % profDisponible(P, H, J, M, Cs), % enseignant dispo à ce moment
+    typesCoursIdentiques(TypeS, TypeL), % salle valide
+    % todo check TailleL >= somme effectifs groupes
 
-    % C is [S, H, J, M, L],
-    % append([C], Cs, Cs2), % On retient le nouveau créneau
+    profDisponible(P, H, J, M, Cs), % enseignant dispo à ce moment
 
-    % delete(Ss, S, Ss2), % On enlève la séance traitée
+    C is [S, H, J, M, L],
+    append([C], Cs, Cs2), % On retient le nouveau créneau
 
-    % planifier(Ss2, Cs2).
+    delete(Ss, S, Ss2), % On enlève la séance traitée
+
+    planifier(Ss2, Cs2).
 
 
 %planifier(Ss, Cs) :- findall(S, seance(S, _, _, _), Ss).
