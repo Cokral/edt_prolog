@@ -1,13 +1,14 @@
 /* instance.pl
 
 @changelog
+f8e54ce Thomas Coquereau        Mon Jan 2 15:35:42 2017 +0100   ADD jours min et max pour le suiv
 837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
 569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
 47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
 9443ae1 Guillaume Clochard      Mon Jan 2 08:03:18 2017 +0100   Convertion # --> %
 00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
 a57af32 Guillaume Clochard      Mon Jan 2 06:38:22 2017 +0100   Ajout description prédicats
-88a4bd3 Guillaume Clochard      Sun Jan 1 21:28:08 2017 +0100   Fix case des constantes
+88a4bd3 Guillaume Clochard      Sun Jan 1 21:28:08 2017 +0100   Fix casse des constantes
 7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
 935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
 a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
@@ -101,18 +102,18 @@ prof(picarougne).
 % Selon les conseils de M. Le Capitaine, nous avons modifié les plages horaires
 
 /**
- * plage(Id, Start:int, End:int)
+ * plage(Id, Start:string, End:string)
  *
  * @arg Id      Id de la plage horaire
  * @arg Start   Heure de début de la plage
  * @arg End     Heure de fin de la plage
  */
-plage(1, 08.00, 09.50).
-plage(2, 09.75, 11.25).
-plage(3, 11.50, 13.00).
-plage(4, 14.00, 15.50).
-plage(5, 15.75, 17.25).
-plage(6, 17.50, 19.00).
+plage(1, "08h00", "09h30").
+plage(2, "09h45", "11h15").
+plage(3, "11h30", "13h00").
+plage(4, "14h00", "15h30").
+plage(5, "15h45", "17h15").
+plage(6, "17h30", "19h00").
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                    Jour                                      %
