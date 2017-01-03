@@ -56,11 +56,11 @@ incomp(silr_code, silr).
 incomp(silr_code, info).
 
 % reflexive
-incompatibles(X, X).
+incompatibles(X, X) :- !.
 
 % symétrique
-incompatibles(X, Y) :- incomp(X, Y).
-incompatibles(X, Y) :- incomp(Y, X).
+incompatibles(X, Y) :- incomp(X, Y), !.
+incompatibles(X, Y) :- incomp(Y, X), !.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Matières                                       %
@@ -141,8 +141,8 @@ date(5,1).
  * @arg J2  Jour date 2
  * @arg M2  Mois date 2
  */
-dateBefore(J1, M1, J2, M2) :- M1 < M2.
-dateBefore(J1, M1, J2, M2) :- M1 = M2, J1 < J2.
+dateBefore( _, M1,  _, M2) :- M1 < M2, !.
+dateBefore(J1, M1, J2, M2) :- M1 = M2, J1 < J2, !.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Type de cours                                  %
