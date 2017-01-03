@@ -6,6 +6,7 @@ Joue les tests unitaires importés
 569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
 */
 :- include('./tests/instance.pl').
+:- include('./tests/planifier.pl').
 
 :- initialization main.
 
