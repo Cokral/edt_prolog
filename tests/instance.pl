@@ -15,5 +15,8 @@ test("l'incompatiblité est symétrique") :-
     incompatibles(silr_para, info),
     incompatibles(info, silr_para).
 
+test("dateBefore: 1/01 < 2/01") :- dateBefore(1, 1, 2, 1).
+test("dateBefore: 1/01 < 1/02") :- dateBefore(1, 1, 1, 2).
+
 :- end_tests(incompatibles).
 

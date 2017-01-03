@@ -131,6 +131,19 @@ date(3,1).
 date(4,1).
 date(5,1).
 
+/**
+ * dateBefore(J1, M1, J2, M2)
+ *
+ * Test si date 1 < date 2
+ *
+ * @arg J1  Jour date 1
+ * @arg M1  Mois date 1
+ * @arg J2  Jour date 2
+ * @arg M2  Mois date 2
+ */
+dateBefore(J1, M1, J2, M2) :- M1 < M2.
+dateBefore(J1, M1, J2, M2) :- M1 = M2, J1 < J2.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Type de cours                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
