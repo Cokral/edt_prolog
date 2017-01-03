@@ -120,15 +120,16 @@ plage(6, "17h30", "19h00").
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * jour(Id)
+ * date(IdJour, IdMois)
  *
- * @arg Id  Id du jour
+ * @arg IdJour  Id du jour
+ * @arg IdMois  Id du mois
  */
-jour(1).
-jour(2).
-jour(3).
-jour(4).
-jour(5).
+date(1,1).
+date(2,1).
+date(3,1).
+date(4,1).
+date(5,1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                               Type de cours                                  %
