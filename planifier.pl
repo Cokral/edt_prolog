@@ -23,17 +23,15 @@ typesCoursIdentiques(X, X).
 memeMomentCreneau(H, J, M, [_, H2, J2, M2, _]) :- H = H2, J = J2, M = M2, !.
 
 /**
- * memeProf(P, C).
+ * memeProfs(P, C).
  *
- * Définit si P est le prof du créneau C.
+ * Définit si Ps sont des prof du créneau C.
  *
- * @arg P   L'enseignant
+ * @arg Ps  Des enseignant
  * @arg C   Un créneau [S, H, J, M, L]
  */
-memeProf(P, [S, _, _, _, _]) :-
-    profSeance(P2, S),
-    P2 = P,
-    !.
+memeProfs([P|_], [S, _, _, _, _]) :- profSeance(P2, S), P2 = P, !.
+memeProfs([_|Ps], [S, H, J, M, L]) :- memeProfs(Ps, [S, H, J, M, L]), !.
 
 /**
  * groupeIncompatibleCreneau(G, C).
@@ -72,14 +70,14 @@ sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]):-
     suitSeance(S2, S),
     (dateBefore(J, M, J2, M2); H < H2),
     !.
-sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
+sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
     suitSeance(S, S2, Jmin, Jmax),
     joursParMois(Nb),
     Offset is ((J + M * Nb) - (J2 + M2 * Nb)),
     Offset >= Jmin,
     Offset =< Jmax,
     !.
-sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
+sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
     suitSeance(S2, S, Jmin, Jmax),
     joursParMois(Nb),
     Offset is ((J2 + M2 * Nb) - (J + M * Nb)),
@@ -95,21 +93,21 @@ sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
  * Définit si un cours n'est pas incompatible au moment donné avec les autres
  * cours de la liste de créneaux.
  *
- * @arg P   L'enseignant
+ * @arg Ps  Les enseignants
  * @arg G   Le groupe
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg Cs  Un créneau [S, H, J, M, L]
  */
-creneauValideCreneau(S, P, G, H, J, M, C) :-
+creneauValideCreneau(S, Ps, G, H, J, M, C) :-
     % le créneau valide le séquencement avec C
     sequencementValideCreneau(S, H, J, M, C),
     (
         % le créneau n'est pas au même moment que C
         (\+ memeMomentCreneau(H, J, M, C));
         % ou il ne concerne pas le même prof et un group incompatible que C
-        (\+ groupeIncompatibleCreneau(G, C), \+ memeProf(P, C))
+        (\+ groupeIncompatibleCreneau(G, C), \+ memeProfs(Ps, C))
     ),
     !.
 
@@ -119,17 +117,17 @@ creneauValideCreneau(S, P, G, H, J, M, C) :-
  * Définit si un creneau est valide (Pas de conflit de groupe ou d'enseignant).
  *
  * @arg S   La séance
- * @arg P   L'enseignant
+ * @arg Ps  Les enseignants
  * @arg G   Le groupe
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg Cs  Liste de créneaux [S, H, J, M, L]
  */
-creneauValide(_, _, _, _, _, _, []):- !.
-creneauValide(S, P, G, H, J, M, [C|Cs]):-
-    creneauValideCreneau(S, P, G, H, J, M, C),
-    creneauValide(S, P, G, H, J, M, Cs),
+creneauValide(_, _, _, _, _, _, []) :- !.
+creneauValide(S, Ps, G, H, J, M, [C|Cs]) :-
+    creneauValideCreneau(S, Ps, G, H, J, M, C),
+    creneauValide(S, Ps, G, H, J, M, Cs),
     !.
 
 /**
@@ -152,7 +150,7 @@ effectifGroupes([G|Gs], S) :-
  * @arg S   Listes des séances à planifier
  * @arg C   Listes des créneaux construits
  */
-planifier([], Cs).
+planifier([], _).
 
 planifier(Ss, Cs) :-
 
@@ -168,7 +166,7 @@ planifier(Ss, Cs) :-
     findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
     findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
-    % Tests des conditions
+    % Tests des conditions ----------------------------------------------------
 
     typesCoursIdentiques(TypeS, TypeL), % type de salle valide
 
@@ -176,7 +174,10 @@ planifier(Ss, Cs) :-
     effectifGroupes(Gs, S),
     S =< TailleL,
 
-    profDisponible(P, H, J, M, Cs), % enseignant dispo à ce moment
+    % test des contraintes sur cette proposition de créneau
+    creneauValideCreneau(S, Ps, H, J, M, L, Cs),
+
+    % Fin tests des conditions ------------------------------------------------
 
     C is [S, H, J, M, L],
     append([C], Cs, Cs2), % On retient le nouveau créneau
@@ -185,7 +186,6 @@ planifier(Ss, Cs) :-
 
     planifier(Ss2, Cs2).
 
-
-%planifier(Ss, Cs) :- findall(S, seance(S, _, _, _), Ss).
+planifier(Ss, Cs) :- findall(S, seance(S, _, _, _), Ss).
 
 

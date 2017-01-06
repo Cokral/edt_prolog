@@ -332,7 +332,9 @@ profSeance(lecapitaine, 12).
 % Séances Réseau
 profSeance(lehn, 13).
 profSeance(lehn, 14).
+profSeance(parrein, 14).
 profSeance(parrein, 15).
+profSeance(lehn, 15).
 
 % Séances Parallélisme
 profSeance(martinez, 16).
