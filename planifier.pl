@@ -153,11 +153,15 @@ effectifGroupes([G|Gs], S) :-
  * @arg S   Listes des séances à planifier
  * @arg C   Listes des créneaux construits
  */
-planifier([], _).
+planifier([], []) :- !.
 
-planifier(Ss, Cs) :-
+planifier(Ss, [C|Cs]) :-
 
-    member(S, Ss),  % la séance
+    member(S, Ss),      % La séance courante
+    delete(Ss, S, Ss2), % On l'enlève de la liste
+
+    planifier(Ss2, Cs), % on traite le sous-problème
+
     seance(S, TypeS, _, _),
 
     plage(H, _, _), % une plage horaire
@@ -166,31 +170,26 @@ planifier(Ss, Cs) :-
     salle(L, TailleL),  % une salle
     accueille(L, TypeL),
 
-    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
-    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
-
     % Tests des conditions ----------------------------------------------------
 
     typesCoursIdentiques(TypeS, TypeL), % type de salle valide
 
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
+
     % taille de salle valide
     effectifGroupes(Gs, Effectif),
     Effectif =< TailleL,
+
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
     % test des contraintes sur cette proposition de créneau
     creneauValide(S, Ps, Gs, H, J, M, Cs),
 
     % Fin tests des conditions ------------------------------------------------
 
-    C = [S, H, J, M, L],
-    append([C], Cs, Cs2), % On retient le nouveau créneau
-
-    delete(Ss, S, Ss2), % On enlève la séance traitée
-
-    planifier(Ss2, Cs2).
+    C = [S, H, J, M, L].
 
 planification(Cs) :-
    findall(S, seance(S, _, _, _), Ss),
    planifier(Ss, Cs).
-
 
