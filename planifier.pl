@@ -34,16 +34,19 @@ memeProfs([P|_], [S, _, _, _, _]) :- profSeance(P2, S), P2 = P, !.
 memeProfs([_|Ps], [S, H, J, M, L]) :- memeProfs(Ps, [S, H, J, M, L]), !.
 
 /**
- * groupeIncompatibleCreneau(G, C).
+ * groupesIncompatibleCreneau(Gs, C).
  *
- * Définit si G est incompatible avec le groupe de C.
+ * Définit si Gs sont incompatibles avec le groupe de C.
  *
- * @arg G   Le groupe
+ * @arg Gs  Les groupes
  * @arg C   Un créneau [S, H, J, M, L]
  */
-groupeIncompatibleCreneau(G, [S, _, _, _, _]) :-
+groupesIncompatibleCreneau([G|_], [S, _, _, _, _]) :-
     groupeSeance(G2, S),
     incompatibles(G, G2),
+    !.
+groupesIncompatibleCreneau([_|Gs], [S, H, J, M, L]) :-
+    groupesIncompatibleCreneau(Gs, [S, H, J, M, L]),
     !.
 
 /**
@@ -88,46 +91,46 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
 % TODO faire dans l'autre sens
 
 /**
- * creneauValideCreneau(P, G, H, J, M, C).
+ * creneauValideCreneau(P, Gs, H, J, M, C).
  *
  * Définit si un cours n'est pas incompatible au moment donné avec les autres
  * cours de la liste de créneaux.
  *
  * @arg Ps  Les enseignants
- * @arg G   Le groupe
+ * @arg Gs  Les groupes
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg Cs  Un créneau [S, H, J, M, L]
  */
-creneauValideCreneau(S, Ps, G, H, J, M, C) :-
+creneauValideCreneau(S, Ps, Gs, H, J, M, C) :-
     % le créneau valide le séquencement avec C
     sequencementValideCreneau(S, H, J, M, C),
     (
         % le créneau n'est pas au même moment que C
         (\+ memeMomentCreneau(H, J, M, C));
         % ou il ne concerne pas le même prof et un group incompatible que C
-        (\+ groupeIncompatibleCreneau(G, C), \+ memeProfs(Ps, C))
+        (\+ groupesIncompatibleCreneau(Gs, C), \+ memeProfs(Ps, C))
     ),
     !.
 
 /**
- * creneauValide(P, G, H, J, M, [Cs]).
+ * creneauValide(S, Ps, G, H, J, M, [Cs]).
  *
  * Définit si un creneau est valide (Pas de conflit de groupe ou d'enseignant).
  *
  * @arg S   La séance
  * @arg Ps  Les enseignants
- * @arg G   Le groupe
+ * @arg Gs  Les groupes
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg Cs  Liste de créneaux [S, H, J, M, L]
  */
 creneauValide(_, _, _, _, _, _, []) :- !.
-creneauValide(S, Ps, G, H, J, M, [C|Cs]) :-
-    creneauValideCreneau(S, Ps, G, H, J, M, C),
-    creneauValide(S, Ps, G, H, J, M, Cs),
+creneauValide(S, Ps, Gs, H, J, M, [C|Cs]) :-
+    creneauValideCreneau(S, Ps, Gs, H, J, M, C),
+    creneauValide(S, Ps, Gs, H, J, M, Cs),
     !.
 
 /**
@@ -171,21 +174,23 @@ planifier(Ss, Cs) :-
     typesCoursIdentiques(TypeS, TypeL), % type de salle valide
 
     % taille de salle valide
-    effectifGroupes(Gs, S),
-    S =< TailleL,
+    effectifGroupes(Gs, Effectif),
+    Effectif =< TailleL,
 
     % test des contraintes sur cette proposition de créneau
-    creneauValideCreneau(S, Ps, H, J, M, L, Cs),
+    creneauValide(S, Ps, Gs, H, J, M, Cs),
 
     % Fin tests des conditions ------------------------------------------------
 
-    C is [S, H, J, M, L],
+    C = [S, H, J, M, L],
     append([C], Cs, Cs2), % On retient le nouveau créneau
 
     delete(Ss, S, Ss2), % On enlève la séance traitée
 
     planifier(Ss2, Cs2).
 
-planifier(Ss, Cs) :- findall(S, seance(S, _, _, _), Ss).
+planification(Cs) :-
+   findall(S, seance(S, _, _, _), Ss),
+   planifier(Ss, Cs).
 
 

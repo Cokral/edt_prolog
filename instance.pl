@@ -291,7 +291,9 @@ groupeSeance(id, 11).
 groupeSeance(id, 12).
 
 % Séances Réseau
-groupeSeance(silr, 13).
+%groupeSeance(silr, 13).
+groupeSeance(silr1, 13).
+groupeSeance(silr2, 13).
 groupeSeance(silr1, 14).
 groupeSeance(silr2, 15).
 

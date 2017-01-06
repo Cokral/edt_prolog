@@ -54,14 +54,14 @@ test("memeProfs est faux sinon") :-
 
 :- begin_tests(groupeIncompatibleCreneau).
 
-test("groupeIncompatibleCreneau est vrai si le groupe est incompatible avec
+test("groupesIncompatibleCreneau est vrai si un groupe est incompatible avec
     le groupe de la séance ") :-
-    C = [1, 1, 1, 1, a1],
-    groupeIncompatibleCreneau(id, C).
+    C = [13, 1, 1, 1, a1],
+    groupesIncompatibleCreneau([silr1, id], C).
 
-test("groupeIncompatibleCreneau est faux sinon") :-
-    C = [11, 1, 1, 1, a1],
-    \+ groupeIncompatibleCreneau(silr2, C).
+test("groupesIncompatibleCreneau est faux sinon") :-
+    C = [13, 1, 1, 1, a1],
+    \+ groupesIncompatibleCreneau([id], C).
 
 :- end_tests(groupeIncompatibleCreneau).
 
