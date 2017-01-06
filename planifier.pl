@@ -48,11 +48,12 @@ profDisponible(P, H, J, M, [C|Cs]) :-
     profDisponible(P, H, H, M, Cs),
     !.
 
-*
-planifier(+Ss, -Cs).
-
-@arg S   Listes des séances à planifier
-@arg C   Listes des créneaux construits
+/**
+ * planifier(+Ss, -Cs).
+ *
+ * @arg S   Listes des séances à planifier
+ * @arg C   Listes des créneaux construits
+ */
 planifier([], Cs).
 
 planifier(Ss, Cs) :-
