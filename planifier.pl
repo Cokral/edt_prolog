@@ -49,6 +49,20 @@ profDisponible(P, H, J, M, [C|Cs]) :-
     !.
 
 /**
+ * effectifGroupes(+Gs, -S)
+ *
+ * @arg Gs  Liste de groupes
+ * @arg S   Somme des effectifs des groupes
+ */
+effectifGroupes([], 0) :- !.
+effectifGroupes([G], S) :- groupe(G, S), !.
+effectifGroupes([G|Gs], S) :-
+    effectifGroupes(Gs, S1),
+    groupe(G, S2),
+    S is S1 + S2,
+    !.
+
+/**
  * planifier(+Ss, -Cs).
  *
  * @arg S   Listes des séances à planifier
@@ -72,8 +86,11 @@ planifier(Ss, Cs) :-
 
     % Tests des conditions
 
-    typesCoursIdentiques(TypeS, TypeL), % salle valide
-    % todo check TailleL >= somme effectifs groupes
+    typesCoursIdentiques(TypeS, TypeL), % type de salle valide
+
+    % taille de salle valide
+    effectifGroupes(Gs, S),
+    S <= TailleL,
 
     profDisponible(P, H, J, M, Cs), % enseignant dispo à ce moment
 

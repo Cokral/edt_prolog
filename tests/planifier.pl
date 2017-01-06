@@ -62,3 +62,11 @@ test("profDisponible est faux si il y a au moins un créneau problématique") :-
     \+ profDisponible(martinez, 1, 1, 1, [C1, C2, C0, C3, C4]).
 
 :- end_tests(profDisponible).
+
+:- begin_tests(effectifGroupes).
+
+test("effectifGroupes renvoit 0 si pas de groupes") :- effectifGroupes([], 0).
+test("effectifGroupes renvoit le bon effectif si pas de groupes") :-
+    effectifGroupes([id, silr], 62).
+
+:- end_tests(effectifGroupes).
