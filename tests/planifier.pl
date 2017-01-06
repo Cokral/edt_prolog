@@ -66,6 +66,50 @@ test("groupeIncompatibleCreneau est faux sinon") :-
 :- end_tests(groupeIncompatibleCreneau).
 
 
+:- begin_tests(sequencementValideCreneau).
+
+test("sequencementValideCreneau est faux si suitSeance/4 n'est pas respecté") :-
+    C = [1, 1, 1, 1, a1], % pas assez loin
+    \+ sequencementValideCreneau(4, 1, 1, 1, C),
+
+    C1 = [1, 1, 1, 1, a1], % mois trop loin
+    \+ sequencementValideCreneau(4, 1, 1, 2, C1).
+
+test("sequencementValideCreneau est vrai si suitSeance/4 est respecté") :-
+    C = [1, 1, 0, 1, a1], % borne min
+    sequencementValideCreneau(4, 1, 2, 1, C),
+
+    C0 = [1, 1, 0, 1, a1], % milieu intervalle
+    sequencementValideCreneau(4, 1, 3, 1, C0),
+
+    C1 = [1, 1, 0, 1, a1], % borne max
+    sequencementValideCreneau(4, 1, 5, 1, C1),
+
+    % dans l'autre sens
+
+    C2 = [4, 1, 2, 1, a1], % borne min
+    sequencementValideCreneau(1, 1, 0, 1, C2),
+
+    C3 = [4, 1, 3, 1, a1], % milieu intervalle
+    sequencementValideCreneau(1, 1, 0, 1, C3),
+
+    C4 = [4, 1, 5, 1, a1], % borne max
+    sequencementValideCreneau(1, 1, 0, 1, C4).
+
+test("sequencementValideCreneau est faux si suitSeance/2 n'est pas respecté") :-
+    C = [2, 1, 1, 1, a1], % pas assez loin
+    \+ sequencementValideCreneau(8, 1, 1, 1, C).
+
+test("sequencementValideCreneau est vrai si suitSeance/2 est respecté") :-
+    C = [2, 1, 0, 1, a1],
+    sequencementValideCreneau(8, 1, 1, 1, C),
+
+    C1 = [8, 1, 1, 1, a1],
+    sequencementValideCreneau(2, 1, 0, 1, C1).
+
+:- end_tests(sequencementValideCreneau).
+
+
 :- begin_tests(creneauValideCreneau).
 
 test("creneauValideCreneau est faux si prof incompatible et meme moment") :-

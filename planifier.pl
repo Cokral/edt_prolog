@@ -38,7 +38,7 @@ memeProf(P, [S, _, _, _, _]) :-
 /**
  * groupeIncompatibleCreneau(G, C).
  *
- * Définit si G est incompatible avec le groupe de C. 
+ * Définit si G est incompatible avec le groupe de C.
  *
  * @arg G   Le groupe
  * @arg C   Un créneau [S, H, J, M, L]
@@ -49,11 +49,52 @@ groupeIncompatibleCreneau(G, [S, _, _, _, _]) :-
     !.
 
 /**
- * creneauValide(P, G, H, J, M, Cs).
+ * sequencementValideCreneau(S, H, J, M, C).
+ *
+ * Définit si le créneau potentiel est conforme avec le séquencement voulu
+ *
+ * @arg S   Une séance
+ * @arg H   La plage horaire
+ * @arg J   Le jour
+ * @arg M   Le mois
+ * @arg C   Un créneau [S, H, J, M, L]
+ */
+% la séance n'en pas en lien avec le créneau transmis
+sequencementValideCreneau(S, _, _, _, [S2, _, _, _, _]):-
+    \+ suitSeance(S, S2),
+    \+ suitSeance(S, S2, _, _),
+    !.
+sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]):-
+    suitSeance(S, S2),
+    (dateBefore(J2, M2, J, M); H2 < H),
+    !.
+sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]):-
+    suitSeance(S2, S),
+    (dateBefore(J, M, J2, M2); H < H2),
+    !.
+sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
+    suitSeance(S, S2, Jmin, Jmax),
+    joursParMois(Nb),
+    Offset is ((J + M * Nb) - (J2 + M2 * Nb)),
+    Offset >= Jmin,
+    Offset =< Jmax,
+    !.
+sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
+    suitSeance(S2, S, Jmin, Jmax),
+    joursParMois(Nb),
+    Offset is ((J2 + M2 * Nb) - (J + M * Nb)),
+    Offset >= Jmin,
+    Offset =< Jmax,
+    !.
+
+% TODO faire dans l'autre sens
+
+/**
+ * creneauValideCreneau(P, G, H, J, M, C).
  *
  * Définit si un cours n'est pas incompatible au moment donné avec les autres
  * cours de la liste de créneaux.
- * 
+ *
  * @arg P   L'enseignant
  * @arg G   Le groupe
  * @arg H   La plage horaire
@@ -61,12 +102,16 @@ groupeIncompatibleCreneau(G, [S, _, _, _, _]) :-
  * @arg M   Le mois
  * @arg Cs  Un créneau [S, H, J, M, L]
  */
-creneauValideCreneau(P, G, H, J, M, C) :- (\+ memeMomentCreneau(H, J, M, C), !);
-                                    (
-                                        \+ groupeIncompatibleCreneau(G, C),
-                                        \+ memeProf(P, C),
-                                        !
-                                    ).
+creneauValideCreneau(P, G, H, J, M, C) :-
+    % le créneau valide le séquencement avec C
+    sequencementValideCreneau(S, H, J, M, C),
+    (
+        % le créneau n'est pas au même moment que C
+        (\+ memeMomentCreneau(H, J, M, C));
+        % ou il ne concerne pas le même prof et un group incompatible que C
+        (\+ groupeIncompatibleCreneau(G, C), \+ memeProf(P, C))
+    ),
+    !.
 
 /**
  * creneauValide(P, G, H, J, M, [Cs]).
@@ -128,7 +173,7 @@ planifier(Ss, Cs) :-
 
     % taille de salle valide
     effectifGroupes(Gs, S),
-    S <= TailleL,
+    S =< TailleL,
 
     profDisponible(P, H, J, M, Cs), % enseignant dispo à ce moment
 

@@ -132,6 +132,13 @@ date(4,1).
 date(5,1).
 
 /**
+ * joursParMois(-Nb).
+ *
+ * @arg Nb  Nombre de jours par mois
+ */
+joursParMois(20).
+
+/**
  * dateBefore(J1, M1, J2, M2)
  *
  * Test si date 1 < date 2
