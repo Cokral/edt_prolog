@@ -162,30 +162,29 @@ planifier(Ss, [C|Cs]) :-
 
     planifier(Ss2, Cs), % on traite le sous-problème
 
+    % Création du créneau et tests ---------------------------------------------
+
     seance(S, TypeS, _, _),
+
+    % une salle
+    salle(L, TailleL),
+    accueille(L, TypeL),
+    typesCoursIdentiques(TypeS, TypeL), % type de salle valide
+
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
+    effectifGroupes(Gs, Effectif),
+    Effectif =< TailleL, % taille de salle valide
+
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
     plage(H, _, _), % une plage horaire
     date(J, M),     % une date
 
-    salle(L, TailleL),  % une salle
-    accueille(L, TypeL),
-
-    % Tests des conditions ----------------------------------------------------
-
-    typesCoursIdentiques(TypeS, TypeL), % type de salle valide
-
-    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
-
-    % taille de salle valide
-    effectifGroupes(Gs, Effectif),
-    Effectif =< TailleL,
-
-    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
-
-    % test des contraintes sur cette proposition de créneau
+    % test des contraintes (profs, incompatibilité groupes, séquencement)
+    % sur cette proposition de créneau
     creneauValide(S, Ps, Gs, H, J, M, Cs),
 
-    % Fin tests des conditions ------------------------------------------------
+    % Fin création du créneau et tests -----------------------------------------
 
     C = [S, H, J, M, L].
 
