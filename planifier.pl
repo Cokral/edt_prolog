@@ -11,41 +11,79 @@
 typesCoursIdentiques(X, X).
 
 /**
- * profDisponibleCreneau(P, H, J, M, C).
+ * memeMomentCreneau(H, J, M, C).
  *
- * Définit si un enseignant est disponible au moment indiqué malgré le
- * créneau donné
+ * Définit si les deux créneaux sont au même moment.
  *
- * @arg P   L'enseignant
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg C   Un créneau [S, H, J, M, L]
  */
-profDisponibleCreneau(_, H, _, _, [_, H2, _, _, _]) :- H \= H2, !.
-profDisponibleCreneau(_, _, J, _, [_, _, J2, _, _]) :- J \= J2, !.
-profDisponibleCreneau(_, _, _, M, [_, _, _, M2, _]) :- M \= M2, !.
-profDisponibleCreneau(P, _, _, _, [S, _, _, _, _]) :-
+memeMomentCreneau(H, J, M, [_, H2, J2, M2, _]) :- H = H2, J = J2, M = M2, !.
+
+/**
+ * memeProf(P, C).
+ *
+ * Définit si P est le prof du créneau C.
+ *
+ * @arg P   L'enseignant
+ * @arg C   Un créneau [S, H, J, M, L]
+ */
+memeProf(P, [S, _, _, _, _]) :-
     profSeance(P2, S),
-    P2 \= P,
+    P2 = P,
     !.
 
 /**
- * profDisponible(P, H, J, M, Cs).
+ * groupeIncompatibleCreneau(G, C).
  *
- * Définit si un enseignant est disponible au moment indiqué malgré la liste
- * de créneaux donnée
+ * Définit si G est incompatible avec le groupe de C. 
+ *
+ * @arg G   Le groupe
+ * @arg C   Un créneau [S, H, J, M, L]
+ */
+groupeIncompatibleCreneau(G, [S, _, _, _, _]) :-
+    groupeSeance(G2, S),
+    incompatibles(G, G2),
+    !.
+
+/**
+ * creneauValide(P, G, H, J, M, Cs).
+ *
+ * Définit si un cours n'est pas incompatible au moment donné avec les autres
+ * cours de la liste de créneaux.
+ * 
+ * @arg P   L'enseignant
+ * @arg G   Le groupe
+ * @arg H   La plage horaire
+ * @arg J   Le jour
+ * @arg M   Le mois
+ * @arg Cs  Un créneau [S, H, J, M, L]
+ */
+creneauValideCreneau(P, G, H, J, M, C) :- (\+ memeMomentCreneau(H, J, M, C), !);
+                                    (
+                                        \+ groupeIncompatibleCreneau(G, C),
+                                        \+ memeProf(P, C),
+                                        !
+                                    ).
+
+/**
+ * creneauValide(P, G, H, J, M, [Cs]).
+ *
+ * Définit si un creneau est valide (Pas de conflit de groupe ou d'enseignant).
  *
  * @arg P   L'enseignant
+ * @arg G   Le groupe
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg Cs  Liste de créneaux [S, H, J, M, L]
  */
-profDisponible(_, _, _, _, []) :- !.
-profDisponible(P, H, J, M, [C|Cs]) :-
-    profDisponibleCreneau(P, H, J, M, C),
-    profDisponible(P, H, H, M, Cs),
+creneauValide(_, _, _, _, _, []):- !.
+creneauValide(P, G, H, J, M, [C|Cs]):-
+    creneauValideCreneau(P, G, H, J, M, C),
+    creneauValide(P, G, H, J, M, Cs),
     !.
 
 /**
