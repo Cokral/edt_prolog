@@ -54,7 +54,8 @@ test("memeProf est faux sinon") :-
 
 :- begin_tests(groupeIncompatibleCreneau).
 
-test("groupeIncompatibleCreneau est vrai si le groupe est incompatible avec le groupe de la séance ") :-
+test("groupeIncompatibleCreneau est vrai si le groupe est incompatible avec
+    le groupe de la séance ") :-
     C = [1, 1, 1, 1, a1],
     groupeIncompatibleCreneau(id, C).
 
@@ -111,7 +112,7 @@ test("creneauValide est faux si il y a au moins un créneau problématique") :-
 :- begin_tests(effectifGroupes).
 
 test("effectifGroupes renvoit 0 si pas de groupes") :- effectifGroupes([], 0).
-test("effectifGroupes renvoit le bon effectif si pas de groupes") :-
+test("effectifGroupes renvoit le bon effectif") :-
     effectifGroupes([id, silr], 62).
 
 :- end_tests(effectifGroupes).
