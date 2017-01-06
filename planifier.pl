@@ -102,7 +102,7 @@ sequencementValideCreneau(S, H, J, M, [S2, _, J2, M2, _]):-
  * @arg M   Le mois
  * @arg Cs  Un créneau [S, H, J, M, L]
  */
-creneauValideCreneau(P, G, H, J, M, C) :-
+creneauValideCreneau(S, P, G, H, J, M, C) :-
     % le créneau valide le séquencement avec C
     sequencementValideCreneau(S, H, J, M, C),
     (
@@ -118,6 +118,7 @@ creneauValideCreneau(P, G, H, J, M, C) :-
  *
  * Définit si un creneau est valide (Pas de conflit de groupe ou d'enseignant).
  *
+ * @arg S   La séance
  * @arg P   L'enseignant
  * @arg G   Le groupe
  * @arg H   La plage horaire
@@ -125,10 +126,10 @@ creneauValideCreneau(P, G, H, J, M, C) :-
  * @arg M   Le mois
  * @arg Cs  Liste de créneaux [S, H, J, M, L]
  */
-creneauValide(_, _, _, _, _, []):- !.
-creneauValide(P, G, H, J, M, [C|Cs]):-
-    creneauValideCreneau(P, G, H, J, M, C),
-    creneauValide(P, G, H, J, M, Cs),
+creneauValide(_, _, _, _, _, _, []):- !.
+creneauValide(S, P, G, H, J, M, [C|Cs]):-
+    creneauValideCreneau(S, P, G, H, J, M, C),
+    creneauValide(S, P, G, H, J, M, Cs),
     !.
 
 /**

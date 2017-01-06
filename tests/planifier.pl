@@ -114,18 +114,24 @@ test("sequencementValideCreneau est vrai si suitSeance/2 est respecté") :-
 
 test("creneauValideCreneau est faux si prof incompatible et meme moment") :-
     C = [11, 1, 1, 1, a1],
-    \+ creneauValideCreneau(kuntz, silr2, 1, 1, 1, C).
+    \+ creneauValideCreneau(12, kuntz, silr2, 1, 1, 1, C).
 
 test("creneauValideCreneau est faux si groupe incompatible et meme moment") :-
     C = [11, 1, 1, 1, a1],
-    \+ creneauValideCreneau(martinez, id, 1, 1, 1, C).
+    \+ creneauValideCreneau(12, martinez, id, 1, 1, 1, C).
+
+test("creneauValideCreneau est faux si le séquencement n'est pas respecté") :-
+    C = [11, 1, 1, 1, a1],
+    \+ creneauValideCreneau(12, martinez, id, 1, 1, 1, C).
 
 test("creneauValideCreneau est vrai sinon") :-
-    C = [11, 1, 1, 1, a1],
+    C = [11, 1, 0, 1, a1],
     % moment différent
-    creneauValideCreneau(martinez, silr2, 1, 1, 2, C),
+    creneauValideCreneau(1, martinez, silr2, 1, 1, 2, C),
+    % séance suivante
+    creneauValideCreneau(12, martinez, silr2, 1, 1, 1, C),
     % prof et groupe différent
-    creneauValideCreneau(martinez, silr2, 1, 1, 1, C).
+    creneauValideCreneau(1, martinez, silr2, 1, 1, 1, C).
 
 :- end_tests(creneauValideCreneau).
 
@@ -133,14 +139,13 @@ test("creneauValideCreneau est vrai sinon") :-
 :- begin_tests(creneauValide).
 
 test("creneauValide est vrai si il n'y a pas de créneaux") :-
-    creneauValide(martinez, silr2, 1, 1, 2, []).
+    creneauValide(12, martinez, silr2, 1, 1, 2, []).
 
 test("creneauValide est vrai si il n'y a que des créneaux valides") :-
-    C1 = [11, 1, 1, 1, a1],
-    C2 = [12, 1, 1, 1, a1],
-    C3 = [1, 2, 1, 1, a1],
-    C4 = [11, 1, 1, 3, a1],
-    creneauValide(martinez, silr2, 1, 1, 1, [C1, C2, C3, C4]).
+    C1 = [11, 1, 0, 0, a1],
+    C2 = [1, 1, 0, 0, a1],
+    C3 = [2, 1, 0, 0, a1],
+    creneauValide(12, martinez, silr2, 1, 2, 1, [C1, C2, C3]).
 
 test("creneauValide est faux si il y a au moins un créneau problématique") :-
     C0 = [1, 1, 1, 1, a1],
@@ -148,7 +153,7 @@ test("creneauValide est faux si il y a au moins un créneau problématique") :-
     C2 = [12, 1, 1, 1, a1],
     C3 = [1, 2, 1, 1, a1],
     C4 = [11, 1, 1, 3, a1],
-    \+ creneauValide(martinez, silr2, 1, 1, 1, [C1, C2, C0, C3, C4]).
+    \+ creneauValide(12, martinez, silr2, 1, 1, 1, [C1, C2, C0, C3, C4]).
 
 :- end_tests(creneauValide).
 
