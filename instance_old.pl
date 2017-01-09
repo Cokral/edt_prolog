@@ -71,33 +71,12 @@ incompatibles(X, Y) :- incomp(Y, X), !.
  *
  * @arg Matiere     Nom de la matière
  **/
-matiere(projet_genie_logiciel).
-matiere(projet_transversal).
-
-matiere(hes_anglais).
-matiere(hes_gestion_projet).
-matiere(hes_marketing).
-matiere(hes_jeu).
-matiere(hes_sante_securite).
-
-matiere(connaissances_bdd).
-matiere(connaissances_projet_ia).
-matiere(connaissances_ia).
-matiere(connaissances_organisation).
-
-matiere(math_analyse_donnees).
-matiere(math_compta).
-matiere(math_crypto).
-matiere(math_opti).
-
-matiere(logiciel_archi_parallèle).
-matiere(logiciel_patrons).
-matiere(logiciel_projet_c).
-matiere(logiciel_c).
-matiere(logiciel_multimedia).
-matiere(logiciel_reseau).
-matiere(logiciel_signal).
-matiere(logiciel_outils).
+matiere(ia).
+matiere(projet_ia).
+matiere(analyse_donnees).
+matiere(reseau).
+matiere(parallelisme).
+matiere(code).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Profs                                      %
@@ -108,41 +87,13 @@ matiere(logiciel_outils).
  *
  * @arg Prof     Nom de l'enseignant
  **/
-prof(jpeg).
-prof(picarougne).
-prof(marcus).
-prof(prie).
-prof(ricordel).
 prof(martinez).
-prof(kuntz).
-prof(parrein).
-prof(nachouki).
-prof(porcheron).
-prof(oili).
-prof(pigeau).
-prof(soufiane).
-prof(milliat).
-prof(goncalves).
-prof(moreau).
-prof(falcher).
-prof(gelgon).
-prof(raschia).
 prof(lecapitaine).
-prof(peter).
+prof(raschia).
+prof(kuntz).
 prof(lehn).
-prof(le_callet).
-prof(kingston).
-prof(vigier).
-prof(perreira).
-prof(normand).
-prof(cohen).
-prof(olivier).
-prof(leman).
-prof(bigeard).
-prof(prof_anglais1).
-prof(prof_anglais2).
-prof(prof_anglais3).
-prof(prof_anglais4).
+prof(parrein).
+prof(picarougne).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Plages                                     %
@@ -169,39 +120,30 @@ plage(6, "17h30", "19h00").
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * mois(IdMois).
+ * date(IdJour, IdMois)
  *
+ * @arg IdJour  Id du jour
  * @arg IdMois  Id du mois
  */
-mois(1).
-mois(2).
-mois(3).
-mois(4).
+date(1,1).
+date(2,1).
+date(3,1).
+date(4,1).
+date(5,1).
 
 /**
-* joursParMois(-Nb).
-*
-* @arg Nb  Nombre de jours par mois
-*/
+ * joursParMois(-Nb).
+ *
+ * @arg Nb  Nombre de jours par mois
+ */
 joursParMois(20).
-
-/**
-* date(IdJour, IdMois)
-*
-* @arg IdJour  Id du jour
-* @arg IdMois  Id du mois
-*/
-date(J, M) :-   % TODO add tests
-    mois(M),
-    joursParMois(Max),
-    between(0, Max, J).
 
 /**
  * dateBefore(J1, M1, J2, M2)
  *
  * Test si date 1 < date 2
- * @arg J1  Jour date 1
  *
+ * @arg J1  Jour date 1
  * @arg M1  Mois date 1
  * @arg J2  Jour date 2
  * @arg M2  Mois date 2
@@ -226,37 +168,10 @@ typeCours(mp).
 typeCours(tp_para).
 typeCours(tp_rez).
 typeCours(ds_machine).
-typeCours(anglais).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Salle                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-/**
- * salle(Nom, Effectif, Types)
- *
- * @arg Nom         Nom de la salle
- * @arg Effectif    Nombre de place disponibles
- * @arg Types       Listes de types de cours
- **/
-salle(a1, 300, [cm, ds]).
-salle(a2, 200, [cm, ds]).
-salle(b001, 26, [tp, mp, ds_machine]).
-salle(c001, 26, [tp, mp, ds_machine]).
-salle(c002, 26, [tp, mp, ds_machine]).
-salle(c008, 50, [cm, td, ds]).
-salle(c009, 26, [tp, tp_para, mp, ds_machine]).
-salle(c007, 10, [tp_rez]).
-salle(e101, 24, [cm, td]).
-salle(e102, 24, [cm, td]).
-salle(e103, 24, [td]).
-salle(e104, 24, [td]).
-salle(e202, 50, [cm, td]).
-salle(iht_aronax, 100, [cm, td]).
-salle(iht_nemo, 50, [td]).
-salle(isitem_TD1, 30, [cm, td]).
-salle(isitem_TD2, 30, [cm, td]).
-salle(isitem_exam, 100, [ds]).
 
 /**
  * salle(Nom, Effectif)
@@ -264,7 +179,17 @@ salle(isitem_exam, 100, [ds]).
  * @arg Nom         Nom de la salle
  * @arg Effectif    Nombre de place disponibles
  **/
-salle(S, N) :- salle(S, N, _). % TODO add tests
+salle(a1, 300).
+salle(a2, 200).
+salle(b001, 26).
+salle(c008, 50).
+salle(c009, 26).
+salle(c007, 10).
+salle(e101, 24).
+salle(e102, 24).
+salle(e103, 24).
+salle(e104, 24).
+salle(e202, 50).
 
 /**
  * accueille(Salle, TypeCours)
@@ -272,109 +197,33 @@ salle(S, N) :- salle(S, N, _). % TODO add tests
  * @arg Salle       Nom d'une salle
  * @arg TypeCours   Type de cours que la salle accueille
  */
-accueille(S, T) :-  % TODO add tests
-    salle(S, _, L),
-    member(T, L).
+accueille(a1, cm).
+accueille(a1, ds).
+accueille(a2, cm).
+accueille(a2, ds).
+accueille(b001, tp).
+accueille(b001, mp).
+accueille(b001, ds_machine).
+accueille(c008, cm).
+accueille(c008, td).
+accueille(c008, ds).
+accueille(c009, tp).
+accueille(c009, tp_para).
+accueille(c009, mp).
+accueille(c009, ds_machine).
+accueille(c007, tp_rez).
+accueille(e101, cm).
+accueille(e101, td).
+accueille(e102, cm).
+accueille(e102, td).
+accueille(e103, td).
+accueille(e104, td).
+accueille(e202, cm).
+accueille(e202, td).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                  Séances                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-/*
- * seances(Nom, Mat, Prof, Type, Groupe, Ids).
- *
- * Définition de plusieurs séances à la volée
- *
- * @arg Nom     Nom des séances
- * @arg Mat     Id Matière
- * @arg Prof    Id Prof
- * @arg Type    Type de cours
- * @arg Groupe  Id Groupe
- * @arg Ids     Liste d'atomes servant d'ids pour ces séances
- */
-seances('CM BDD', connaissances_bdd, raschia, cm, info, [
-    cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4,
-    cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
-]).
-
-seances('TD BDD', connaissances_bdd, raschia, td, id, [
-    td_bdd_id_1,
-    td_bdd_id_2,
-    td_bdd_id_3,
-    td_bdd_id_4,
-    td_bdd_id_5
-]).
-
-seances('TP BDD', connaissances_bdd, raschia, tp, id, [
-    tp_bdd_id_1,
-    tp_bdd_id_2,
-    tp_bdd_id_3,
-    tp_bdd_id_4,
-    tp_bdd_id_5,
-    tp_bdd_id_6
-]).
-
-seances('TD BDD', connaissances_bdd, nachouki, td, silr1, [
-    td_bdd_silr1_1,
-    td_bdd_silr1_2,
-    td_bdd_silr1_3,
-    td_bdd_silr1_4,
-    td_bdd_silr1_5
-]).
-
-seances('TP BDD', connaissances_bdd, nachouki, tp, silr1, [
-    tp_bdd_silr1_1,
-    tp_bdd_silr1_2,
-    tp_bdd_silr1_3,
-    tp_bdd_silr1_4,
-    tp_bdd_silr1_5,
-    tp_bdd_silr1_6
-]).
-
-seances('TD BDD', connaissances_bdd, nachouki, td, silr2, [
-    td_bdd_silr2_1,
-    td_bdd_silr2_2,
-    td_bdd_silr2_3,
-    td_bdd_silr2_4,
-    td_bdd_silr2_5
-]).
-
-seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
-    tp_bdd_silr2_1,
-    tp_bdd_silr2_2,
-    tp_bdd_silr2_3,
-    tp_bdd_silr2_4,
-    tp_bdd_silr2_5,
-    tp_bdd_silr2_6
-]).
-
-seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
-    tp_projet_ia_id_1,
-    tp_projet_ia_id_2,
-    tp_projet_ia_id_3,
-    tp_projet_ia_id_4,
-    tp_projet_ia_id_5,
-    tp_projet_ia_id_6
-]).
-
-seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
-    tp_projet_ia_silr1_1,
-    tp_projet_ia_silr1_2,
-    tp_projet_ia_silr1_3,
-    tp_projet_ia_silr1_4,
-    tp_projet_ia_silr1_5,
-    tp_projet_ia_silr1_6
-]).
-
-seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
-    tp_projet_ia_silr2_1,
-    tp_projet_ia_silr2_2,
-    tp_projet_ia_silr2_3,
-    tp_projet_ia_silr2_4,
-    tp_projet_ia_silr2_5,
-    tp_projet_ia_silr2_6
-]).
-
 
 /**
  * seances(Id, TypeCours, Matiere, Nom)
@@ -384,9 +233,36 @@ seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
  * @arg Matiere     Matiere à laquelle la séance appartient
  * @arg Nom         Nom de la séance
  */
-seance(Id, Type, Mat, Nom) :- % TODO add tests
-    seances(Nom, Mat, _, Type, _, Ids),
-    member(Id, Ids).
+% Séances ia
+seance(1, cm, ia, 'CM').
+seance(2, td, ia, 'TD 1 - SILR2').
+seance(3, tp, ia, 'TP 1 - SILR2').
+seance(4, td, ia, 'TD 1 - ID').
+seance(5, tp, ia, 'TP 1 - ID').
+seance(6, td, ia, 'TD 1 - SILR').
+seance(7, tp, ia, 'TP 1 - SILR1').
+
+% Séances Projet ia
+seance(8, tp, projet_ia, 'TP - SILR2').
+seance(9, tp, projet_ia, 'TP - ID').
+seance(10, tp, projet_ia, 'TP - SILR').
+
+% Séances Analyse de données
+seance(11, cm, analyse_donnees, 'CM').
+seance(12, td, analyse_donnees, 'TD').
+
+% Séances Réseau
+seance(13, cm, reseau, 'CM').
+seance(14, tp, reseau, 'TP - SILR1').
+seance(15, tp, reseau, 'TP - SILR2').
+
+% Séances Parallélisme
+seance(16, cm, parallelisme, 'CM').
+seance(17, td, parallelisme, 'TD').
+
+% Séances Code
+seance(18, cm, code, 'CM').
+seance(19, tp, code, 'TP').
 
 /**
  * groupeSeance(Groupe, Seance)
@@ -396,9 +272,38 @@ seance(Id, Type, Mat, Nom) :- % TODO add tests
  * @arg Groupe      Nom du groupe
  * @arg Seance      Id de la séance
  */
-groupeSeance(Groupe, Seance) :- % TODO add tests
-    seances(_, _, _, _, Groupe, Ids),
-    member(Seance, Ids).
+% Séances ia
+groupeSeance(info, 1).
+groupeSeance(silr2, 2).
+groupeSeance(silr2, 3).
+groupeSeance(id, 4).
+groupeSeance(id, 5).
+groupeSeance(silr1, 6).
+groupeSeance(silr1, 7).
+
+% Séances Projet ia
+groupeSeance(silr2, 8).
+groupeSeance(id, 9).
+groupeSeance(silr1, 10).
+
+% Séances Analyse de données
+groupeSeance(id, 11).
+groupeSeance(id, 12).
+
+% Séances Réseau
+%groupeSeance(silr, 13).
+groupeSeance(silr1, 13).
+groupeSeance(silr2, 13).
+groupeSeance(silr1, 14).
+groupeSeance(silr2, 15).
+
+% Séances Parallélisme
+groupeSeance(silr_para, 16).
+groupeSeance(silr_para, 17).
+
+% Séances Code
+groupeSeance(silr_code, 18).
+groupeSeance(silr_code, 19).
 
 /**
  * profSeance(Prof, Seance)
@@ -408,23 +313,38 @@ groupeSeance(Groupe, Seance) :- % TODO add tests
  * @arg Prof        Nom de l'enseignant
  * @arg Seance      Id de la séance
  */
-profSeance(Prof, Seance) :- % TODO add tests
-    seances(_, _, Prof, _, _, Ids),
-    member(Seance, Ids).
+% Séances ia
+profSeance(martinez, 1).
+profSeance(martinez, 2).
+profSeance(martinez, 3).
+profSeance(lecapitaine, 4).
+profSeance(lecapitaine, 5).
+profSeance(rashia, 6).
+profSeance(rashia, 7).
 
-/**
- * suitSeancesListe(+S1, +S2, +Liste).
- *
- * Est vrai si S1 et S2 se suivent dans Liste
- *
- * @arg S1      Id de séance
- * @arg S2      Id de séance
- * @arg Liste   Liste d'id de séances
- */
-suitSeancesListe(S1, S2, [S1, S2|_]). % TODO add tests
-suitSeancesListe(S1, S2, [X|Ss]) :-
-    S1 \= X, S2 \= X,
-    suitSeance(S1, S2, Ss).
+% Séances Projet ia
+profSeance(martinez, 8).
+profSeance(lecapitaine, 9).
+profSeance(raschia, 10).
+
+% Séances Analyse de données
+profSeance(kuntz, 11).
+profSeance(lecapitaine, 12).
+
+% Séances Réseau
+profSeance(lehn, 13).
+profSeance(lehn, 14).
+profSeance(parrein, 14).
+profSeance(parrein, 15).
+profSeance(lehn, 15).
+
+% Séances Parallélisme
+profSeance(martinez, 16).
+profSeance(martinez, 17).
+
+% Séances Code
+profSeance(picarougne, 18).
+profSeance(picarougne, 19).
 
 /**
  * suitSeance(Seance_suivante, Seance_suivie)
@@ -436,16 +356,18 @@ suitSeancesListe(S1, S2, [X|Ss]) :-
  * @arg Seance_suivante     Id de la séance qui suit
  * @arg Seance_suivie       Id de la séance suivit
  */
-suitSeance(cm_bdd_8, td_bdd_id_1).
-suitSeance(cm_bdd_8, tp_bdd_id_1).
-suitSeance(cm_bdd_8, td_bdd_silr1_1).
-suitSeance(cm_bdd_8, tp_bdd_silr1_1).
-suitSeance(cm_bdd_8, td_bdd_silr2_1).
-suitSeance(cm_bdd_8, tp_bdd_silr2_1).
-suitSeances(S1, S2) :-  % TODO tests
-    seances(_, _, _, _, _, Ids),
-    suitSeancesListe(S1, S2, Ids).
 
+suitSeance(8, 2).
+suitSeance(8, 3).
+suitSeance(9, 4).
+suitSeance(9, 5).
+suitSeance(10, 6).
+suitSeance(10, 7).
+suitSeance(12, 11).
+suitSeance(14, 13).
+suitSeance(15, 13).
+suitSeance(17, 16).
+suitSeance(19, 18).
 
 /**
  * suitSeance(Seance_suivante, Seance_suivie, tempsMin, tempsMax)
@@ -457,8 +379,8 @@ suitSeances(S1, S2) :-  % TODO tests
  */
 
 suitSeance(2, 1, 1, 1).
-% suitSeance(3, 1, 1, 2).
-% suitSeance(4, 1, 2, 5).
-% suitSeance(5, 1, 1, 3).
-% suitSeance(6, 1, 2, 2).
-% suitSeance(7, 1, 1, 5).
+suitSeance(3, 1, 1, 2).
+suitSeance(4, 1, 2, 5).
+suitSeance(5, 1, 1, 3).
+suitSeance(6, 1, 2, 2).
+suitSeance(7, 1, 1, 5).
