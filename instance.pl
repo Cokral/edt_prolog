@@ -767,6 +767,8 @@ suitSeance(td_crypto_silr1_1, cm_crypto_6) :- !.
 suitSeance(td_crypto_id_1, cm_crypto_6) :- !.
 suitSeance(tp_reseaux_silr1_1, cm_reseaux_7) :- !.
 suitSeance(tp_reseaux_silr2_1, cm_reseaux_7) :- !.
+suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12) :- !.
+suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
