@@ -59,6 +59,47 @@ groupesIncompatibleCreneau([_|Gs], [S, H, J, M, L]) :-
     groupesIncompatibleCreneau(Gs, [S, H, J, M, L]),
     !.
 
+
+/**
+ * momentBefore(+H1, +J1, +M1, +H2, +J2, +M2).
+ *
+ * Définit si la date 1 est bien après la date 2
+ *
+ * @arg H1  La plage horaire
+ * @arg J1  Le jour
+ * @arg M1  Le mois
+ * @arg H2  La plage horaire
+ * @arg J2  Le jour
+ * @arg M2  Le mois
+ */
+momentBefore(_, J1, M1, _, J2, M2) :-
+    dateBefore(J2, M2, J1, M1), % 2 se déroule un jour placé avant
+    !.
+momentBefore(H1, J1, M1, H2, J2, M2) :-
+    J1 = J2,
+    M1 = M2,
+    H2 < H1, % S2 se déroule même jour, mais plage plus petite
+    !.
+
+/**
+ * customSequenceValide(+J1, +M1, +J2, +M2, +Jmin, +Jmax).
+ *
+ * Définit si le créneau potentiel est conforme avec le séquencement voulu
+ *
+ * @arg J1   Le jour
+ * @arg M1   Le mois
+ * @arg J2   Le jour
+ * @arg M2   Le mois
+ * @arg Jmin Le nombre de jours minimum entre 1 et 2
+ * @arg JMax Le nombre de jours maximum entre 1 et 2
+ */
+customSequenceValide(J1, M1, J2, M2, Jmin, Jmax) :-
+    joursParMois(Nb),
+    Offset is ((J1 + M1 * Nb) - (J2 + M2 * Nb)),
+    Offset >= Jmin,
+    Offset =< Jmax,
+    !. % 1 se déroule bien entre JMin et Jmax jours après 2
+
 /**
  * sequencementValideCreneau(S, H, J, M, C).
  *
@@ -70,32 +111,28 @@ groupesIncompatibleCreneau([_|Gs], [S, H, J, M, L]) :-
  * @arg M   Le mois
  * @arg C   Un créneau [S, H, J, M, L]
  */
-% la séance n'en pas en lien avec le créneau transmis
+ % la séance n'est pas en lien avec le créneau transmis
 sequencementValideCreneau(S, _, _, _, [S2, _, _, _, _]):-
     \+ suitSeance(S, S2),
     \+ suitSeance(S, S2, _, _),
+    \+ suitSeance(S2, S),
+    \+ suitSeance(S2, S, _, _),
     !.
-sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]):-
-    suitSeance(S, S2),
-    (dateBefore(J2, M2, J, M); H2 < H),
+sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]) :-
+    suitSeance(S, S2), % S suit S2
+    momentBefore(H, J, M, H2, J2, M2),
     !.
-sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]):-
-    suitSeance(S2, S),
-    (dateBefore(J, M, J2, M2); H < H2),
+sequencementValideCreneau(S, H, J, M, [S2, H2, J2, M2, _]) :-
+    suitSeance(S2, S), % S2 suit S
+    momentBefore(H2, J2, M2, H, J, M),
     !.
-sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
-    suitSeance(S, S2, Jmin, Jmax),
-    joursParMois(Nb),
-    Offset is ((J + M * Nb) - (J2 + M2 * Nb)),
-    Offset >= Jmin,
-    Offset =< Jmax,
+sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
+    suitSeance(S, S2, Jmin, Jmax), % S suit S2
+    customSequenceValide(J, M, J2, M2, Jmin, Jmax),
     !.
-sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
-    suitSeance(S2, S, Jmin, Jmax),
-    joursParMois(Nb),
-    Offset is ((J2 + M2 * Nb) - (J + M * Nb)),
-    Offset >= Jmin,
-    Offset =< Jmax,
+sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
+    suitSeance(S2, S, Jmin, Jmax), % S2 suit S
+    customSequenceValide(J2, M2, J, M, Jmin, Jmax),
     !.
 
 /**
@@ -192,8 +229,8 @@ planifier(Ss, [C|Cs]) :-
 
     findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
-    plage(H, _, _), % une plage horaire
     date(J, M),     % une date
+    plage(H, _, _), % une plage horaire
 
     % test des contraintes (profs, incompatibilité groupes, séquencement)
     % sur cette proposition de créneau
@@ -251,6 +288,7 @@ afficherSalle(L) :-
 afficherPlanification([]) :- !.
 afficherPlanification(Cs) :-
     date(J, M),
+    plage(H, _, _),
     member(C, Cs),
     C = [S, H, J, M, L],
     write('--------------------------------------------------------------'), nl,
@@ -260,6 +298,7 @@ afficherPlanification(Cs) :-
     afficherProfs(S), nl,
     afficherSalle(L), nl,
     delete(Cs, C, Cs2),
-    afficherPlanification(Cs2).
+    afficherPlanification(Cs2),
+    !.
 
 

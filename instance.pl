@@ -293,87 +293,88 @@ accueille(S, T) :-  % TODO add tests
  * @arg Ids     Liste d'atomes servant d'ids pour ces séances
  */
 seances('CM BDD', connaissances_bdd, raschia, cm, info, [
-    cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4,
-    cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
+    cm_bdd_1, cm_bdd_2, cm_bdd_3
+    % cm_bdd_4,
+    % cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
 ]).
 
-seances('TD BDD', connaissances_bdd, raschia, td, id, [
-    td_bdd_id_1,
-    td_bdd_id_2,
-    td_bdd_id_3,
-    td_bdd_id_4,
-    td_bdd_id_5
-]).
+% seances('TD BDD', connaissances_bdd, raschia, td, id, [
+    % td_bdd_id_1,
+    % td_bdd_id_2,
+    % td_bdd_id_3,
+    % td_bdd_id_4,
+    % td_bdd_id_5
+% ]).
 
-seances('TP BDD', connaissances_bdd, raschia, tp, id, [
-    tp_bdd_id_1,
-    tp_bdd_id_2,
-    tp_bdd_id_3,
-    tp_bdd_id_4,
-    tp_bdd_id_5,
-    tp_bdd_id_6
-]).
+% seances('TP BDD', connaissances_bdd, raschia, tp, id, [
+    % tp_bdd_id_1,
+    % tp_bdd_id_2,
+    % tp_bdd_id_3,
+    % tp_bdd_id_4,
+    % tp_bdd_id_5,
+    % tp_bdd_id_6
+% ]).
 
-seances('TD BDD', connaissances_bdd, nachouki, td, silr1, [
-    td_bdd_silr1_1,
-    td_bdd_silr1_2,
-    td_bdd_silr1_3,
-    td_bdd_silr1_4,
-    td_bdd_silr1_5
-]).
+% seances('TD BDD', connaissances_bdd, nachouki, td, silr1, [
+    % td_bdd_silr1_1,
+    % td_bdd_silr1_2,
+    % td_bdd_silr1_3,
+    % td_bdd_silr1_4,
+    % td_bdd_silr1_5
+% ]).
 
-seances('TP BDD', connaissances_bdd, nachouki, tp, silr1, [
-    tp_bdd_silr1_1,
-    tp_bdd_silr1_2,
-    tp_bdd_silr1_3,
-    tp_bdd_silr1_4,
-    tp_bdd_silr1_5,
-    tp_bdd_silr1_6
-]).
+% seances('TP BDD', connaissances_bdd, nachouki, tp, silr1, [
+    % tp_bdd_silr1_1,
+    % tp_bdd_silr1_2,
+    % tp_bdd_silr1_3,
+    % tp_bdd_silr1_4,
+    % tp_bdd_silr1_5,
+    % tp_bdd_silr1_6
+% ]).
 
-seances('TD BDD', connaissances_bdd, nachouki, td, silr2, [
-    td_bdd_silr2_1,
-    td_bdd_silr2_2,
-    td_bdd_silr2_3,
-    td_bdd_silr2_4,
-    td_bdd_silr2_5
-]).
+% seances('TD BDD', connaissances_bdd, nachouki, td, silr2, [
+    % td_bdd_silr2_1,
+    % td_bdd_silr2_2,
+    % td_bdd_silr2_3,
+    % td_bdd_silr2_4,
+    % td_bdd_silr2_5
+% ]).
 
-seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
-    tp_bdd_silr2_1,
-    tp_bdd_silr2_2,
-    tp_bdd_silr2_3,
-    tp_bdd_silr2_4,
-    tp_bdd_silr2_5,
-    tp_bdd_silr2_6
-]).
+% seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
+    % tp_bdd_silr2_1,
+    % tp_bdd_silr2_2,
+    % tp_bdd_silr2_3,
+    % tp_bdd_silr2_4,
+    % tp_bdd_silr2_5,
+    % tp_bdd_silr2_6
+% ]).
 
-seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
-    tp_projet_ia_id_1,
-    tp_projet_ia_id_2,
-    tp_projet_ia_id_3,
-    tp_projet_ia_id_4,
-    tp_projet_ia_id_5,
-    tp_projet_ia_id_6
-]).
+% seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
+    % tp_projet_ia_id_1,
+    % tp_projet_ia_id_2,
+    % tp_projet_ia_id_3,
+    % tp_projet_ia_id_4,
+    % tp_projet_ia_id_5,
+    % tp_projet_ia_id_6
+% ]).
 
-seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
-    tp_projet_ia_silr1_1,
-    tp_projet_ia_silr1_2,
-    tp_projet_ia_silr1_3,
-    tp_projet_ia_silr1_4,
-    tp_projet_ia_silr1_5,
-    tp_projet_ia_silr1_6
-]).
+% seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
+    % tp_projet_ia_silr1_1,
+    % tp_projet_ia_silr1_2,
+    % tp_projet_ia_silr1_3,
+    % tp_projet_ia_silr1_4,
+    % tp_projet_ia_silr1_5,
+    % tp_projet_ia_silr1_6
+% ]).
 
-seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
-    tp_projet_ia_silr2_1,
-    tp_projet_ia_silr2_2,
-    tp_projet_ia_silr2_3,
-    tp_projet_ia_silr2_4,
-    tp_projet_ia_silr2_5,
-    tp_projet_ia_silr2_6
-]).
+% seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
+    % tp_projet_ia_silr2_1,
+    % tp_projet_ia_silr2_2,
+    % tp_projet_ia_silr2_3,
+    % tp_projet_ia_silr2_4,
+    % tp_projet_ia_silr2_5,
+    % tp_projet_ia_silr2_6
+% ]).
 
 
 /**
@@ -421,10 +422,10 @@ profSeance(Prof, Seance) :- % TODO add tests
  * @arg S2      Id de séance
  * @arg Liste   Liste d'id de séances
  */
-suitSeancesListe(S1, S2, [S1, S2|_]). % TODO add tests
-suitSeancesListe(S1, S2, [X|Ss]) :-
+suitSeancesListe(S2, S1, [S1, S2|_]) :- !. % TODO add tests
+suitSeancesListe(S2, S1, [X|Ss]) :-
     S1 \= X, S2 \= X,
-    suitSeance(S1, S2, Ss).
+    suitSeancesListe(S2, S1, Ss).
 
 /**
  * suitSeance(Seance_suivante, Seance_suivie)
@@ -436,15 +437,15 @@ suitSeancesListe(S1, S2, [X|Ss]) :-
  * @arg Seance_suivante     Id de la séance qui suit
  * @arg Seance_suivie       Id de la séance suivit
  */
-suitSeance(cm_bdd_8, td_bdd_id_1).
-suitSeance(cm_bdd_8, tp_bdd_id_1).
-suitSeance(cm_bdd_8, td_bdd_silr1_1).
-suitSeance(cm_bdd_8, tp_bdd_silr1_1).
-suitSeance(cm_bdd_8, td_bdd_silr2_1).
-suitSeance(cm_bdd_8, tp_bdd_silr2_1).
-suitSeances(S1, S2) :-  % TODO tests
+suitSeance(td_bdd_id_1, cm_bdd_8) :- !.
+suitSeance(tp_bdd_id_1, cm_bdd_8) :- !.
+suitSeance(td_bdd_silr1_1, cm_bdd_8) :- !.
+suitSeance(tp_bdd_silr1_1, cm_bdd_8) :- !.
+suitSeance(td_bdd_silr2_1, cm_bdd_8) :- !.
+suitSeance(tp_bdd_silr2_1, cm_bdd_8) :- !.
+suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
-    suitSeancesListe(S1, S2, Ids).
+    suitSeancesListe(S2, S1, Ids).
 
 
 /**

@@ -20,7 +20,7 @@ test("l'incompatiblité est symétrique") :-
 :- begin_tests(dateBefore).
 
 test("dateBefore: 1/01 < 2/01") :- dateBefore(1, 1, 2, 1).
-test("dateBefore: 1/01 < 1/02") :- dateBefore(1, 1, 1, 2).
+test("dateBefore: 2/01 > 1/01") :- \+ dateBefore(2, 1, 1, 1).
 
 :- end_tests(dateBefore).
 
