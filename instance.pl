@@ -89,15 +89,17 @@ matiere(math_analyse_donnees).
 matiere(math_compta).
 matiere(math_crypto).
 matiere(math_opti).
+matiere(math_archi_parallèle).
 
-matiere(logiciel_archi_parallèle).
 matiere(logiciel_patrons).
 matiere(logiciel_projet_c).
 matiere(logiciel_c).
 matiere(logiciel_multimedia).
+matiere(logiciel_traitement_image).
 matiere(logiciel_reseau).
 matiere(logiciel_signal).
 matiere(logiciel_outils).
+matiere(logiciel_meta_heuristique).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Profs                                      %
@@ -157,12 +159,12 @@ prof(prof_anglais4).
  * @arg Start   Heure de début de la plage
  * @arg End     Heure de fin de la plage
  */
-plage(1, "08h00", "09h30").
-plage(2, "09h45", "11h15").
-plage(3, "11h30", "13h00").
-plage(4, "14h00", "15h30").
-plage(5, "15h45", "17h15").
-plage(6, "17h30", "19h00").
+plage(1, '08h00', '09h30').
+plage(2, '09h45', '11h15').
+plage(3, '11h30', '13h00').
+plage(4, '14h00', '15h30').
+plage(5, '15h45', '17h15').
+plage(6, '17h30', '19h00').
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                    Jour                                      %
@@ -292,88 +294,391 @@ accueille(S, T) :-  % TODO add tests
  * @arg Groupe  Id Groupe
  * @arg Ids     Liste d'atomes servant d'ids pour ces séances
  */
+
+/*
+ * Systèmes d'information et de connaissances 
+ * INFO
+ */
+
 seances('CM BDD', connaissances_bdd, raschia, cm, info, [
     cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4
     % cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
 ]).
 
-% seances('TD BDD', connaissances_bdd, raschia, td, id, [
-    % td_bdd_id_1,
-    % td_bdd_id_2,
-    % td_bdd_id_3,
-    % td_bdd_id_4,
-    % td_bdd_id_5
-% ]).
+seances('TD BDD', connaissances_bdd, raschia, td, id, [
+	td_bdd_id_1,
+    td_bdd_id_2,
+   	td_bdd_id_3,
+    td_bdd_id_4,
+    td_bdd_id_5
+]).
 
-% seances('TP BDD', connaissances_bdd, raschia, tp, id, [
-    % tp_bdd_id_1,
-    % tp_bdd_id_2,
-    % tp_bdd_id_3,
-    % tp_bdd_id_4,
-    % tp_bdd_id_5,
-    % tp_bdd_id_6
-% ]).
+seances('TP BDD', connaissances_bdd, raschia, tp, id, [
+    tp_bdd_id_1,
+    tp_bdd_id_2,
+    tp_bdd_id_3,
+    tp_bdd_id_4,
+    tp_bdd_id_5,
+    tp_bdd_id_6
+]).
 
-% seances('TD BDD', connaissances_bdd, nachouki, td, silr1, [
-    % td_bdd_silr1_1,
-    % td_bdd_silr1_2,
-    % td_bdd_silr1_3,
-    % td_bdd_silr1_4,
-    % td_bdd_silr1_5
-% ]).
+seances('TD BDD', connaissances_bdd, nachouki, td, silr1, [
+    td_bdd_silr1_1,
+    td_bdd_silr1_2,
+    td_bdd_silr1_3,
+    td_bdd_silr1_4,
+    td_bdd_silr1_5
+]).
 
-% seances('TP BDD', connaissances_bdd, nachouki, tp, silr1, [
-    % tp_bdd_silr1_1,
-    % tp_bdd_silr1_2,
-    % tp_bdd_silr1_3,
-    % tp_bdd_silr1_4,
-    % tp_bdd_silr1_5,
-    % tp_bdd_silr1_6
-% ]).
+seances('TP BDD', connaissances_bdd, nachouki, tp, silr1, [
+    tp_bdd_silr1_1,
+    tp_bdd_silr1_2,
+    tp_bdd_silr1_3,
+    tp_bdd_silr1_4,
+    tp_bdd_silr1_5,
+    tp_bdd_silr1_6
+]).
 
-% seances('TD BDD', connaissances_bdd, nachouki, td, silr2, [
-    % td_bdd_silr2_1,
-    % td_bdd_silr2_2,
-    % td_bdd_silr2_3,
-    % td_bdd_silr2_4,
-    % td_bdd_silr2_5
-% ]).
+seances('TD BDD', connaissances_bdd, nachouki, td, silr2, [
+    td_bdd_silr2_1,
+    td_bdd_silr2_2,
+    td_bdd_silr2_3,
+    td_bdd_silr2_4,
+    td_bdd_silr2_5
+]).
 
-% seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
-    % tp_bdd_silr2_1,
-    % tp_bdd_silr2_2,
-    % tp_bdd_silr2_3,
-    % tp_bdd_silr2_4,
-    % tp_bdd_silr2_5,
-    % tp_bdd_silr2_6
-% ]).
+seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
+    tp_bdd_silr2_1,
+    tp_bdd_silr2_2,
+    tp_bdd_silr2_3,
+    tp_bdd_silr2_4,
+    tp_bdd_silr2_5,
+    tp_bdd_silr2_6
+]).
 
-% seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
-%     tp_projet_ia_id_1,
-%     tp_projet_ia_id_2,
-%     tp_projet_ia_id_3,
-%     tp_projet_ia_id_4,
-%     tp_projet_ia_id_5,
-%     tp_projet_ia_id_6
-% ]).
+seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
+    tp_projet_ia_id_1,
+    tp_projet_ia_id_2,
+    tp_projet_ia_id_3,
+    tp_projet_ia_id_4,
+    tp_projet_ia_id_5,
+    tp_projet_ia_id_6
+]).
 
-% seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
-%     tp_projet_ia_silr1_1,
-%     tp_projet_ia_silr1_2,
-%     tp_projet_ia_silr1_3,
-%     tp_projet_ia_silr1_4,
-%     tp_projet_ia_silr1_5,
-%     tp_projet_ia_silr1_6
-% ]).
+seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
+    tp_projet_ia_silr1_1,
+    tp_projet_ia_silr1_2,
+    tp_projet_ia_silr1_3,
+    tp_projet_ia_silr1_4,
+    tp_projet_ia_silr1_5,
+    tp_projet_ia_silr1_6
+]).
 
-% seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
-%     tp_projet_ia_silr2_1,
-%     tp_projet_ia_silr2_2,
-%     tp_projet_ia_silr2_3,
-%     tp_projet_ia_silr2_4,
-%     tp_projet_ia_silr2_5,
-%     tp_projet_ia_silr2_6
-% ]).
+seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
+    tp_projet_ia_silr2_1,
+    tp_projet_ia_silr2_2,
+    tp_projet_ia_silr2_3,
+    tp_projet_ia_silr2_4,
+    tp_projet_ia_silr2_5,
+    tp_projet_ia_silr2_6
+]).
+
+seances('CM IA', connaissances_ia, martinez, cm, info, [
+    cm_IA_1,
+    cm_IA_2,
+    cm_IA_3,
+    cm_IA_4,
+    cm_IA_5,
+    cm_IA_6
+]).
+
+seances('TD IA', connaissances_ia, lecapitaine, td, id, [
+    td_IA_id_1,
+    td_IA_id_2,
+    td_IA_id_3
+]).
+
+seances('TD IA', connaissances_ia, martinez, td, silr1, [
+    td_IA_silr1_1,
+    td_IA_silr1_2,
+    td_IA_silr1_3
+]).
+
+seances('TD IA', connaissances_ia, raschia, td, silr2, [
+    td_IA_silr2_1,
+    td_IA_silr2_2,
+    td_IA_silr2_3
+]).
+
+/*
+ * Ingenierie logicielle 
+ * INFO
+ */
+
+seances('CM multimédia', logiciel_multimedia, jpeg, cm, id, [
+    cm_multimedia_1,
+    cm_multimedia_2,
+    cm_multimedia_3,
+    cm_multimedia_4
+]).
+
+seances('CM multimédia', logiciel_multimedia, gelgon, cm, id, [
+    cm_multimedia_5,
+    cm_multimedia_6,
+    cm_multimedia_7,
+    cm_multimedia_8
+]).
+
+seances('TP multimédia', logiciel_multimedia, gelgon, tp, id, [
+    tp_multimedia_1,
+    tp_multimedia_2,
+    tp_multimedia_3,
+    tp_multimedia_4,
+    tp_multimedia_5,
+    tp_multimedia_6
+]).
+
+seances('CM optimisation et meta heuristique', logiciel_meta_heuristique, kuntz, cm, id, [
+    cm_meta_heuristique_1,
+    cm_meta_heuristique_2,
+    cm_meta_heuristique_3,
+    cm_meta_heuristique_4,
+    cm_meta_heuristique_5,
+    cm_meta_heuristique_6,
+    cm_meta_heuristique_7
+]).
+
+seances('CM C++', logiciel_c, picarougne, cm, info, [
+    tp_c_1,
+    tp_c_2,
+    tp_c_3,
+    tp_c_4,
+    tp_c_5,
+    tp_c_6,
+    tp_c_7,
+    tp_c_8,
+    tp_c_9,
+    tp_c_10
+]).
+
+seances('TP C++', logiciel_c, soufiane, tp, id, [
+    tp_c_id_1,
+    tp_c_id_2,
+    tp_c_id_3,
+    tp_c_id_4,
+    tp_c_id_5,
+    tp_c_id_6,
+    tp_c_id_7,
+    tp_c_id_8,
+    tp_c_id_9,
+    tp_c_id_10
+]).
+
+seances('TP C++', logiciel_c, milliat, tp, silr1, [
+    tp_c_silr1_1,
+    tp_c_silr1_2,
+    tp_c_silr1_3,
+    tp_c_silr1_4,
+    tp_c_silr1_5,
+    tp_c_silr1_6,
+    tp_c_silr1_7,
+    tp_c_silr1_8,
+    tp_c_silr1_9,
+    tp_c_silr1_10
+]).
+
+seances('TP C++', logiciel_c, picarougne, tp, silr2, [
+    tp_c_silr2_1,
+    tp_c_silr2_2,
+    tp_c_silr2_3,
+    tp_c_silr2_4,
+    tp_c_silr2_5,
+    tp_c_silr2_6,
+    tp_c_silr2_7,
+    tp_c_silr2_8,
+    tp_c_silr2_9,
+    tp_c_silr2_10
+]).
+
+seances('CM outils ingénierie logiciel', logiciel_outils, cohen, cm, silr, [
+    cm_outils_ingenierie_silr_1,
+    cm_outils_ingenierie_silr_2
+]).
+
+seances('TP outils ingénierie logiciel', logiciel_outils, cohen, tp, silr1, [
+    tp_outils_ingenierie_silr1_1,
+    tp_outils_ingenierie_silr1_2,
+    tp_outils_ingenierie_silr1_3,
+    tp_outils_ingenierie_silr1_4,
+    tp_outils_ingenierie_silr1_5,
+    tp_outils_ingenierie_silr1_6
+]).
+
+seances('TP outils ingénierie logiciel', logiciel_outils, vigier, tp, silr2, [
+    tp_outils_ingenierie_silr2_1,
+    tp_outils_ingenierie_silr2_2,
+    tp_outils_ingenierie_silr2_3,
+    tp_outils_ingenierie_silr2_4,
+    tp_outils_ingenierie_silr2_5,
+    tp_outils_ingenierie_silr2_6
+]).
+
+/*
+ * Mathématiques de la décision
+ * ID
+ */
+
+seances('CM analyse de données', math_analyse_donnees, kuntz, cm, id, [
+    cm_analyse_donnees_1,
+    cm_analyse_donnees_2,
+    cm_analyse_donnees_3,
+    cm_analyse_donnees_4,
+    cm_analyse_donnees_5,
+    cm_analyse_donnees_6,
+    cm_analyse_donnees_7
+]).
+
+seances('TD analyse de données', math_analyse_donnees, lecapitaine, td, id, [
+    td_analyse_donnees_1,
+    td_analyse_donnees_2,
+    td_analyse_donnees_3
+]).
+
+seances('TP analyse de données', math_analyse_donnees, [lecapitaine, peter], tp, id, [
+    tp_analyse_donnees_1,
+    tp_analyse_donnees_2,
+    tp_analyse_donnees_3,
+    tp_analyse_donnees_4,
+    tp_analyse_donnees_5,
+    tp_analyse_donnees_6
+]).
+
+seances('CM architecture para et parallélisation de données', math_archi_parallèle, martinez, cm, id, [
+    cm_archi_parallèle_1,
+    cm_archi_parallèle_2
+]).
+
+seances('TD architecture para et parallélisation de données', math_archi_parallèle, martinez, td, id, [
+    td_archi_parallèle_1,
+    td_archi_parallèle_2
+]).
+
+seances('TD comptabilite', math_compta, goncalves, td, id, [
+    td_compta_1,
+    td_compta_2,
+    td_compta_3,
+    td_compta_4,
+    td_compta_5,
+    td_compta_6,
+    td_compta_7
+]).
+
+seances('CM crypto', math_crypto, parrein, cm, info, [
+    cm_crypto_1,
+    cm_crypto_2,
+    cm_crypto_3,
+    cm_crypto_4,
+    cm_crypto_5,
+    cm_crypto_6
+]).
+
+/*
+ * Mathématiques de la décision & réseau
+ * Info
+ */
+
+seances('TD crypto', math_crypto, raschia, td, id, [
+    td_crypto_id_1,
+    td_crypto_id_2,
+    td_crypto_id_3,
+    td_crypto_id_4
+]).
+
+seances('TD crypto', math_crypto, normand, td, silr1, [
+    td_crypto_silr1_1,
+    td_crypto_silr1_2,
+    td_crypto_silr1_3,
+    td_crypto_silr1_4
+]).
+
+seances('TD crypto', math_crypto, parrein, td, silr2, [
+    td_crypto_silr2_1,
+    td_crypto_silr2_2,
+    td_crypto_silr2_3,
+    td_crypto_silr2_4
+]).
+
+/*
+ * Réseaux, multimédias 1
+ * Silr
+ */
+
+seances('CM réseaux', logiciel_reseau, lehn, cm, silr, [
+    cm_reseaux_1,
+    cm_reseaux_2,
+    cm_reseaux_3,
+    cm_reseaux_4,
+    cm_reseaux_5,
+    cm_reseaux_6,
+    cm_reseaux_7
+]).
+
+seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr1, [
+    tp_reseaux_silr1_1,
+    tp_reseaux_silr1_2,
+    tp_reseaux_silr1_3,
+    tp_reseaux_silr1_4,
+    tp_reseaux_silr1_5,
+    tp_reseaux_silr1_6,
+    tp_reseaux_silr1_7,
+    tp_reseaux_silr1_8
+]).
+
+seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr2, [
+    tp_reseaux_silr2_1,
+    tp_reseaux_silr2_2,
+    tp_reseaux_silr2_3,
+    tp_reseaux_silr2_4,
+    tp_reseaux_silr2_5,
+    tp_reseaux_silr2_6,
+    tp_reseaux_silr2_7,
+    tp_reseaux_silr2_8
+]).
+
+seances('CM traitement d'image, logiciel_traitement_image, jpeg, cm, silr, [
+    cm_traitement_image_1,
+    cm_traitement_image_2,
+    cm_traitement_image_3,
+    cm_traitement_image_4,
+    cm_traitement_image_5,
+    cm_traitement_image_6,
+    cm_traitement_image_7,
+    cm_traitement_image_8,
+    cm_traitement_image_9,
+    cm_traitement_image_10,
+    cm_traitement_image_11,
+    cm_traitement_image_12
+]).
+
+seances('TP traitement d'image', logiciel_traitement_image, [gelgon, perreira], tp, silr1, [
+    tp_traitement_image_silr1_1,
+    tp_traitement_image_silr1_2,
+    tp_traitement_image_silr1_3,
+    tp_traitement_image_silr1_4,
+    tp_traitement_image_silr1_5,
+    tp_traitement_image_silr1_6,
+    tp_traitement_image_silr1_7
+]).
+
+seances('TP traitement d'image', logiciel_traitement_image, marcus, tp, silr2, [
+    tp_traitement_image_silr2_1,
+    tp_traitement_image_silr2_2,
+    tp_traitement_image_silr2_3,
+    tp_traitement_image_silr2_4,
+    tp_traitement_image_silr2_5,
+    tp_traitement_image_silr2_6,
+    tp_traitement_image_silr2_7
+]).
 
 
 /**
@@ -441,6 +746,27 @@ suitSeance(td_bdd_silr1_1, cm_bdd_8) :- !.
 suitSeance(tp_bdd_silr1_1, cm_bdd_8) :- !.
 suitSeance(td_bdd_silr2_1, cm_bdd_8) :- !.
 suitSeance(tp_bdd_silr2_1, cm_bdd_8) :- !.
+suitSeance(td_IA_silr2_1, cm_IA_6) :- !.
+suitSeance(td_IA_silr1_1, cm_IA_6) :- !.
+suitSeance(td_IA_id_1, cm_IA_6) :- !.
+suitSeance(tp_projet_ia_silr2_1, td_IA_silr2_3) :- !.
+suitSeance(tp_projet_ia_silr1_1, td_IA_silr1_3) :- !.
+suitSeance(tp_projet_ia_id_1, td_IA_id_3) :- !.
+suitSeance(tp_multimedia_1, cm_multimedia_8) :- !.
+suitSeance(tp_multimedia_1, cm_multimedia_4) :- !.
+suitSeance(tp_c_id_1, cm_IA_6) :- !.
+suitSeance(tp_c_silr1_1, cm_IA_6) :- !.
+suitSeance(tp_c_silr2_1, cm_IA_6) :- !.
+suitSeance(tp_outils_ingenierie_silr2_1, cm_outils_ingenierie_silr_2) :- !.
+suitSeance(tp_outils_ingenierie_silr1_1, cm_outils_ingenierie_silr_2) :- !.
+suitSeance(td_analyse_donnees_1, cm_analyse_donnees_7) :- !.
+suitSeance(tp_analyse_donnees_1, td_analyse_donnees_3) :- !.
+suitSeance(td_archi_parallèle_1, cm_archi_parallèle_2) :- !.
+suitSeance(td_crypto_silr2_1, cm_crypto_6) :- !.
+suitSeance(td_crypto_silr1_1, cm_crypto_6) :- !.
+suitSeance(td_crypto_id_1, cm_crypto_6) :- !.
+suitSeance(tp_reseaux_silr1_1, cm_reseaux_7) :- !.
+suitSeance(tp_reseaux_silr2_1, cm_reseaux_7) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
