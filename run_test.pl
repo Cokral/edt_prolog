@@ -7,6 +7,7 @@ Joue les tests unitaires importés
 */
 :- include('./tests/instance.pl').
 :- include('./tests/planifier.pl').
+:- include('./tests/utils.pl').
 
 :- initialization main.
 
