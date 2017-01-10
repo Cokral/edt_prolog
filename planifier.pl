@@ -23,6 +23,16 @@ typesCoursIdentiques(X, X).
 memeMomentCreneau(H, J, M, [_, H2, J2, M2, _]) :- H = H2, J = J2, M = M2, !.
 
 /**
+ * memeSalle(L, C).
+ *
+ * Définit si L est une salle du créneau C
+ *
+ * @arg L   Une salle
+ * @arg C   Un créneau [S, H, J, M, L]
+ */
+memeSalle(L, [_, _, _, _, L]) :- !.
+
+/**
  * memeProfs(P, C).
  *
  * Définit si Ps sont des prof du créneau C.
@@ -88,10 +98,8 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
     Offset =< Jmax,
     !.
 
-% TODO faire dans l'autre sens
-
 /**
- * creneauValideCreneau(P, Gs, H, J, M, C).
+ * creneauValideCreneau(P, Gs, H, J, M, L, C).
  *
  * Définit si un cours n'est pas incompatible au moment donné avec les autres
  * cours de la liste de créneaux.
@@ -101,23 +109,29 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]):-
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
+ * @arg L   La salle
  * @arg Cs  Un créneau [S, H, J, M, L]
  */
-creneauValideCreneau(S, Ps, Gs, H, J, M, C) :-
+creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
     % le créneau valide le séquencement avec C
     sequencementValideCreneau(S, H, J, M, C),
     (
         % le créneau n'est pas au même moment que C
         (\+ memeMomentCreneau(H, J, M, C));
-        % ou il ne concerne pas le même prof et un group incompatible que C
-        (\+ groupesIncompatibleCreneau(Gs, C), \+ memeProfs(Ps, C))
+        % ou il ne concerne pas un même prof, des groupes incompatibles
+        % ou une même salle
+        (
+            \+ groupesIncompatibleCreneau(Gs, C),
+            \+ memeProfs(Ps, C),
+            \+ memeSalle(L, C)
+        )
     ),
     !.
 
 /**
- * creneauValide(S, Ps, G, H, J, M, [Cs]).
+ * creneauValide(S, Ps, G, H, J, M, L, [Cs]).
  *
- * Définit si un creneau est valide (Pas de conflit de groupe ou d'enseignant).
+ * Définit si un creneau est valide (Pas de conflit avec les créneaux existants)
  *
  * @arg S   La séance
  * @arg Ps  Les enseignants
@@ -125,12 +139,13 @@ creneauValideCreneau(S, Ps, Gs, H, J, M, C) :-
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
+ * @arg L   La salle
  * @arg Cs  Liste de créneaux [S, H, J, M, L]
  */
-creneauValide(_, _, _, _, _, _, []) :- !.
-creneauValide(S, Ps, Gs, H, J, M, [C|Cs]) :-
-    creneauValideCreneau(S, Ps, Gs, H, J, M, C),
-    creneauValide(S, Ps, Gs, H, J, M, Cs),
+creneauValide(_, _, _, _, _, _, _, []) :- !.
+creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
+    creneauValideCreneau(S, Ps, Gs, H, J, M, L, C),
+    creneauValide(S, Ps, Gs, H, J, M, L, Cs),
     !.
 
 /**
@@ -182,7 +197,7 @@ planifier(Ss, [C|Cs]) :-
 
     % test des contraintes (profs, incompatibilité groupes, séquencement)
     % sur cette proposition de créneau
-    creneauValide(S, Ps, Gs, H, J, M, Cs),
+    creneauValide(S, Ps, Gs, H, J, M, L, Cs),
 
     % Fin création du créneau et tests -----------------------------------------
 
