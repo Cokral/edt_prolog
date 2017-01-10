@@ -296,13 +296,13 @@ accueille(S, T) :-  % TODO add tests
  */
 
 /*
- * Systèmes d'information et de connaissances 
+ * Systèmes d'information et de connaissances
  * INFO
  */
 
 seances('CM BDD', connaissances_bdd, raschia, cm, info, [
-    cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4
-    % cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
+    cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4,
+    cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
 ]).
 
 seances('TD BDD', connaissances_bdd, raschia, td, id, [
@@ -411,7 +411,7 @@ seances('TD IA', connaissances_ia, raschia, td, silr2, [
 ]).
 
 /*
- * Ingenierie logicielle 
+ * Ingenierie logicielle
  * INFO
  */
 
@@ -645,7 +645,7 @@ seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr2, [
     tp_reseaux_silr2_8
 ]).
 
-seances('CM traitement d'image, logiciel_traitement_image, jpeg, cm, silr, [
+seances('CM traitement d\'image', logiciel_traitement_image, jpeg, cm, silr, [
     cm_traitement_image_1,
     cm_traitement_image_2,
     cm_traitement_image_3,
@@ -660,7 +660,7 @@ seances('CM traitement d'image, logiciel_traitement_image, jpeg, cm, silr, [
     cm_traitement_image_12
 ]).
 
-seances('TP traitement d'image', logiciel_traitement_image, [gelgon, perreira], tp, silr1, [
+seances('TP traitement d\'image', logiciel_traitement_image, [gelgon, perreira], tp, silr1, [
     tp_traitement_image_silr1_1,
     tp_traitement_image_silr1_2,
     tp_traitement_image_silr1_3,
@@ -670,7 +670,7 @@ seances('TP traitement d'image', logiciel_traitement_image, [gelgon, perreira], 
     tp_traitement_image_silr1_7
 ]).
 
-seances('TP traitement d'image', logiciel_traitement_image, marcus, tp, silr2, [
+seances('TP traitement d\'image', logiciel_traitement_image, marcus, tp, silr2, [
     tp_traitement_image_silr2_1,
     tp_traitement_image_silr2_2,
     tp_traitement_image_silr2_3,
@@ -715,6 +715,12 @@ groupeSeance(Groupe, Seance) :- % TODO add tests
  */
 profSeance(Prof, Seance) :- % TODO add tests
     seances(_, _, Prof, _, _, Ids),
+    \+ is_list(Prof),
+    member(Seance, Ids).
+profSeance(Prof, Seance) :- % TODO add tests
+    seances(_, _, Profs, _, _, Ids),
+    is_list(Profs),
+    member(Prof, Profs),
     member(Seance, Ids).
 
 /**
