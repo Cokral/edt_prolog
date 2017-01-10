@@ -226,7 +226,7 @@ accueille(e202, td).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * seances(Id, TypeCours, Matiere, Nom)
+ * seance(Id, TypeCours, Matiere, Nom)
  *
  * @arg Id          Id de la séance
  * @arg TypeCours   Type de cours de la séance
@@ -379,8 +379,8 @@ suitSeance(19, 18).
  */
 
 suitSeance(2, 1, 1, 1).
-suitSeance(3, 1, 1, 2).
+suitSeance(3, 2, 1, 2).
 suitSeance(4, 1, 2, 5).
-suitSeance(5, 1, 1, 3).
+suitSeance(5, 4, 1, 3).
 suitSeance(6, 1, 2, 2).
-suitSeance(7, 1, 1, 5).
+suitSeance(7, 6, 1, 5).

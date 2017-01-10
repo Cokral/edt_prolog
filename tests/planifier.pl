@@ -80,24 +80,24 @@ test("sequencementValideCreneau est faux si suitSeance/4 n'est pas respecté") :
 test("sequencementValideCreneau est vrai si suitSeance/4 est respecté") :-
     % 4 suit 1
     C = [1, 1, 0, 1, a1], % borne min
-    sequencementValideCreneau(4, 1, 2, 1, C).
+    sequencementValideCreneau(4, 1, 2, 1, C),
 
-    % C0 = [1, 1, 0, 1, a1], % milieu intervalle
-    % sequencementValideCreneau(4, 1, 3, 1, C0),
+    C0 = [1, 1, 0, 1, a1], % milieu intervalle
+    sequencementValideCreneau(4, 1, 3, 1, C0),
 
-    % C1 = [1, 1, 0, 1, a1], % borne max
-    % sequencementValideCreneau(4, 1, 5, 1, C1).
+    C1 = [1, 1, 0, 1, a1], % borne max
+    sequencementValideCreneau(4, 1, 5, 1, C1),
 
-    % dans l'autre sens
+    %dans l'autre sens
 
-    % C2 = [4, 1, 2, 1, a1], % borne min
-    % sequencementValideCreneau(1, 1, 0, 1, C2),
+    C2 = [4, 1, 2, 1, a1], % borne min
+    sequencementValideCreneau(1, 1, 0, 1, C2),
 
-    % C3 = [4, 1, 3, 1, a1], % milieu intervalle
-    % sequencementValideCreneau(1, 1, 0, 1, C3),
+    C3 = [4, 1, 3, 1, a1], % milieu intervalle
+    sequencementValideCreneau(1, 1, 0, 1, C3),
 
-    % C4 = [4, 1, 5, 1, a1], % borne max
-    % sequencementValideCreneau(1, 1, 0, 1, C4).
+    C4 = [4, 1, 5, 1, a1], % borne max
+    sequencementValideCreneau(1, 1, 0, 1, C4).
 
 test("sequencementValideCreneau est faux si suitSeance/2 n'est pas respecté") :-
     % 8 suit 2

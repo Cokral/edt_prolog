@@ -241,64 +241,11 @@ planifier(Ss, [C|Cs]) :-
     C = [S, H, J, M, L].
 
 planification(Cs) :-
-   findall(S, seance(S, _, _, _), Ss),
-   planifier(Ss, Cs).
-
-afficherSeance(S) :-
-    seance(S, TypeCours, Mat, Nom),
-    write('Séance:\t\t'),
-    write(S), write(' "'), write(Nom), write('"'),
-    write(' - '), write(TypeCours),
-    write(' - '), write(Mat).
-
-afficherMoment(J, M, H) :-
-    plage(H, Start, End),
-    write('Date:\t\t'),
-    write(J), write('/'), write(M),
-    write(' '), write(Start), write('-'), write(End).
-
-afficherGroupe([G]) :-
-    write(G),
-    !.
-afficherGroupe([G, G2|Gs]) :-
-    write(G), write(', '),
-    afficherGroupe([G2|Gs]).
-
-afficherGroupes(S) :-
-    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
-    write('Groupes:\t'),
-    afficherGroupe(Gs).
-
-afficherProf([P]) :-
-    write(P),
-    !.
-afficherProf([P, P2|Ps]) :-
-    write(P), write(', '),
-    afficherProf([P2|Ps]).
-
-afficherProfs(S) :-
-    findall(P, profSeance(P, S), Ps), % tous les profs de la séance
-    write('Profs:\t\t'),
-    afficherProf(Ps).
-
-afficherSalle(L) :-
-    salle(L, Nb),
-    write('Salle:\t\t'), write(L), write('('), write(Nb), write(')').
-
-afficherPlanification([]) :- !.
-afficherPlanification(Cs) :-
-    date(J, M),
-    plage(H, _, _),
-    member(C, Cs),
-    C = [S, H, J, M, L],
-    write('--------------------------------------------------------------'), nl,
-    afficherSeance(S), nl,
-    afficherMoment(J, M, H), nl,
-    afficherGroupes(S), nl,
-    afficherProfs(S), nl,
-    afficherSalle(L), nl,
-    delete(Cs, C, Cs2),
-    afficherPlanification(Cs2),
-    !.
-
+    findall(S, seance(S, _, _, _), Ss),
+    % on trie les séances, les plus contraintes à la fin
+    predsort(beforeSeance, Ss, Ss2),
+    % on inverse car planifier/2 commence par la fin et on veut placer d'abord
+    % les séances les moins contraintes (ie. les débuts de matière)
+    reverse(Ss2, Ss3),
+    planifier(Ss3, Cs).
 

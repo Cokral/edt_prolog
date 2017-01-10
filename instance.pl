@@ -293,8 +293,7 @@ accueille(S, T) :-  % TODO add tests
  * @arg Ids     Liste d'atomes servant d'ids pour ces séances
  */
 seances('CM BDD', connaissances_bdd, raschia, cm, info, [
-    cm_bdd_1, cm_bdd_2, cm_bdd_3
-    % cm_bdd_4,
+    cm_bdd_1, cm_bdd_2, cm_bdd_3, cm_bdd_4
     % cm_bdd_5, cm_bdd_6, cm_bdd_7, cm_bdd_8
 ]).
 
@@ -350,30 +349,30 @@ seances('CM BDD', connaissances_bdd, raschia, cm, info, [
 % ]).
 
 % seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
-    % tp_projet_ia_id_1,
-    % tp_projet_ia_id_2,
-    % tp_projet_ia_id_3,
-    % tp_projet_ia_id_4,
-    % tp_projet_ia_id_5,
-    % tp_projet_ia_id_6
+%     tp_projet_ia_id_1,
+%     tp_projet_ia_id_2,
+%     tp_projet_ia_id_3,
+%     tp_projet_ia_id_4,
+%     tp_projet_ia_id_5,
+%     tp_projet_ia_id_6
 % ]).
 
 % seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, silr1, [
-    % tp_projet_ia_silr1_1,
-    % tp_projet_ia_silr1_2,
-    % tp_projet_ia_silr1_3,
-    % tp_projet_ia_silr1_4,
-    % tp_projet_ia_silr1_5,
-    % tp_projet_ia_silr1_6
+%     tp_projet_ia_silr1_1,
+%     tp_projet_ia_silr1_2,
+%     tp_projet_ia_silr1_3,
+%     tp_projet_ia_silr1_4,
+%     tp_projet_ia_silr1_5,
+%     tp_projet_ia_silr1_6
 % ]).
 
 % seances('TP mini projet IA', connaissances_projet_ia, raschia, tp, silr2, [
-    % tp_projet_ia_silr2_1,
-    % tp_projet_ia_silr2_2,
-    % tp_projet_ia_silr2_3,
-    % tp_projet_ia_silr2_4,
-    % tp_projet_ia_silr2_5,
-    % tp_projet_ia_silr2_6
+%     tp_projet_ia_silr2_1,
+%     tp_projet_ia_silr2_2,
+%     tp_projet_ia_silr2_3,
+%     tp_projet_ia_silr2_4,
+%     tp_projet_ia_silr2_5,
+%     tp_projet_ia_silr2_6
 % ]).
 
 
@@ -414,7 +413,7 @@ profSeance(Prof, Seance) :- % TODO add tests
     member(Seance, Ids).
 
 /**
- * suitSeancesListe(+S1, +S2, +Liste).
+ * suitSeancesListe(+S1, ?S2, +Liste).
  *
  * Est vrai si S1 et S2 se suivent dans Liste
  *
@@ -423,12 +422,11 @@ profSeance(Prof, Seance) :- % TODO add tests
  * @arg Liste   Liste d'id de séances
  */
 suitSeancesListe(S2, S1, [S1, S2|_]) :- !. % TODO add tests
-suitSeancesListe(S2, S1, [X|Ss]) :-
-    S1 \= X, S2 \= X,
+suitSeancesListe(S2, S1, [_|Ss]) :-
     suitSeancesListe(S2, S1, Ss).
 
 /**
- * suitSeance(Seance_suivante, Seance_suivie)
+ * suitSeance(+Seance_suivante, ?Seance_suivie)
  *
  * On remarque que le prédicat nous permet également d'implémenter la relation
  * de suite entre les matière (dernière séance matière 1 - première séance
