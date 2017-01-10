@@ -194,7 +194,7 @@ joursParMois(20).
 date(J, M) :-   % TODO add tests
     mois(M),
     joursParMois(Max),
-    between(0, Max, J).
+    between(1, Max, J).
 
 /**
  * dateBefore(J1, M1, J2, M2)
