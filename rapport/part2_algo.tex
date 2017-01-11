@@ -1,0 +1,57 @@
+
+\subsection{Algorithme}
+
+\subsubsection{Résolution}
+
+\begin{lstlisting}[language=Prolog, caption=Resolution, captionpos=b]
+/**
+ * planifier(+Ss, -Cs).
+ *
+ * @arg S   Listes des seances a planifier
+ * @arg C   Listes des creneaux construits
+ */
+planifier([], []) :- !.
+planifier(Ss, [C|Cs]) :-
+
+    member(S, Ss),      % La seance courante
+    delete(Ss, S, Ss2), % On l'enleve de la liste
+
+    planifier(Ss2, Cs), % on traite le sous-probleme
+
+    % Creation du creneau et tests ---------------------------------------------
+
+    seance(S, TypeS, _, _),
+
+    % une salle
+    salle(L, TailleL),
+    accueille(L, TypeL),
+    typesCoursIdentiques(TypeS, TypeL), % type de salle valide
+
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la seance
+    effectifGroupes(Gs, Effectif),
+    Effectif =< TailleL, % taille de salle valide
+
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la seance
+
+    date(J, M),     % une date
+    plage(H, _, _), % une plage horaire
+
+    % test des contraintes (profs, incompatibilite groupes, sequencement)
+    % sur cette proposition de creneau
+    creneauValide(S, Ps, Gs, H, J, M, L, Cs),
+
+    % Fin creation du creneau et tests -----------------------------------------
+
+    C = [S, H, J, M, L].
+\end{lstlisting}
+
+TODO expliquer, parler de sous-problème et récursion
+
+TODO mentionner l'importance de l'ordre des appels aux prédicats pour économiser
+lors des retours arrières
+
+\subsubsection{Prédicats utilitaires}
+
+TODO décrire ce qui se passe dans \texttt{creneauValide} et les prédicats
+utilisés (mettre leur signature, pas le code)
+

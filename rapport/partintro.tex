@@ -1,0 +1,36 @@
+\section{Introduction}
+
+Ce rapport présente un premier travail effectué dans le cadre du Mini-Projet
+d'Intelligence Artificielle.
+Il consiste en la planification de l'emploi du temps à Polytech Nantes.
+Ce présent document contient le premier rendu (Résolution générale du problème),
+ainsi que la suite du projet (Résolution du problème en Prolog).
+
+Il est également fournit le code source du projet.
+
+
+\begin{lstlisting}[language=bash, caption=Fichiers, captionpos=b]
+README.md
+instance.pl
+instance_old.pl
+main.pl
+planifier.pl
+run_test.pl
+tests\
+    instance.pl
+    planifier.pl
+    utils.pl
+utils.pl
+\end{lstlisting}
+
+Le programme se lance par la commande suivante :
+
+\begin{lstlisting}[language=bash, caption=Lancer l'algorithme, captionpos=b]
+swipl -s main.pl
+\end{lstlisting}
+
+Les tests unitaires :
+
+\begin{lstlisting}[language=bash, caption=Lancer les tests, captionpos=b]
+swipl -s run_tests.pl
+\end{lstlisting}

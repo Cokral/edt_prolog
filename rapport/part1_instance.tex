@@ -1,4 +1,4 @@
-\section{Instance}
+\subsection{Instance}
 
 Le problème modélisé, il convient maintenant de construire un jeu de données qui
 servira à la construction de l'emploi du temps.
@@ -8,8 +8,22 @@ sur laquelle nous allons travailler. Pour des soucis de lisibilité, le diagramm
 est incomplet. Il a été choisi de ne représenter que quelques séances et de ne
 pas représenter les dépendances entre elles.
 
-L'instance complète est disponible sous format Prolog dans le fichier
-\texttt{instance.pl}.
+Deux instances sont disponibles :
+
+\begin{description}
+
+    \item[\texttt{instance\_old.pl}] Un petit jeu de données (17 séances) nous
+        ayant servit au début du projet et servant actuellement pour les tests
+        unitaires
+
+    \item[\texttt{instance.pl}] Représente un semestre complet (TODO : nombre de
+        séances, nombre de cours, nombre de profs, etc.)
+
+\end{description}
+
+Pour générer \texttt{instance.pl}, des prédicats ont été utilisés afin de
+faciliter la saisie des données en regroupant les séances d'une même matière
+dans une même déclaration.
 
 \begin{landscape}
 

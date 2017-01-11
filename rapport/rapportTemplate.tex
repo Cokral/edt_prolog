@@ -36,6 +36,8 @@
 \usepackage{algorithmic}
 \usepackage{algorithm2e}
 %\usepackage{program}
+\usepackage{listings}
+\usepackage[parfill]{parskip}
 
 %====================== INFORMATION ET REGLES ======================
 
@@ -46,7 +48,7 @@
 \hypersetup{							% Information sur le document
 pdfauthor = {Guillaume Clochard
 			Thomas Coquereau},			% Auteurs
-pdftitle = {Mini-Projet d'Intelligence Artificiel
+pdftitle = {Mini-Projet d'Intelligence Artificielle
 			Emploi du temps à Polytech Nantes},			% Titre du document
 pdfsubject = {Compte Rendu Mini-Projet},		% Sujet
 pdfkeywords = {},	% Mots-clefs
@@ -64,7 +66,9 @@ pdfstartview={FitH}}					% ajuste la page à la largueur de l'écran
 % \renewcommand{\arraystretch}{1.5}
 
 \title{Mini-Projet d'Intelligence Artificiel \\
-    Emploi du temps à Polytech Nantes}
+    Emploi du temps à Polytech Nantes \\
+    - \\
+    Rapport complet}
 \author{Guillaume Clochard, Thomas Coquereau}
 \maketitle
 
@@ -76,14 +80,13 @@ pdfstartview={FitH}}					% ajuste la page à la largueur de l'écran
 
 %====================== INCLUSION DES PARTIES ======================
 
-\input{./introduction.tex}
-
-\input{./uml.tex}
-
-\input{./instance.tex}
+\input{./partintro.tex}
 \newpage
-
-\input{./solution.tex}
+\input{./part1.tex}
 \newpage
+\input{./part2.tex}
+\newpage
+\input{./partconclu.tex}
+
 
 \end{document}

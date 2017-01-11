@@ -1,5 +1,5 @@
 
-\section{Solution}
+\subsection{Solution}
 
 Il convient à présent de définir une première proposition de solution.
 
@@ -11,14 +11,14 @@ Sa signature serait grossièrement :
 \begin{description}
 
 \item[Entrées] les séances $S$, les plages horaires $H$, les jours de
-travail $J$ et les salles $L$
+travail $J$, les mois $M$ et les salles $L$
 \item[Sortie] un sous-ensemble de tous les créneaux $C$
 
 \end{description}
 
 \begin{center}
 
-$ \begin{array}{ll}
+$\begin{array}{ll}
 \textsc{Planifier} : S \times H \times J \times L \quad \not\to \quad C
 \end{array}$
 
@@ -26,7 +26,7 @@ $ \begin{array}{ll}
 
 On retrouve donc les objets modélisés à la Figure \ref{fig:uml}.
 
-\subsection{Pré-conditions}
+\subsubsection{Pré-conditions}
 
 Les pré-conditions de la fonction $\textsc{Planifier}$ sont formées par le respect
 de la modélisations UML et de l'ajout de détails comme :
@@ -55,7 +55,7 @@ de la modélisations UML et de l'ajout de détails comme :
 
 \end{itemize}
 
-\subsection{Post-conditions}
+\subsubsection{Post-conditions}
 
 \begin{itemize}
 
@@ -123,8 +123,8 @@ de la modélisations UML et de l'ajout de détails comme :
 
 \end{itemize}
 
-\newpage
-\subsection{Algorithme non déterministe}
+
+\subsubsection{Algorithme non déterministe}
 
 Nous avons choisit de formuler notre solution sous forme d'un algorithme non
 déterministe.
