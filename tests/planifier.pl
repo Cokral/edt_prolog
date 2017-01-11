@@ -176,3 +176,57 @@ test("effectifGroupes renvoit le bon effectif") :-
     effectifGroupes([id, silr], 62).
 
 :- end_tests(effectifGroupes).
+
+
+:- begin_tests(planification).
+
+creneauErreur(Cs) :-
+
+    member(C, Cs),
+
+    [S, H, J, M, L] = C,
+
+    seance(S, TypeS, _, _),
+
+    salle(L, MaxNb),
+    findall(TypeL, accueille(L, TypeL), TypeLs),
+
+    findall(Groupe, groupeSeance(S, Groupe), Groupes),
+    effectifGroupes(Groupes, Effectif),
+
+    findall(Prof, profSeance(S, Prof), Profs),
+    delete(Cs, C, Cs2),
+
+    (
+        % vérification capacité salle
+        (MaxNb < Effectif);
+        % vérification type de salle ok
+        (\+ member(TypeS, TypeLs));
+
+        % vérification autres contraintes
+        (
+            \+ creneauValide(S, Profs, Groupes, H, J, M, L, [])
+        )
+
+    ),
+
+    creneauErreur(Cs2).
+
+test("planification planifie toutes les séances une fois") :-
+    findall(S, seance(S, _, _, _), Ss),
+    planification(Ps), !,
+
+    % toutes les séances sont planifiées
+    forall(member(S1, Ss), assert(member([S1, _, _, _], Ps))),
+
+    length(Ss, Ls), % toutes les séances ne sont planifiées qu'une fois
+    length(Ps, Lp),
+    Ls is Lp.
+
+test("planification respecte les contraintes sur chaque créneau") :-
+    planification(Ps), !,
+    \+ creneauErreur(Ps).
+
+:- end_tests(planification).
+
+
