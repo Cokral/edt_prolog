@@ -680,6 +680,50 @@ seances('TP traitement d\'image', logiciel_traitement_image, marcus, tp, silr2, 
     tp_traitement_image_silr2_7
 ]).
 
+seances('CM traitement du signal', logiciel_signal, le_callet, cm, silr, [
+    cm_traitement_signal_1,
+    cm_traitement_signal_2,
+    cm_traitement_signal_3,
+    cm_traitement_signal_4,
+    cm_traitement_signal_5,
+    cm_traitement_signal_6
+]).
+
+seances('TD traitement du signal', logiciel_signal, le_callet, td, silr2, [
+    td_traitement_signal_silr1_1,
+    td_traitement_signal_silr1_2,
+    td_traitement_signal_silr1_3,
+    td_traitement_signal_silr1_4,
+    td_traitement_signal_silr1_5,
+    td_traitement_signal_silr1_6
+]).
+
+seances('TD traitement du signal', logiciel_signal, ricordel, td, silr2, [
+    td_traitement_signal_silr2_1,
+    td_traitement_signal_silr2_2,
+    td_traitement_signal_silr2_3,
+    td_traitement_signal_silr2_4,
+    td_traitement_signal_silr2_5,
+    td_traitement_signal_silr2_6
+]).
+
+seances('TD traitement du signal', logiciel_signal, [le_callet, vigier], tp, silr1, [
+    tp_traitement_signal_silr1_1,
+    tp_traitement_signal_silr1_2,
+    tp_traitement_signal_silr1_3,
+    tp_traitement_signal_silr1_4,
+    tp_traitement_signal_silr1_5,
+    tp_traitement_signal_silr1_6
+]).
+
+seances('TD traitement du signal', logiciel_signal, ricordel, tp, silr2, [
+    tp_traitement_signal_silr2_1,
+    tp_traitement_signal_silr2_2,
+    tp_traitement_signal_silr2_3,
+    tp_traitement_signal_silr2_4,
+    tp_traitement_signal_silr2_5,
+    tp_traitement_signal_silr2_6
+]).
 
 /**
  * seances(Id, TypeCours, Matiere, Nom)
@@ -775,6 +819,10 @@ suitSeance(tp_reseaux_silr1_1, cm_reseaux_7) :- !.
 suitSeance(tp_reseaux_silr2_1, cm_reseaux_7) :- !.
 suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12) :- !.
 suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12) :- !.
+suitSeance(td_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
+suitSeance(td_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
+suitSeance(tp_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
+suitSeance(tp_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
