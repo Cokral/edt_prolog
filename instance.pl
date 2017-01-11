@@ -725,6 +725,48 @@ seances('TD traitement du signal', logiciel_signal, ricordel, tp, silr2, [
     tp_traitement_signal_silr2_6
 ]).
 
+/*
+ * HES
+ * Info
+ */
+
+seances('CM Marketing', hes_marketing, moreau, cm, silr, [
+    cm_marketing_silr_1
+]).
+
+seances('CM Marketing', hes_marketing, oili, cm, silr, [
+    cm_marketing_silr_2
+]).
+
+seances('CM Marketing', hes_marketing, moreau, cm, id, [
+    cm_marketing_id_1
+]).
+
+seances('CM Marketing', hes_marketing, oili, cm, silr, [
+    cm_marketing_id_2
+]).
+
+seances('TD Marketing', hes_marketing, oili, cm, silr, [
+    td_marketing_silr_1,
+    td_marketing_silr_2,
+    td_marketing_silr_3,
+    td_marketing_silr_4,
+    td_marketing_silr_5,
+    td_marketing_silr_6,
+    td_marketing_silr_7
+]).
+
+seances('TD Marketing', hes_marketing, oili, cm, id, [
+    td_marketing_id_1,
+    td_marketing_id_2,
+    td_marketing_id_3,
+    td_marketing_id_4,
+    td_marketing_id_5,
+    td_marketing_id_6,
+    td_marketing_id_7
+]).
+
+
 /**
  * seances(Id, TypeCours, Matiere, Nom)
  *
@@ -823,6 +865,10 @@ suitSeance(td_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
 suitSeance(td_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
 suitSeance(tp_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
 suitSeance(tp_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
+suitSeance(cm_marketing_id_2, cm_marketing_id_1) :- !.
+suitSeance(cm_marketing_silr_2, cm_marketing_silr_1) :- !.
+suitSeance(td_marketing_id_1, cm_marketing_id_2) :- !.
+suitSeance(td_marketing_silr_1, cm_marketing_silr_2) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
