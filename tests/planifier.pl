@@ -178,8 +178,15 @@ test("effectifGroupes renvoit le bon effectif") :-
 :- end_tests(effectifGroupes).
 
 
-:- begin_tests(planification).
+:- begin_tests(planifier).
 
+/**
+ * creneauErreur(Cs)
+ *
+ * Cherche un créneau en erreur dans Cs
+ *
+ * @arg Cs  Une liste de créneaux
+ */
 creneauErreur(Cs) :-
 
     member(C, Cs),
@@ -212,9 +219,12 @@ creneauErreur(Cs) :-
 
     creneauErreur(Cs2).
 
-test("planification planifie toutes les séances une fois") :-
+test("planifier planifie toutes les séances une fois") :-
     findall(S, seance(S, _, _, _), Ss),
-    planification(Ps), !,
+    predsort(beforeSeance, Ss, Ss2),
+    reverse(Ss2, Ss3),
+
+    planifier(Ss3, Ps), !,
 
     % toutes les séances sont planifiées
     forall(member(S1, Ss), assert(member([S1, _, _, _], Ps))),
@@ -223,10 +233,15 @@ test("planification planifie toutes les séances une fois") :-
     length(Ps, Lp),
     Ls is Lp.
 
-test("planification respecte les contraintes sur chaque créneau") :-
-    planification(Ps), !,
+test("planifier respecte les contraintes sur chaque créneau") :-
+    findall(S, seance(S, _, _, _), Ss),
+    predsort(beforeSeance, Ss, Ss2),
+    reverse(Ss2, Ss3),
+
+    planifier(Ss3, Ps), !,
+
     \+ creneauErreur(Ps).
 
-:- end_tests(planification).
+:- end_tests(planifier).
 
 

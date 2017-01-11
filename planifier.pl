@@ -206,7 +206,6 @@ effectifGroupes([G|Gs], S) :-
  * @arg C   Listes des créneaux construits
  */
 planifier([], []) :- !.
-
 planifier(Ss, [C|Cs]) :-
 
     member(S, Ss),      % La séance courante
@@ -239,13 +238,4 @@ planifier(Ss, [C|Cs]) :-
     % Fin création du créneau et tests -----------------------------------------
 
     C = [S, H, J, M, L].
-
-planification(Cs) :-
-    findall(S, seance(S, _, _, _), Ss),
-    % on trie les séances, les plus contraintes à la fin
-    predsort(beforeSeance, Ss, Ss2),
-    % on inverse car planifier/2 commence par la fin et on veut placer d'abord
-    % les séances les moins contraintes (ie. les débuts de matière)
-    reverse(Ss2, Ss3),
-    planifier(Ss3, Cs).
 
