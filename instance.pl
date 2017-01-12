@@ -146,6 +146,9 @@ prof(prof_anglais2).
 prof(prof_anglais3).
 prof(prof_anglais4).
 
+prof(prof_ptrans_id).
+prof(prof_ptrans_silr).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Plages                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -221,6 +224,7 @@ dateBefore(J1, M1, J2, M2) :- M1 = M2, J1 < J2, !.
  * @arg Type  Un type de cours
  */
 typeCours(cm).
+typeCours(projet).
 typeCours(td).
 typeCours(tp).
 typeCours(ds).
@@ -259,6 +263,7 @@ salle(iht_nemo, 50, [td]).
 salle(isitem_TD1, 30, [cm, td]).
 salle(isitem_TD2, 30, [cm, td]).
 salle(isitem_exam, 100, [ds]).
+salle(maison_projet, 1000, [projet]).
 
 /**
  * salle(Nom, Effectif)
@@ -854,6 +859,85 @@ seances('TP patrons conception', logiciel_patrons, pigeau, tp, silr2, [
     tp_patrons_silr2_2
 ]).
 
+seances('CM projet transversal', projet_transversal, jpeg, cm, info, [
+    cm_projet_transversal_1
+]).
+
+seances('CM projet transversal', projet_transversal, marcus, cm, info, [
+    cm_projet_transversal_2
+]).
+
+seances('PROJET projet transversal', projet_transversal, prof_ptrans_id, projet, id, [
+    projet_transversal_id_1,
+    projet_transversal_id_2,
+    projet_transversal_id_3,
+    projet_transversal_id_4,
+    projet_transversal_id_5,
+    projet_transversal_id_6,
+    projet_transversal_id_7,
+    projet_transversal_id_8,
+    projet_transversal_id_9,
+    projet_transversal_id_10,
+    projet_transversal_id_11,
+    projet_transversal_id_12,
+    projet_transversal_id_13,
+    projet_transversal_id_14,
+    projet_transversal_id_15,
+    projet_transversal_id_16,
+    projet_transversal_id_17,
+    projet_transversal_id_18,
+    projet_transversal_id_19,
+    projet_transversal_id_20,
+    projet_transversal_id_21,
+    projet_transversal_id_22,
+    projet_transversal_id_23,
+    projet_transversal_id_24,
+    projet_transversal_id_25,
+    projet_transversal_id_26,
+    projet_transversal_id_27,
+    projet_transversal_id_28,
+    projet_transversal_id_29,
+    projet_transversal_id_30,
+    projet_transversal_id_31,
+    projet_transversal_id_32,
+    projet_transversal_id_33
+]).
+
+seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, projet, silr, [
+    projet_transversal_silr_1,
+    projet_transversal_silr_2,
+    projet_transversal_silr_3,
+    projet_transversal_silr_4,
+    projet_transversal_silr_5,
+    projet_transversal_silr_6,
+    projet_transversal_silr_7,
+    projet_transversal_silr_8,
+    projet_transversal_silr_9,
+    projet_transversal_silr_10,
+    projet_transversal_silr_11,
+    projet_transversal_silr_12,
+    projet_transversal_silr_13,
+    projet_transversal_silr_14,
+    projet_transversal_silr_15,
+    projet_transversal_silr_16,
+    projet_transversal_silr_17,
+    projet_transversal_silr_18,
+    projet_transversal_silr_19,
+    projet_transversal_silr_20,
+    projet_transversal_silr_21,
+    projet_transversal_silr_22,
+    projet_transversal_silr_23,
+    projet_transversal_silr_24,
+    projet_transversal_silr_25,
+    projet_transversal_silr_26,
+    projet_transversal_silr_27,
+    projet_transversal_silr_28,
+    projet_transversal_silr_29,
+    projet_transversal_silr_30,
+    projet_transversal_silr_31,
+    projet_transversal_silr_32,
+    projet_transversal_silr_33
+]).
 
 
 
@@ -971,6 +1055,9 @@ suitSeance(td_patrons_silr2_1, cm_patrons_3) :- !.
 suitSeance(tp_patrons_id_1, td_patrons_id_2) :- !.
 suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2) :- !.
 suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2) :- !.
+suitSeance(cm_projet_transversal_2, cm_projet_transversal_1) :- !.
+suitSeance(projet_transversal_id_33, cm_projet_transversal_2) :- !.
+suitSeance(projet_transversal_silr_33, cm_projet_transversal_2) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
