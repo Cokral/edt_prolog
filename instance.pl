@@ -264,6 +264,7 @@ salle(isitem_TD1, 30, [cm, td]).
 salle(isitem_TD2, 30, [cm, td]).
 salle(isitem_exam, 100, [ds]).
 salle(maison_projet, 1000, [projet]).
+salle(maison_projet_2, 1000, [projet]).
 
 /**
  * salle(Nom, Effectif)
@@ -311,9 +312,9 @@ seances('CM BDD', connaissances_bdd, raschia, cm, info, [
 ]).
 
 seances('TD BDD', connaissances_bdd, raschia, td, id, [
-	td_bdd_id_1,
+    td_bdd_id_1,
     td_bdd_id_2,
-   	td_bdd_id_3,
+       td_bdd_id_3,
     td_bdd_id_4,
     td_bdd_id_5
 ]).
@@ -777,7 +778,7 @@ seances('TD marketing', hes_marketing, oili, cm, id, [
 ]).
 
 /*
- * Stages et Projets 
+ * Stages et Projets
  * Info
  */
 
@@ -1056,9 +1057,10 @@ suitSeance(tp_patrons_id_1, td_patrons_id_2) :- !.
 suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2) :- !.
 suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2) :- !.
 suitSeance(cm_projet_transversal_2, cm_projet_transversal_1) :- !.
-suitSeance(projet_transversal_id_33, cm_projet_transversal_2) :- !.
-suitSeance(projet_transversal_silr_33, cm_projet_transversal_2) :- !.
+suitSeance(projet_transversal_id_1, cm_projet_transversal_2) :- !.
+suitSeance(projet_transversal_silr_1, cm_projet_transversal_2) :- !.
 suitSeance(S2, S1) :-  % TODO tests
+    \+ suitSeance(S2, S1, _, _),
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
 
@@ -1071,11 +1073,4 @@ suitSeance(S2, S1) :-  % TODO tests
  * @arg tempsMin     		Nombre de jours min avant la prochaine séance
  * @arg tempsMax       		Nombre de jours max avant la prochaine séance
  */
-
-suitSeance(2, 1, 1, 1).
 suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
-% suitSeance(3, 1, 1, 2).
-% suitSeance(4, 1, 2, 5).
-% suitSeance(5, 1, 1, 3).
-% suitSeance(6, 1, 2, 2).
-% suitSeance(7, 1, 1, 5).
