@@ -7,45 +7,43 @@
 /**
  * planifier(+Ss, -Cs).
  *
- * @arg S   Listes des seances a planifier
- * @arg C   Listes des creneaux construits
+ * @arg S   Listes des séances à planifier
+ * @arg C   Listes des créneaux construits
  */
 planifier([], []) :- !.
 planifier(Ss, [C|Cs]) :-
 
-    member(S, Ss),      % La seance courante
-    delete(Ss, S, Ss2), % On l'enleve de la liste
+    member(S, Ss),      % La séance courante
+    delete(Ss, S, Ss2), % On l'enlève de la liste
 
-    planifier(Ss2, Cs), % on traite le sous-probleme
+    planifier(Ss2, Cs), % on traite le sous-problème
 
-    % Creation du creneau et tests ---------------------------------------------
+    % Création du créneau et tests ---------------------------------------------
 
     seance(S, TypeS, _, _),
+
+    date(J, M),     % une date
+    plage(H, _, _), % une plage horaire
 
     % une salle
     salle(L, TailleL),
     accueille(L, TypeL),
     typesCoursIdentiques(TypeS, TypeL), % type de salle valide
 
-    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la seance
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
     effectifGroupes(Gs, Effectif),
     Effectif =< TailleL, % taille de salle valide
 
-    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la seance
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
 
-    date(J, M),     % une date
-    plage(H, _, _), % une plage horaire
-
-    % test des contraintes (profs, incompatibilite groupes, sequencement)
-    % sur cette proposition de creneau
+    % test des contraintes (profs, incompatibilité groupes, séquencement)
+    % sur cette proposition de créneau
     creneauValide(S, Ps, Gs, H, J, M, L, Cs),
 
-    % Fin creation du creneau et tests -----------------------------------------
+    % Fin création du créneau et tests -----------------------------------------
 
     C = [S, H, J, M, L].
 \end{lstlisting}
-
-TODO expliquer, parler de sous-problème et récursion
 
 Voici, dans le code ci-dessus, notre fonction de résolution "planifier(Ss, Cs)". 
 
@@ -58,7 +56,13 @@ Une fois que l'on s'attaque à une seule séance. On va faire les \emph{choix\_n
 
 L'ordre de ces choix est important car la récursivité de Prolog remontera et trouvera de nouvelles valeurs dans l'ordre que nous avons défini.
 
-Tout d'abord, on trouve une salle qui peut accueillir suffisamment d'élèves ainsi que le bon type de cours. Tant que ces deux variables ne sont pas vraies, Prolog va effectuer un \emph{choix\_nd} de salle.
+Tout d'abord, on détermine la date ainsi que la plage horaire via deux \emph{choix\_nd}. 
+On commence par ces choix-ci car cela permet de s'assurer que l'on aura les cours sur des créneaux similaires. 
+Exemples : le 01/01, de 14h à 15h30, on peut avoir plusieurs séances avec des groupes différents et des salles différentes.
+
+En effet auparavan nous commencions par déterminer la salle et l'emploi du temps était beaucoup plus étendu car les créneaux ne se superposaient que très peu.
+
+Dans un second temps, on va donc trouver une salle qui peut accueillir suffisamment d'élèves ainsi que le bon type de cours. Tant que ces deux variables ne sont pas vraies, Prolog va effectuer un \emph{choix\_nd} de salle.
 
 Ensuite on se penche sur les problèmes de groupes. 
 On récupère les groupes associés à la séance, et on vérifie qu'ils ne sont pas trop nombreux par rapport à la salle choisie. 
@@ -68,16 +72,34 @@ Il est donc important dans ce cas de les effectuer l'une après l'autre.
 
 Après cela, on récupère le(s) professeur(s) associé(s) à la séance.
 
-Puis, on effectue des \emph{choix\_nd} sur la date dans un premier temps, puis la plage horaire.
-
-Comme cela, si la fonction suivante \texttt{creneauValide} qui applique les post-conditions, Prolog testera tout d'abord : toutes les plages différentes du jour, puis les dates différentes, et seulement après cela changera-t-il de salle.
-
-
-TODO mentionner l'importance de l'ordre des appels aux prédicats pour économiser
-lors des retours arrières
+Cet ordre permet que, pour un même créneau, on regarde toutes les salles qui correspondent avant de changer de créneau. C'est une bonne façon de régler le problème d'avoir des cours en parallèles.
 
 \subsubsection{Prédicats utilitaires}
 
+\begin{lstlisting}[language=Prolog, caption=creneauValide, captionpos=b]
+/**
+ * creneauValide(S, Ps, G, H, J, M, L, [Cs]).
+ *
+ * Définit si un creneau est valide (Pas de conflit avec les créneaux existants)
+ *
+ * @arg S   La séance
+ * @arg Ps  Les enseignants
+ * @arg Gs  Les groupes
+ * @arg H   La plage horaire
+ * @arg J   Le jour
+ * @arg M   Le mois
+ * @arg L   La salle
+ * @arg Cs  Liste de créneaux [S, H, J, M, L]
+ */
+creneauValide(_, _, _, _, _, _, _, []) :- !.
+creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
+    creneauValideCreneau(S, Ps, Gs, H, J, M, L, C),
+    creneauValide(S, Ps, Gs, H, J, M, L, Cs),
+    !.
+\end{lstlisting}
+
 TODO décrire ce qui se passe dans \texttt{creneauValide} et les prédicats
 utilisés (mettre leur signature, pas le code)
+
+
 
