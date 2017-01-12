@@ -217,6 +217,9 @@ planifier(Ss, [C|Cs]) :-
 
     seance(S, TypeS, _, _),
 
+    date(J, M),     % une date
+    plage(H, _, _), % une plage horaire
+
     % une salle
     salle(L, TailleL),
     accueille(L, TypeL),
@@ -227,9 +230,6 @@ planifier(Ss, [C|Cs]) :-
     Effectif =< TailleL, % taille de salle valide
 
     findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
-
-    date(J, M),     % une date
-    plage(H, _, _), % une plage horaire
 
     % test des contraintes (profs, incompatibilité groupes, séquencement)
     % sur cette proposition de créneau
