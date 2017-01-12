@@ -47,6 +47,32 @@ planifier(Ss, [C|Cs]) :-
 
 TODO expliquer, parler de sous-problème et récursion
 
+Voici, dans le code ci-dessus, notre fonction de résolution "planifier(Ss, Cs)". 
+
+Nous avons essayé d'écrire un code qui soit \emph{atomique} au maximum. Chaque fonction effectue une action précise, ou bien est ensuite divisée en plusieurs fonctions qui elles effectueront des requêtes atomiques.
+
+Après avoir récupéré la séance courante, on traite ce sous problème. 
+On cherche à diviser le problème pour qu'il traite chaque séance indépendamment. 
+
+Une fois que l'on s'attaque à une seule séance. On va faire les \emph{choix\_nd} décris dans l'algorithme \ref{algo:algo1}.
+
+L'ordre de ces choix est important car la récursivité de Prolog remontera et trouvera de nouvelles valeurs dans l'ordre que nous avons défini.
+
+Tout d'abord, on trouve une salle qui peut accueillir suffisamment d'élèves ainsi que le bon type de cours. Tant que ces deux variables ne sont pas vraies, Prolog va effectuer un \emph{choix\_nd} de salle.
+
+Ensuite on se penche sur les problèmes de groupes. 
+On récupère les groupes associés à la séance, et on vérifie qu'ils ne sont pas trop nombreux par rapport à la salle choisie. 
+Si c'est le cas, Prolog va remonter à la fonction précédente, c'est à dire le choix de la salle. 
+
+Il est donc important dans ce cas de les effectuer l'une après l'autre.
+
+Après cela, on récupère le(s) professeur(s) associé(s) à la séance.
+
+Puis, on effectue des \emph{choix\_nd} sur la date dans un premier temps, puis la plage horaire.
+
+Comme cela, si la fonction suivante \texttt{creneauValide} qui applique les post-conditions, Prolog testera tout d'abord : toutes les plages différentes du jour, puis les dates différentes, et seulement après cela changera-t-il de salle.
+
+
 TODO mentionner l'importance de l'ordre des appels aux prédicats pour économiser
 lors des retours arrières
 
