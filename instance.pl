@@ -500,6 +500,11 @@ seances('TP C++', logiciel_c, picarougne, tp, silr2, [
     tp_c_silr2_10
 ]).
 
+seances('CM Mini-Projet C++', logiciel_projet_c, picarougne, cm, info, [
+    cm_projet_c_1,
+    cm_projet_c_2
+]).
+
 seances('CM outils ingénierie logiciel', logiciel_outils, cohen, cm, silr, [
     cm_outils_ingenierie_silr_1,
     cm_outils_ingenierie_silr_2
@@ -730,23 +735,23 @@ seances('TP traitement du signal', logiciel_signal, ricordel, tp, silr2, [
  * Info
  */
 
-seances('CM Marketing', hes_marketing, moreau, cm, silr, [
+seances('CM marketing', hes_marketing, moreau, cm, silr, [
     cm_marketing_silr_1
 ]).
 
-seances('CM Marketing', hes_marketing, oili, cm, silr, [
+seances('CM marketing', hes_marketing, oili, cm, silr, [
     cm_marketing_silr_2
 ]).
 
-seances('CM Marketing', hes_marketing, moreau, cm, id, [
+seances('CM marketing', hes_marketing, moreau, cm, id, [
     cm_marketing_id_1
 ]).
 
-seances('CM Marketing', hes_marketing, oili, cm, silr, [
+seances('CM marketing', hes_marketing, oili, cm, silr, [
     cm_marketing_id_2
 ]).
 
-seances('TD Marketing', hes_marketing, oili, cm, silr, [
+seances('TD marketing', hes_marketing, oili, cm, silr, [
     td_marketing_silr_1,
     td_marketing_silr_2,
     td_marketing_silr_3,
@@ -756,7 +761,7 @@ seances('TD Marketing', hes_marketing, oili, cm, silr, [
     td_marketing_silr_7
 ]).
 
-seances('TD Marketing', hes_marketing, oili, cm, id, [
+seances('TD marketing', hes_marketing, oili, cm, id, [
     td_marketing_id_1,
     td_marketing_id_2,
     td_marketing_id_3,
@@ -765,6 +770,91 @@ seances('TD Marketing', hes_marketing, oili, cm, id, [
     td_marketing_id_6,
     td_marketing_id_7
 ]).
+
+/*
+ * Stages et Projets 
+ * Info
+ */
+
+seances('CM génie logiciel gestion projets', projet_genie_logiciel, marcus, cm, info, [
+    cm_genie_logi_1,
+    cm_genie_logi_2,
+    cm_genie_logi_3
+]).
+
+seances('CM génie logiciel gestion projets', projet_genie_logiciel, prie, cm, info, [
+    cm_genie_logi_4,
+    cm_genie_logi_5,
+    cm_genie_logi_6
+]).
+
+seances('TD génie logiciel gestion projets', projet_genie_logiciel, marcus, td, id, [
+    td_genie_logi_id_1,
+    td_genie_logi_id_2,
+    td_genie_logi_id_3
+]).
+
+seances('TD génie logiciel gestion projets', projet_genie_logiciel, nachouki, td, silr1, [
+    td_genie_logi_silr1_1,
+    td_genie_logi_silr1_2,
+    td_genie_logi_silr1_3
+]).
+
+seances('TD génie logiciel gestion projets', projet_genie_logiciel, prie, td, silr2, [
+    td_genie_logi_silr2_1,
+    td_genie_logi_silr2_2,
+    td_genie_logi_silr2_3
+]).
+
+seances('TP génie logiciel gestion projets', projet_genie_logiciel, marcus, tp, id, [
+    tp_genie_logi_id_1
+]).
+
+seances('TP génie logiciel gestion projets', projet_genie_logiciel, marcus, tp, silr1, [
+    tp_genie_logi_silr1_1
+]).
+
+seances('TP génie logiciel gestion projets', projet_genie_logiciel, marcus, tp, silr2, [
+    tp_genie_logi_silr2_1
+]).
+
+seances('CM patrons conception', logiciel_patrons, pigeau, cm, info, [
+    cm_patrons_1,
+    cm_patrons_2,
+    cm_patrons_3
+]).
+
+seances('TD patrons conception', logiciel_patrons, marcus, td, id, [
+    td_patrons_id_1,
+    td_patrons_id_2
+]).
+
+seances('TD patrons conception', logiciel_patrons, prie, td, silr1, [
+    td_patrons_silr1_1,
+    td_patrons_silr1_2
+]).
+
+seances('TD patrons conception', logiciel_patrons, pigeau, td, silr2, [
+    td_patrons_silr2_1,
+    td_patrons_silr2_2
+]).
+
+seances('TP patrons conception', logiciel_patrons, marcus, tp, id, [
+    tp_patrons_id_1,
+    tp_patrons_id_2
+]).
+
+seances('TP patrons conception', logiciel_patrons, prie, tp, silr1, [
+    tp_patrons_silr1_1,
+    tp_patrons_silr1_2
+]).
+
+seances('TP patrons conception', logiciel_patrons, pigeau, tp, silr2, [
+    tp_patrons_silr2_1,
+    tp_patrons_silr2_2
+]).
+
+
 
 
 /**
@@ -849,6 +939,9 @@ suitSeance(tp_multimedia_1, cm_multimedia_4) :- !.
 suitSeance(tp_c_id_1, cm_IA_6) :- !.
 suitSeance(tp_c_silr1_1, cm_IA_6) :- !.
 suitSeance(tp_c_silr2_1, cm_IA_6) :- !.
+suitSeance(cm_projet_c_1, tp_c_id_10) :- !.
+suitSeance(cm_projet_c_1, tp_c_silr1_10) :- !.
+suitSeance(cm_projet_c_1, tp_c_silr2_10) :- !.
 suitSeance(tp_outils_ingenierie_silr2_1, cm_outils_ingenierie_silr_2) :- !.
 suitSeance(tp_outils_ingenierie_silr1_1, cm_outils_ingenierie_silr_2) :- !.
 suitSeance(td_analyse_donnees_1, cm_analyse_donnees_7) :- !.
@@ -869,6 +962,15 @@ suitSeance(cm_marketing_id_2, cm_marketing_id_1) :- !.
 suitSeance(cm_marketing_silr_2, cm_marketing_silr_1) :- !.
 suitSeance(td_marketing_id_1, cm_marketing_id_2) :- !.
 suitSeance(td_marketing_silr_1, cm_marketing_silr_2) :- !.
+suitSeance(tp_genie_logi_id_1, cm_genie_logi_6) :- !.
+suitSeance(tp_genie_logi_silr1_1, cm_genie_logi_6) :- !.
+suitSeance(tp_genie_logi_silr2_1, cm_genie_logi_6) :- !.
+suitSeance(td_patrons_id_1, cm_patrons_3) :- !.
+suitSeance(td_patrons_silr1_1, cm_patrons_3) :- !.
+suitSeance(td_patrons_silr2_1, cm_patrons_3) :- !.
+suitSeance(tp_patrons_id_1, td_patrons_id_2) :- !.
+suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2) :- !.
+suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2) :- !.
 suitSeance(S2, S1) :-  % TODO tests
     seances(_, _, _, _, _, Ids),
     suitSeancesListe(S2, S1, Ids).
@@ -884,6 +986,7 @@ suitSeance(S2, S1) :-  % TODO tests
  */
 
 suitSeance(2, 1, 1, 1).
+suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
 % suitSeance(3, 1, 1, 2).
 % suitSeance(4, 1, 2, 5).
 % suitSeance(5, 1, 1, 3).
