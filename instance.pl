@@ -707,7 +707,7 @@ seances('TD traitement du signal', logiciel_signal, ricordel, td, silr2, [
     td_traitement_signal_silr2_6
 ]).
 
-seances('TD traitement du signal', logiciel_signal, [le_callet, vigier], tp, silr1, [
+seances('TP traitement du signal', logiciel_signal, [le_callet, vigier], tp, silr1, [
     tp_traitement_signal_silr1_1,
     tp_traitement_signal_silr1_2,
     tp_traitement_signal_silr1_3,
@@ -716,7 +716,7 @@ seances('TD traitement du signal', logiciel_signal, [le_callet, vigier], tp, sil
     tp_traitement_signal_silr1_6
 ]).
 
-seances('TD traitement du signal', logiciel_signal, ricordel, tp, silr2, [
+seances('TP traitement du signal', logiciel_signal, ricordel, tp, silr2, [
     tp_traitement_signal_silr2_1,
     tp_traitement_signal_silr2_2,
     tp_traitement_signal_silr2_3,
@@ -861,10 +861,10 @@ suitSeance(tp_reseaux_silr1_1, cm_reseaux_7) :- !.
 suitSeance(tp_reseaux_silr2_1, cm_reseaux_7) :- !.
 suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12) :- !.
 suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12) :- !.
-suitSeance(td_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
-suitSeance(td_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
-suitSeance(tp_traitement_signal_silr1_6, cm_traitement_signal_6) :- !.
-suitSeance(tp_traitement_signal_silr2_6, cm_traitement_signal_6) :- !.
+suitSeance(td_traitement_signal_silr1_1, cm_traitement_signal_6) :- !.
+suitSeance(td_traitement_signal_silr2_1, cm_traitement_signal_6) :- !.
+suitSeance(tp_traitement_signal_silr1_1, cm_traitement_signal_6) :- !.
+suitSeance(tp_traitement_signal_silr2_1, cm_traitement_signal_6) :- !.
 suitSeance(cm_marketing_id_2, cm_marketing_id_1) :- !.
 suitSeance(cm_marketing_silr_2, cm_marketing_silr_1) :- !.
 suitSeance(td_marketing_id_1, cm_marketing_id_2) :- !.
