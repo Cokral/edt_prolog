@@ -1,13 +1,53 @@
 
 \subsection{\textit{One more thing}}
 
-TODO parler de dynamic
+\subsubsection{\texttt{dynamic}}
 
+Afin de saisir relativement rapidement les séances correspondantes à un semestre
+complet, nous avons utilisé des prédicats travaillant sur des listes.
+L'inconvénient est la charge de travail supplémentaire demandé à Prolog à chaque
+prédicat \texttt{seance/4}, par exemple.
+Toutes ces données étant disponible à priori, nous avons donc utilisé le
+prédicat Prolog \texttt{dynamic} qui permet de définir des prédicats à la volée,
+comme un chargement de base de données.
+
+Cette transformation a permit un gain d'un facteur 100, passant de 10min à 6s
+pour la planification du même jeu de données.
+
+\subsubsection{Optimisation de l'emploi du temps}
 TODO parler des prédicats supplémentaires pour optimiser l'emploi du temps
 
+\subsubsection{Affichage}
 TODO parler de l'affichage
 
-TODO parler des tests
+\subsubsection{Tests}
+
+Les prédicats sont testés à l'aide PLUnit sur notre premier jeu de données
+\texttt{instance\_old.pl}. Avoir une démarche TDD (Test Driven Development) nous
+a grandement aidé à la découpe du problème. Cela nous a également permit
+d'arriver rapidement à un code de qualité et de pouvoir travailler à
+l'amélioration et aux performances de notre solution.
+
+Voici un exemple :
+
+\begin{lstlisting}[language=Prolog, caption=Exemple de test, captionpos=b,
+label={lst:test}]
+:- begin_tests(indiceSeance).
+
+test("indiceSeance renvoie 0 si la seance ne suit rien") :-
+    indiceSeance(1, 0).
+
+test("indiceSeance renvoie le nombre de seances precedentes sinon") :-
+    indiceSeance(2, 1),
+    indiceSeance(8, 2).
+
+:- end_tests(indiceSeance).
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption=Lancer les tests, captionpos=b]
+swipl -s run_tests.pl
+\end{lstlisting}
+
 
 \subsubsection{Question subsidiaire}
 
@@ -16,14 +56,12 @@ séances dans un emploi du temps déjà réalisé (\texttt{Ds}).
 
 \begin{lstlisting}[language=Prolog, caption=Exemple d'ajout dans un EDT, captionpos=b,
 label={lst:creneauValideCreneau}]
+findall(S, seance(S, _, _, _), Ss), % toutes les seances
+predsort(beforeSeance, Ss, Ss2),
+reverse(Ss2, [X|Ss3]), % X est une seance qu'on ne veut pas planifier tout
+                       % de suite
+planifier(Ss3, Cs), % premier emploi du temps
 
-    findall(S, seance(S, _, _, _), Ss), % toutes les seances
-    predsort(beforeSeance, Ss, Ss2),
-    reverse(Ss2, [X|Ss3]), % X est une seance qu'on ne peut pas planifier tout
-                           % de suite
-    planifier(Ss3, Cs), % premier emploi du temps
-
-    planifier([X], Cs, Cs2). % ajout de X sur dans l'emploi du temps si possible
-
+planifier([X], Cs, Cs2). % ajout de X sur dans l'emploi du temps si possible
 \end{lstlisting}
 
