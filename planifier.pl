@@ -3,7 +3,7 @@
 */
 
 /**
- * typesCoursIdentiques(X, Y).
+ * typesCoursIdentiques(+X, +Y).
  *
  * @arg X Un type de cours
  * @arg Y Un type de cours
@@ -11,7 +11,7 @@
 typesCoursIdentiques(X, X).
 
 /**
- * memeMomentCreneau(H, J, M, C).
+ * memeMomentCreneau(+H, +J, +M, +C).
  *
  * Définit si les deux créneaux sont au même moment.
  *
@@ -23,7 +23,7 @@ typesCoursIdentiques(X, X).
 memeMomentCreneau(H, J, M, [_, H2, J2, M2, _]) :- H = H2, J = J2, M = M2, !.
 
 /**
- * memeSalle(L, C).
+ * memeSalle(+L, +C).
  *
  * Définit si L est une salle du créneau C
  *
@@ -33,7 +33,7 @@ memeMomentCreneau(H, J, M, [_, H2, J2, M2, _]) :- H = H2, J = J2, M = M2, !.
 memeSalle(L, [_, _, _, _, L]) :- !.
 
 /**
- * memeProfs(P, C).
+ * memeProfs(+P, +C).
  *
  * Définit si Ps sont des prof du créneau C.
  *
@@ -44,7 +44,7 @@ memeProfs([P|_], [S, _, _, _, _]) :- profSeance(P2, S), P2 = P, !.
 memeProfs([_|Ps], [S, H, J, M, L]) :- memeProfs(Ps, [S, H, J, M, L]), !.
 
 /**
- * groupesIncompatibleCreneau(Gs, C).
+ * groupesIncompatibleCreneau(+Gs, +C).
  *
  * Définit si Gs sont incompatibles avec le groupe de C.
  *
@@ -101,7 +101,7 @@ customSequenceValide(J1, M1, J2, M2, Jmin, Jmax) :-
     !. % 1 se déroule bien entre JMin et Jmax jours après 2
 
 /**
- * sequencementValideCreneau(S, H, J, M, C).
+ * sequencementValideCreneau(+S, +H, +J, +M, +C).
  *
  * Définit si le créneau potentiel est conforme avec le séquencement voulu
  *
@@ -136,7 +136,7 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
     !.
 
 /**
- * creneauValideCreneau(P, Gs, H, J, M, L, C).
+ * creneauValideCreneau(+S, +Ps, +Gs, +H, +J, +M, +L, +C).
  *
  * Définit si un cours n'est pas incompatible au moment donné avec les autres
  * cours de la liste de créneaux.
@@ -147,7 +147,7 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg L   La salle
- * @arg Cs  Un créneau [S, H, J, M, L]
+ * @arg C   Un créneau [S, H, J, M, L]
  */
 creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
     % le créneau valide le séquencement avec C
@@ -166,7 +166,7 @@ creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
     !.
 
 /**
- * creneauValide(S, Ps, G, H, J, M, L, [Cs]).
+ * creneauValide(+S, +Ps, +Gs, +H, +J, +M, +L, +Cs).
  *
  * Définit si un creneau est valide (Pas de conflit avec les créneaux existants)
  *
