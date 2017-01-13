@@ -31,6 +31,10 @@ groupe(silr1,     18).
 groupe(silr2,     20).
 groupe(silr_para, 14).
 groupe(silr_code, 24).
+groupe(anglais_A, 12).
+groupe(anglais_B, 16).
+groupe(anglais_C, 18).
+groupe(anglais_D, 16).
 
 /**
  * incomp(-G1, -G2)
@@ -52,6 +56,10 @@ incomp(silr_code, silr1).
 incomp(silr_code, silr2).
 incomp(silr_code, silr).
 incomp(silr_code, info).
+incomp(anglais_A, info).
+incomp(anglais_B, info).
+incomp(anglais_C, info).
+incomp(anglais_D, info).
 
 /**
  * incompatibles(-Groupe1, -Groupe2)
@@ -839,6 +847,68 @@ seances('TD marketing', hes_marketing, oili, cm, id, [
 seances('DS marketing', hes_marketing, [moreau, oili], ds, info, [
     ds_marketing
 ]).
+
+
+seances('TD anglais', hes_anglais, prof_anglais1, td, anglais_A, [
+    td_anglais_A_1,
+    td_anglais_A_2,
+    td_anglais_A_3,
+    td_anglais_A_4,
+    td_anglais_A_5,
+    td_anglais_A_6,
+    td_anglais_A_7,
+    td_anglais_A_8,
+    td_anglais_A_9,
+    td_anglais_A_10,
+    td_anglais_A_11,
+    td_anglais_A_12
+]).
+
+seances('TD anglais', hes_anglais, prof_anglais2, td, anglais_B, [
+    td_anglais_B_1,
+    td_anglais_B_2,
+    td_anglais_B_3,
+    td_anglais_B_4,
+    td_anglais_B_5,
+    td_anglais_B_6,
+    td_anglais_B_7,
+    td_anglais_B_8,
+    td_anglais_B_9,
+    td_anglais_B_10,
+    td_anglais_B_11,
+    td_anglais_B_12
+]).
+
+seances('TD anglais', hes_anglais, prof_anglais3, td, anglais_C, [
+    td_anglais_C_1,
+    td_anglais_C_2,
+    td_anglais_C_3,
+    td_anglais_C_4,
+    td_anglais_C_5,
+    td_anglais_C_6,
+    td_anglais_C_7,
+    td_anglais_C_8,
+    td_anglais_C_9,
+    td_anglais_C_10,
+    td_anglais_C_11,
+    td_anglais_C_12
+]).
+
+seances('TD anglais', hes_anglais, prof_anglais4, td, anglais_D, [
+    td_anglais_D_1,
+    td_anglais_D_2,
+    td_anglais_D_3,
+    td_anglais_D_4,
+    td_anglais_D_5,
+    td_anglais_D_6,
+    td_anglais_D_7,
+    td_anglais_D_8,
+    td_anglais_D_9,
+    td_anglais_D_10,
+    td_anglais_D_11,
+    td_anglais_D_12
+]).
+
 
 /*
  * Stages et Projets
