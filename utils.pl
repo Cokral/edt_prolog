@@ -1,6 +1,10 @@
 /* utils.pl
-
-*/
+ *
+ * @changelog
+ * 8802f99 Guillaume Clochard      Tue Jan 10 11:15:49 2017 +0100  Ordonnancement des séances
+ * 58acf14 Guillaume Clochard      Tue Jan 10 10:11:59 2017 +0100  Ajout beforeSeance/3
+ * 3eb734e Guillaume Clochard      Tue Jan 10 09:45:05 2017 +0100  Ajout indiceSeance/2
+ * */
 
 /**
  * indiceSeance(+S, -I).

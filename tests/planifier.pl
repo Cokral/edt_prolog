@@ -1,8 +1,19 @@
 /* tests/planifier.pl
-
-Tests des prédicats de `planifier.pl`
-
-@changelog
+ *
+ * Tests des prédicats de `planifier.pl`
+ *
+ * @changelog
+ * 5212ac0 Guillaume Clochard      Wed Jan 11 08:15:57 2017 +0100  Ajout test planification/1
+ * 8802f99 Guillaume Clochard      Tue Jan 10 11:15:49 2017 +0100  Ordonnancement des séances
+ * 5f85b31 Guillaume Clochard      Tue Jan 10 08:44:36 2017 +0100  Fix tests sequencement
+ * ae2cb06 Guillaume Clochard      Tue Jan 10 05:42:32 2017 +0100  Ajout contrainte salle différente si même moment
+ * ccf325a Guillaume Clochard      Fri Jan 6 15:00:18 2017 +0100   Fix gestion liste de groupes
+ * ea7e1d8 Guillaume Clochard      Fri Jan 6 14:38:15 2017 +0100   Gestion d'une liste de profs
+ * 374d56d Guillaume Clochard      Fri Jan 6 11:37:13 2017 +0100   Correction tests
+ * 37b8972 Thomas Coquereau        Fri Jan 6 11:29:11 2017 +0100   ADD test groupes compatibles and REFACTO profDisponibles
+ * c61aa7c Guillaume Clochard      Fri Jan 6 10:10:28 2017 +0100   Ajout test taille de salle valide
+ * b927ab3 Guillaume Clochard      Tue Jan 3 17:21:46 2017 +0100   Ajout profDisponible/5
+ * 2619d84 Guillaume Clochard      Tue Jan 3 17:20:55 2017 +0100   Ajout typesCoursIdentiques/2
 */
 
 :- include('../planifier.pl').

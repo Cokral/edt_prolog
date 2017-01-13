@@ -1,17 +1,20 @@
 /* instance.pl
-
-@changelog
-f8e54ce Thomas Coquereau        Mon Jan 2 15:35:42 2017 +0100   ADD jours min et max pour le suiv
-837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
-569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
-47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
-9443ae1 Guillaume Clochard      Mon Jan 2 08:03:18 2017 +0100   Convertion # --> %
-00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
-a57af32 Guillaume Clochard      Mon Jan 2 06:38:22 2017 +0100   Ajout description prédicats
-88a4bd3 Guillaume Clochard      Sun Jan 1 21:28:08 2017 +0100   Fix casse des constantes
-7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
-935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
-a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
+ *
+ * @changelog
+ * 8802f99 Guillaume Clochard      Tue Jan 10 11:15:49 2017 +0100  Ordonnancement des séances
+ * ccf325a Guillaume Clochard      Fri Jan 6 15:00:18 2017 +0100   Fix gestion liste de groupes
+ * ea7e1d8 Guillaume Clochard      Fri Jan 6 14:38:15 2017 +0100   Gestion d'une liste de profs
+ * 0a74c23 Guillaume Clochard      Tue Jan 3 14:41:09 2017 +0100   Add dateBefore/4
+ * b5cb411 Thomas Coquereau        Tue Jan 3 14:28:54 2017 +0100   FIX jour into date
+ * dcc9597 Guillaume Clochard      Tue Jan 3 14:22:06 2017 +0100   Simplification plage/3
+ * f8e54ce Thomas Coquereau        Mon Jan 2 15:35:42 2017 +0100   ADD jours min et max pour le suivi
+ * 837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
+ * 569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
+ * 47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
+ * 00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
+ * 7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
+ * 935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
+ * a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
 */
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
