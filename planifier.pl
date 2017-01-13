@@ -59,7 +59,6 @@ groupesIncompatibleCreneau([_|Gs], [S, H, J, M, L]) :-
     groupesIncompatibleCreneau(Gs, [S, H, J, M, L]),
     !.
 
-
 /**
  * momentBefore(+H1, +J1, +M1, +H2, +J2, +M2).
  *
@@ -134,6 +133,22 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
     suitSeance(S2, S, Jmin, Jmax), % S2 suit S
     customSequenceValide(J2, M2, J, M, Jmin, Jmax),
     !.
+
+/**
+ * jeudiApresMidi(+H, +J)
+ *
+ * Est vrai si le moment passé est un jeudi après midi
+ *
+ * Partant du principe qu'il y a 5 jours dans une semaine et que l'année
+ * commence un lundi, sans cas particulier, alors les jeudis tombent les jours
+ * multiple de 4.
+ *
+ * @arg H   Plage horaire
+ * @arg J   Jour
+ */
+jeudiApresMidi(H, J) :-
+    J mod 4 is 0,
+    H > 3.
 
 /**
  * creneauValideCreneau(+S, +Ps, +Gs, +H, +J, +M, +L, +C).
@@ -222,6 +237,8 @@ planifier(Ss, Ds, [C|Cs]) :-
 
     date(J, M),     % une date
     plage(H, _, _), % une plage horaire
+
+    \+ jeudiApresMidi(H, J),
 
     % une salle
     salle(L, TailleL),
