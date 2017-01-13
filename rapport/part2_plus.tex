@@ -1,8 +1,29 @@
 
 \subsection{\textit{One more thing}}
 
-TODO parler de l'affichage
+TODO parler de dynamic
 
 TODO parler des prédicats supplémentaires pour optimiser l'emploi du temps
 
+TODO parler de l'affichage
+
 TODO parler des tests
+
+\subsubsection{Question subsidiaire}
+
+L'algorithme \texttt{planifier(+Ss, +Ds, -Cs)} permet également de planifier des
+séances dans un emploi du temps déjà réalisé (\texttt{Ds}).
+
+\begin{lstlisting}[language=Prolog, caption=Exemple d'ajout dans un EDT, captionpos=b,
+label={lst:creneauValideCreneau}]
+
+    findall(S, seance(S, _, _, _), Ss), % toutes les seances
+    predsort(beforeSeance, Ss, Ss2),
+    reverse(Ss2, [X|Ss3]), % X est une seance qu'on ne peut pas planifier tout
+                           % de suite
+    planifier(Ss3, Cs), % premier emploi du temps
+
+    planifier([X], Cs, Cs2). % ajout de X sur dans l'emploi du temps si possible
+
+\end{lstlisting}
+
