@@ -3,11 +3,6 @@
 Le problème modélisé, il convient maintenant de construire un jeu de données qui
 servira à la construction de l'emploi du temps.
 
-La Figure \ref{fig:objet} représente sous forme de diagramme objet l'instance
-sur laquelle nous allons travailler. Pour des soucis de lisibilité, le diagramme
-est incomplet. Il a été choisi de ne représenter que quelques séances et de ne
-pas représenter les dépendances entre elles.
-
 Deux instances sont disponibles :
 
 \begin{description}
@@ -16,21 +11,12 @@ Deux instances sont disponibles :
         ayant servit au début du projet et servant actuellement pour les tests
         unitaires
 
-    \item[\texttt{instance.pl}] Représente un semestre complet (TODO : nombre de
-        séances, nombre de cours, nombre de profs, etc.)
+    \item[\texttt{instance.pl}] Représente un semestre complet (458 séances,
+        21 matières, 32 enseignants, 9 groupes, 20 salles)
 
 \end{description}
 
 Pour générer \texttt{instance.pl}, des prédicats ont été utilisés afin de
 faciliter la saisie des données en regroupant les séances d'une même matière
 dans une même déclaration.
-
-\begin{landscape}
-
-    \begin{figure}[t]
-        \includegraphics[keepaspectratio=true,width=26cm]{diagrammeObjet.png}
-            \caption{\label{fig:objet} Diagramme objet tronqué}
-    \end{figure}
-
-\end{landscape}
 

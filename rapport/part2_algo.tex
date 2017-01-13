@@ -3,6 +3,12 @@
 
 \subsubsection{Résolution}
 
+Voici dans le code \ref{lst:reso} ci-dessous l'algorithme principal
+\texttt{planifier(+Ss, +Ds, -Cs)}.
+L'idée est de découper le problème en sous-problèmes par récursion. La
+planification d'une séance demande ainsi la planification des séances la
+précédant dans la liste \texttt{Ss} initiale (sous-problème).
+
 \begin{lstlisting}[language=Prolog, caption=Resolution, captionpos=b,
 label={lst:reso}]
 /**
@@ -49,11 +55,6 @@ planifier(Ss, Ds, [C|Cs]) :-
     C = [S, H, J, M, L].
 \end{lstlisting}
 
-Voici dans le code \ref{lst:reso} ci-dessus l'algorithme principal
-\texttt{planifier(+Ss, +Ds, -Cs)}.
-L'idée est de découper le problème en sous-problèmes par récursion. La
-planification d'une séance demande ainsi la planification des séances la
-précédant dans la liste \texttt{Ss} initiale (sous-problème).
 
 La planification d'une séance consiste donc à faire les choix non déterministes
 présentés dans l'algorithme \ref{algo:algo1}. L'ordre d'éxécution de ces choix
@@ -65,7 +66,7 @@ Pour chaque séance, on détermine donc tout d'abord le moment, puis la salle,
 avant de tester si le créneau formé est valide. Si ce n'est pas le cas, Prolog
 testera toutes les autres salles avant de rechercher une autre date.
 Choisir l'ordre inverse (choix de la salle avant la date) donnerait un emploi du
-temps s'étalant sur une période plus long, Prolog préférant alors passer à un
+temps s'étalant sur une période plus longue, Prolog préférant alors passer à un
 moment suivant plutôt que de cherche une salle libre (ie. peu de cours en
 parallèle).
 
@@ -160,7 +161,7 @@ creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
 
 Le code du listing \ref{lst:creneauValideCreneau} montre les tests effectués
 face à chaque créneau. Les autres prédicats déterministes sont documentés dans
-\texttt{planifier.pl}.
+\texttt{planifier.pl} :
 
 \begin{itemize}
 

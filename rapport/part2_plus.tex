@@ -7,12 +7,22 @@ Afin de saisir relativement rapidement les séances correspondantes à un semest
 complet, nous avons utilisé des prédicats travaillant sur des listes.
 L'inconvénient est la charge de travail supplémentaire demandé à Prolog à chaque
 prédicat \texttt{seance/4}, par exemple.
-Toutes ces données étant disponible à priori, nous avons donc utilisé le
-prédicat Prolog \texttt{dynamic} qui permet de définir des prédicats à la volée,
-comme un chargement de base de données.
+Toutes ces données étant disponibles à priori, nous avons donc utilisé les
+prédicats Prolog \texttt{dynamic} et \texttt{assertz/1} qui permettent de
+définir des prédicats à la volée, comme un chargement de base de données.
 
-Cette transformation a permit un gain d'un facteur 100, passant de 10min à 6s
-pour la planification du même jeu de données.
+Cette transformation a permit un gain d'un ordre de grandeur 100, passant de 500
+secondes (9min) à 2s
+pour la planification du même jeu de données. On peut comparer l'ancien
+profiling (Figure \ref{fig:profile9min}) avec le nouveau (Figure
+\ref{fig:profile}). À remarquer : le temps important passé dans les prédicats
+gravitant autour du concept de séance sans utiliser \texttt{dynamic}.
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[keepaspectratio=true,width=12cm]{profile9min.png}
+        \caption{\label{fig:profile9min} Résultat du profiling avant dynamic}
+\end{figure}
 
 \subsubsection{Optimisation de l'emploi du temps}
 
@@ -118,9 +128,10 @@ afficherPlanification(Cs) :-
 
 Pour l'affichage, on utilise la fonction \texttt{afficherPlanification(+Cs)} que l'on peut voir dans l'algorithme \ref{lst:affi} ci-dessus.
 
-On va chercher à afficher l'emploi du temps par ordre chronologie : donc du premier jour, première plage jusqu'au dernier jour, dernière plage.
+On va chercher à afficher l'emploi du temps par ordre chronologique : donc du premier jour, première plage jusqu'au dernier jour, dernière plage.
 
-De ce fait, la fonction récupère tout d'abord, la date. Puis dans un second temps une plage.
+De ce fait, la fonction récupère tout d'abord la date puis, dans un second
+temps, une plage.
 
 Ensuite, elle sélectionne un des créneaux qui correspond et débute l'affichage.
 
@@ -139,14 +150,16 @@ afficherSeance(S) :-
     write(' - '), write(Mat).
 \end{lstlisting}
 
-Celui-ci est atomique, on affiche tout d'abord la séance (Nom, type, matière), puis le moment (Jour, mois et plage) ainsi de suite jusqu'à avoir toutes les informations propres à un emploi du temps pour ce créneau.
+On affiche tout d'abord la séance (nom,
+type, matière), puis le moment (jour, mois et plage) et ainsi de suite jusqu'à avoir toutes les informations propres à un emploi du temps pour ce créneau.
 Sur l'algorithme \ref{lst:affi_sea} ci-dessus, on a un exemple de fonction : celle permettant d'afficher les séances.
 
-On supprime ensuite ce créneau de la liste des créneaux vu qu'il a déjà été affiché puis on rappelle la fonction sur la nouvelle liste.
+On supprime ensuite ce créneau de la liste des créneaux à traiter puis on
+rappelle récursivement la fonction sur la nouvelle liste.
 
 On peut voir le rendu de l'affichage sur l'image \ref{fig:affi_sortie}.
 
-\begin{figure}[t]
+\begin{figure}[H]
 	\centering
     \includegraphics[keepaspectratio=true,width=12cm]{affichage.png}
         \caption{\label{fig:affi_sortie} Affichage en console}
@@ -188,13 +201,13 @@ L'algorithme \texttt{planifier(+Ss, +Ds, -Cs)} permet également de planifier de
 séances dans un emploi du temps déjà réalisé (\texttt{Ds}).
 
 \begin{lstlisting}[language=Prolog, caption=Exemple d'ajout dans un EDT, captionpos=b,
-label={lst:creneauValideCreneau}]
+label={lst:plus}]
 findall(S, seance(S, _, _, _), Ss), % toutes les seances
 predsort(beforeSeance, Ss, Ss2),
 reverse(Ss2, [X|Ss3]), % X est une seance qu'on ne veut pas planifier tout
                        % de suite
 planifier(Ss3, Cs), % premier emploi du temps
 
-planifier([X], Cs, Cs2). % ajout de X sur dans l'emploi du temps si possible
+planifier([X], Cs, Cs2). % ajout de X dans l'emploi du temps si possible
 \end{lstlisting}
 
