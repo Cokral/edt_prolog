@@ -18,7 +18,59 @@ pour la planification du même jeu de données.
 TODO parler des prédicats supplémentaires pour optimiser l'emploi du temps
 
 \subsubsection{Affichage}
-TODO parler de l'affichage
+\begin{lstlisting}[language=Prolog, caption=Affichage, captionpos=b,
+label={lst:affi}]
+/**
+ * afficherPlanification(+Cs)
+ *
+ * Affiche la planification dans l'ordre chronologique
+ *
+ * @arg Cs  Une liste de creneaux
+ */
+afficherPlanification([]) :- !.
+afficherPlanification(Cs) :-
+    date(J, M),
+    plage(H, _, _),
+    member(C, Cs),
+    C = [S, H, J, M, L],
+    write('--------------------------------------------------------------'), nl,
+    afficherSeance(S), nl,
+    afficherMoment(J, M, H), nl,
+    afficherGroupes(S), nl,
+    afficherProfs(S), nl,
+    afficherSalle(L), nl,
+    delete(Cs, C, Cs2),
+    afficherPlanification(Cs2),
+    !.
+\end{lstlisting}
+
+Pour l'affichage, on utilise la fonction \texttt{afficherPlanification(+Cs)} que l'on peut voir dans l'algorithme \ref{lst:affi} ci-dessus.
+
+On va chercher à afficher l'emploi du temps par ordre chronologie : donc du premier jour, première plage jusqu'au dernier jour, dernière plage.
+
+De ce fait, la fonction récupère tout d'abord, la date. Puis dans un second temps une plage.
+
+Ensuite, elle sélectionne un des créneaux qui correspond et débute l'affichage.
+
+\begin{lstlisting}[language=Prolog, caption=Affichage, captionpos=b,
+label={lst:affi_sea}]
+/**
+ * afficherSeance(+S)
+ *
+ * @arg S
+ */
+afficherSeance(S) :-
+    seance(S, TypeCours, Mat, Nom),
+    write('Seance:\t\t'),
+    write(S), write(' "'), write(Nom), write('"'),
+    write(' - '), write(TypeCours),
+    write(' - '), write(Mat).
+\end{lstlisting}
+
+Celui-ci est atomique, on affiche tout d'abord la séance (Nom, type, matière), puis le moment (Jour, mois et plage) ainsi de suite jusqu'à avoir toutes les informations propres à un emploi du temps pour ce créneau.
+Sur l'algorithme \ref{lst:affi_sea} ci-dessus, on a un exemple de fonction : celle permettant d'afficher les séances.
+
+On supprime ensuite ce créneau de la liste des créneaux vu qu'il a déjà été affiché puis on rappelle la fonction sur la nouvelle liste.
 
 \subsubsection{Tests}
 
