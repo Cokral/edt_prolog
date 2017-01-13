@@ -3,22 +3,23 @@
 
 \subsubsection{Résolution}
 
-\begin{lstlisting}[language=Prolog, caption=Resolution, captionpos=b]
+\begin{lstlisting}[language=Prolog, caption=Resolution, captionpos=b,
+label={lst:reso}]
 /**
  * planifier(+Ss, -Cs).
  *
- * @arg S   Listes des séances à planifier
- * @arg C   Listes des créneaux construits
+ * @arg S   Listes des seances a planifier
+ * @arg C   Listes des creneaux construits
  */
 planifier([], []) :- !.
 planifier(Ss, [C|Cs]) :-
 
-    member(S, Ss),      % La séance courante
-    delete(Ss, S, Ss2), % On l'enlève de la liste
+    member(S, Ss),      % La seance courante
+    delete(Ss, S, Ss2), % On l'enleve de la liste
 
-    planifier(Ss2, Cs), % on traite le sous-problème
+    planifier(Ss2, Cs), % on traite le sous-probleme
 
-    % Création du créneau et tests ---------------------------------------------
+    % Creation du creneau et tests ---------------------------------------------
 
     seance(S, TypeS, _, _),
 
@@ -30,66 +31,86 @@ planifier(Ss, [C|Cs]) :-
     accueille(L, TypeL),
     typesCoursIdentiques(TypeS, TypeL), % type de salle valide
 
-    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la séance
+    findall(G, groupeSeance(G, S), Gs), % tous les groupes de la seance
     effectifGroupes(Gs, Effectif),
     Effectif =< TailleL, % taille de salle valide
 
-    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la séance
+    findall(P, profSeance(P, S), Ps),   % tous les enseignants de la seance
 
-    % test des contraintes (profs, incompatibilité groupes, séquencement)
-    % sur cette proposition de créneau
+    % test des contraintes (profs, incompatibilite groupes, sequencement)
+    % sur cette proposition de creneau
     creneauValide(S, Ps, Gs, H, J, M, L, Cs),
 
-    % Fin création du créneau et tests -----------------------------------------
+    % Fin creation du creneau et tests -----------------------------------------
 
     C = [S, H, J, M, L].
 \end{lstlisting}
 
-Voici, dans le code ci-dessus, notre fonction de résolution "planifier(Ss, Cs)". 
+Voici dans le code \ref{lst:reso} ci-dessus l'algorithme principal \texttt{planifier(Ss,
+Cs)}.
+L'idée est de découper le problème en sous-problèmes par récursion. La
+planification d'une séance demande ainsi la planification des séances la
+précédant dans la liste \texttt{Ss} initiale (sous-problème).
 
-Nous avons essayé d'écrire un code qui soit \emph{atomique} au maximum. Chaque fonction effectue une action précise, ou bien est ensuite divisée en plusieurs fonctions qui elles effectueront des requêtes atomiques.
+La planification d'une séance consiste donc à faire les choix non déterministes
+présentés dans l'algorithme \ref{algo:algo1}. L'ordre d'éxécution de ces choix
+a son importance : le back-tracking de Prolog remontera sur les choix pour
+trouver une combinaison validant les conditions dans l'ordre que nous avons
+défini.
 
-Après avoir récupéré la séance courante, on traite ce sous problème. 
-On cherche à diviser le problème pour qu'il traite chaque séance indépendamment. 
+Pour chaque séance, on détermine donc tout d'abord le moment, puis la salle,
+avant de tester si le créneau formé est valide. Si ce n'est pas le cas, Prolog
+testera toutes les autres salles avant de rechercher une autre date.
+Choisir l'ordre inverse (choix de la salle avant la date) donnerait un emploi du
+temps s'étalant sur une période plus long, Prolog préférant alors passer à un
+moment suivant plutôt que de cherche une salle libre (ie. peu de cours en
+parallèle).
 
-Une fois que l'on s'attaque à une seule séance. On va faire les \emph{choix\_nd} décris dans l'algorithme \ref{algo:algo1}.
+Exemple : le 01/01, de 14h à 15h30, on peut avoir plusieurs séances avec des
+groupes différents et des salles différentes.
 
-L'ordre de ces choix est important car la récursivité de Prolog remontera et trouvera de nouvelles valeurs dans l'ordre que nous avons défini.
+À chaque propositon de créneau, on effectue les tests de validité des
+posts-conditions :
 
-Tout d'abord, on détermine la date ainsi que la plage horaire via deux \emph{choix\_nd}. 
-On commence par ces choix-ci car cela permet de s'assurer que l'on aura les cours sur des créneaux similaires. 
-Exemples : le 01/01, de 14h à 15h30, on peut avoir plusieurs séances avec des groupes différents et des salles différentes.
+\begin{itemize}
 
-En effet auparavan nous commencions par déterminer la salle et l'emploi du temps était beaucoup plus étendu car les créneaux ne se superposaient que très peu.
+    \item On vérifie que la salle le bon type de cours.
 
-Dans un second temps, on va donc trouver une salle qui peut accueillir suffisamment d'élèves ainsi que le bon type de cours. Tant que ces deux variables ne sont pas vraies, Prolog va effectuer un \emph{choix\_nd} de salle.
+    \item On se penche ensuite sur les problèmes de groupes. On récupère les
+        groupes associés à la séance, et on vérifie que la salle convient à
+        l'effectif .
 
-Ensuite on se penche sur les problèmes de groupes. 
-On récupère les groupes associés à la séance, et on vérifie qu'ils ne sont pas trop nombreux par rapport à la salle choisie. 
-Si c'est le cas, Prolog va remonter à la fonction précédente, c'est à dire le choix de la salle. 
+    \item Les autres post-conditions nécessitent de parcourir les créneaux déjà
+        construits. C'est \texttt{creneauValide} qui s'en charge. On l'explique
+        plus bas.
 
-Il est donc important dans ce cas de les effectuer l'une après l'autre.
+\end{itemize}
 
-Après cela, on récupère le(s) professeur(s) associé(s) à la séance.
-
-Cet ordre permet que, pour un même créneau, on regarde toutes les salles qui correspondent avant de changer de créneau. C'est une bonne façon de régler le problème d'avoir des cours en parallèles.
+Il est donc important d'effectuer les tests au plus tôt après le choix non
+déterministe. On optimise ainsi les calculs nécessaire. Prolog ne lancera par
+exemple pas le \texttt{findall} des groupes tant qu'une salle de bon type n'est
+pas trouvée.
 
 \subsubsection{Prédicats utilitaires}
 
-\begin{lstlisting}[language=Prolog, caption=creneauValide, captionpos=b]
+Des prédicats déterministes ont été implémentés afin de participer à la
+validation des post-conditions, à l'ajout d'un créneau potentiel.
+
+\begin{lstlisting}[language=Prolog, caption=creneauValide, captionpos=b,
+label={lst:creneauValide}]
 /**
- * creneauValide(S, Ps, G, H, J, M, L, [Cs]).
+ * creneauValide(+S, +Ps, +Gs, +H, +J, +M, +L, +Cs).
  *
- * Définit si un creneau est valide (Pas de conflit avec les créneaux existants)
+ * Definit si un creneau est valide (Pas de conflit avec les creneaux existants)
  *
- * @arg S   La séance
+ * @arg S   La seance
  * @arg Ps  Les enseignants
  * @arg Gs  Les groupes
  * @arg H   La plage horaire
  * @arg J   Le jour
  * @arg M   Le mois
  * @arg L   La salle
- * @arg Cs  Liste de créneaux [S, H, J, M, L]
+ * @arg Cs  Liste de creneaux [S, H, J, M, L]
  */
 creneauValide(_, _, _, _, _, _, _, []) :- !.
 creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
@@ -98,8 +119,65 @@ creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
     !.
 \end{lstlisting}
 
-TODO décrire ce qui se passe dans \texttt{creneauValide} et les prédicats
-utilisés (mettre leur signature, pas le code)
+Le code du listing \ref{lst:creneauValide} montre la logique récursive de la
+validation d'une nouveau créneau.
+
+\begin{lstlisting}[language=Prolog, caption=creneauValide, captionpos=b,
+label={lst:creneauValideCreneau}]
+/**
+ * creneauValideCreneau(+S, +Ps, +Gs, +H, +J, +M, +L, +C).
+ *
+ * Definit si un cours n'est pas incompatible au moment donne avec les autres
+ * cours de la liste de creneaux.
+ *
+ * @arg Ps  Les enseignants
+ * @arg Gs  Les groupes
+ * @arg H   La plage horaire
+ * @arg J   Le jour
+ * @arg M   Le mois
+ * @arg L   La salle
+ * @arg C   Un creneau [S, H, J, M, L]
+ */
+creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
+    % le creneau valide le sequencement avec C
+    sequencementValideCreneau(S, H, J, M, C),
+    (
+        % le creneau n'est pas au meme moment que C
+        (\+ memeMomentCreneau(H, J, M, C));
+        % ou il ne concerne pas un meme prof, des groupes incompatibles
+        % ou une meme salle
+        (
+            \+ groupesIncompatibleCreneau(Gs, C),
+            \+ memeProfs(Ps, C),
+            \+ memeSalle(L, C)
+        )
+    ),
+    !.
+\end{lstlisting}
+
+Le code du listing \ref{lst:creneauValideCreneau} montre les tests effectués
+face à chaque créneau. Les autres prédicats déterministes sont documentés dans
+\texttt{planifier.pl}.
+
+\begin{itemize}
+
+    \item \texttt{sequencementValideCreneau(+S, +H, +J, +M, +C)} vérifie que
+        le nouveau créneau respecte les contraintes de séquencement avec le
+        créneau \texttt{C} existant.
+
+    \item \texttt{\textbackslash+ memeMomentCreneau(+H, +J, +M, +C)} teste si
+        les deux créneaux ont lieu en même temps.
+
+    \item \texttt{\textbackslash+ groupesIncompatibleCreneau(+Gs, +C)} vérifie
+        que les groupes ne sont pas incompatibles avec les groupes du créneau C.
+
+    \item \texttt{\textbackslash+ memeProfs(+Ps, +C)} vérifie que tous les profs
+        du créneau sont disponibles.
+
+    \item \texttt{\textbackslash+ memeSalle(+L, +C)} vérifie que la salle est
+        libre.
+
+\end{itemize}
 
 
 
