@@ -201,19 +201,19 @@ creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
     !.
 
 /**
-* jeudiApresMidi(+H, +J)
-*
-* Est vrai si le moment passé est un jeudi après midi
-*
-* Partant du principe qu'il y a 5 jours dans une semaine et que l'année
-* commence un lundi, sans cas particulier, alors les jeudis tombent les jours
-* multiple de 4.
-*
-* @arg H   Plage horaire
-* @arg J   Jour
-*/
+ * jeudiApresMidi(+H, +J)
+ *
+ * Est vrai si le moment passé est un jeudi après midi
+ *
+ * Partant du principe qu'il y a 5 jours dans une semaine et que l'annee
+ * commence un lundi, sans cas particulier, alors les jeudis tombent le 4eme
+ * jour de chaque semaine.
+ *
+ * @arg H   Plage horaire
+ * @arg J   Jour
+ */
 jeudiApresMidi(H, J) :-
-    J mod 4 is 0,
+    (J + 1) mod 5 is 0,
     H > 3.
 
 /**
