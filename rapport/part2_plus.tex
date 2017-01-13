@@ -15,7 +15,79 @@ Cette transformation a permit un gain d'un facteur 100, passant de 10min à 6s
 pour la planification du même jeu de données.
 
 \subsubsection{Optimisation de l'emploi du temps}
-TODO parler des prédicats supplémentaires pour optimiser l'emploi du temps
+
+Afin de rendre l'emploi du temps un peu plus vivable, on peut optimiser un peu
+les choses.
+
+Évitons de planifier des cours en début ou fin de journée :
+
+\begin{lstlisting}[language=Prolog, caption=Éviter début et fin de journée,
+captionpos=b, label={lst:debutfin}]
+% plage(H, _, _).
+member(H, [2, 3, 4, 5, 1, 6]), % une plage horaire
+                               % evitons premier et dernier creneau
+\end{lstlisting}
+
+Limitons le nombre de cours par jours :
+
+\begin{lstlisting}[language=Prolog, caption=Limite de cours par jour,
+captionpos=b, label={lst:nbcours}]
+/**
+ * tropDeCoursCeJour(+J, +M, +Max, +Cs)
+ *
+ * @arg J   Jour
+ * @arg M   Mois
+ * @arg Max Nombre max de cours par jour
+ * @arg Cs  Liste de creneaux deja planifies
+ */
+tropDeCoursCeJour(J, M, Max, Cs) :-
+    findall(S, member([S, _, J, M, _], Cs), Csjour),
+    length(Csjour, X),
+    X > Max.
+\end{lstlisting}
+
+Empêchons les cours le jeudi après-midi :
+
+\begin{lstlisting}[language=Prolog, caption=Jeudi après-midi,
+captionpos=b, label={lst:jeudi}]
+/**
+ * jeudiApresMidi(+H, +J)
+ *
+ * Est vrai si le moment passe est un jeudi apres midi
+ *
+ * Partant du principe qu'il y a 5 jours dans une semaine et que l'annee
+ * commence un lundi, sans cas particulier, alors les jeudis tombent le 4eme
+ * jour de chaque semaine.
+ *
+ * @arg H   Plage horaire
+ * @arg J   Jour
+ */
+jeudiApresMidi(H, J) :-
+    (J + 1) mod 5 is 0,
+    H > 3.
+\end{lstlisting}
+
+Limitons à un examen par jour :
+
+\begin{lstlisting}[language=Prolog, caption=Détection de conflit d'exament,
+captionpos=b, label={lst:examen}]
+/**
+ * conflitExamen(+S, +J, +M, +C)
+ *
+ * Est vrai si C se deroule le meme jour et que les deux creneaux sont des
+ * examents
+ *
+ * @arg S   Seance
+ * @arg J   Jour
+ * @arg M   Mois
+ * @arg C   Un creneau
+ */
+conflitExamen(S, J, M, [S2, _, J, M, _]) :-
+    seance(S, ds, _, _),
+    seance(S2, ds, _, _).
+\end{lstlisting}
+
+L'intégration de ces prédicats est disponible dans le code joint au rendu.
 
 \subsubsection{Affichage}
 \begin{lstlisting}[language=Prolog, caption=Affichage, captionpos=b,
