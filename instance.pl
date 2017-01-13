@@ -29,8 +29,6 @@ groupe(id,        24).
 groupe(silr,      38).
 groupe(silr1,     18).
 groupe(silr2,     20).
-groupe(silr_para, 14).
-groupe(silr_code, 24).
 groupe(anglais_A, 12).
 groupe(anglais_B, 16).
 groupe(anglais_C, 18).
@@ -48,14 +46,6 @@ incomp(silr1, silr).
 incomp(silr1, info).
 incomp(silr2, silr).
 incomp(silr2, info).
-incomp(silr_para, silr1).
-incomp(silr_para, silr2).
-incomp(silr_para, silr).
-incomp(silr_para, info).
-incomp(silr_code, silr1).
-incomp(silr_code, silr2).
-incomp(silr_code, silr).
-incomp(silr_code, info).
 incomp(anglais_A, info).
 incomp(anglais_B, info).
 incomp(anglais_C, info).
@@ -88,16 +78,12 @@ incompatibles(X, Y) :- incomp(Y, X), !.
 matiere(projet_genie_logiciel).
 matiere(projet_transversal).
 
-matiere(hes_anglais). % TO ADD
-matiere(hes_gestion_projet).
+matiere(hes_anglais).
 matiere(hes_marketing).
-matiere(hes_jeu). % TO ADD
-matiere(hes_sante_securite). % TO ADD
 
 matiere(connaissances_bdd).
 matiere(connaissances_projet_ia).
 matiere(connaissances_ia).
-matiere(connaissances_organisation). % TO ADD
 
 matiere(math_analyse_donnees).
 matiere(math_compta).
@@ -133,33 +119,27 @@ prof(martinez).
 prof(kuntz).
 prof(parrein).
 prof(nachouki).
-prof(porcheron).
 prof(oili).
 prof(pigeau).
 prof(soufiane).
 prof(milliat).
 prof(goncalves).
 prof(moreau).
-prof(falcher).
 prof(gelgon).
 prof(raschia).
 prof(lecapitaine).
 prof(peter).
 prof(lehn).
 prof(le_callet).
-prof(kingston).
 prof(vigier).
 prof(perreira).
 prof(normand).
 prof(cohen).
-prof(olivier).
 prof(leman).
-prof(bigeard).
 prof(prof_anglais1).
 prof(prof_anglais2).
 prof(prof_anglais3).
 prof(prof_anglais4).
-
 prof(prof_ptrans_id).
 prof(prof_ptrans_silr).
 
@@ -909,7 +889,6 @@ seances('TD anglais', hes_anglais, prof_anglais4, td, anglais_D, [
     td_anglais_D_12
 ]).
 
-
 /*
  * Stages et Projets
  * Info
@@ -1254,6 +1233,7 @@ suitSeance(ds_genie_logi, tp_genie_logi_silr2_1, 5, 20).
 suitSeance(ds_patrons, tp_patrons_id_2, 7, 12).
 suitSeance(ds_patrons, tp_patrons_silr1_2, 7, 12).
 suitSeance(ds_patrons, tp_patrons_silr2_2, 7, 12).
+
 
 suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
 
