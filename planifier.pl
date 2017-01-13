@@ -135,20 +135,19 @@ sequencementValideCreneau(S, _, J, M, [S2, _, J2, M2, _]) :-
     !.
 
 /**
- * jeudiApresMidi(+H, +J)
+ * conflitExamen(+S, +J, +M, +C)
  *
- * Est vrai si le moment passé est un jeudi après midi
+ * Est vrai si C se déroule le même jour et que les deux créneaux sont des
+ * examents
  *
- * Partant du principe qu'il y a 5 jours dans une semaine et que l'année
- * commence un lundi, sans cas particulier, alors les jeudis tombent les jours
- * multiple de 4.
- *
- * @arg H   Plage horaire
+ * @arg S   Séance
  * @arg J   Jour
+ * @arg M   Mois
+ * @arg C   Un créneau
  */
-jeudiApresMidi(H, J) :-
-    J mod 4 is 0,
-    H > 3.
+conflitExamen(S, J, M, [S2, _, J, M, _]) :-
+    seance(S, ds, _, _),
+    seance(S2, ds, _, _).
 
 /**
  * creneauValideCreneau(+S, +Ps, +Gs, +H, +J, +M, +L, +C).
@@ -167,6 +166,7 @@ jeudiApresMidi(H, J) :-
 creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
     % le créneau valide le séquencement avec C
     sequencementValideCreneau(S, H, J, M, C),
+    \+ conflitExamen(S, J, M, C),
     (
         % le créneau n'est pas au même moment que C
         (\+ memeMomentCreneau(H, J, M, C));
@@ -199,6 +199,22 @@ creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
     creneauValideCreneau(S, Ps, Gs, H, J, M, L, C),
     creneauValide(S, Ps, Gs, H, J, M, L, Cs),
     !.
+
+/**
+* jeudiApresMidi(+H, +J)
+*
+* Est vrai si le moment passé est un jeudi après midi
+*
+* Partant du principe qu'il y a 5 jours dans une semaine et que l'année
+* commence un lundi, sans cas particulier, alors les jeudis tombent les jours
+* multiple de 4.
+*
+* @arg H   Plage horaire
+* @arg J   Jour
+*/
+jeudiApresMidi(H, J) :-
+    J mod 4 is 0,
+    H > 3.
 
 /**
  * effectifGroupes(+Gs, -S)
