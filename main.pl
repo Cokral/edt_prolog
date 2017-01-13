@@ -2,6 +2,8 @@
  *
     swipl -s main.pl
  *
+ * @changelog
+ * 39d2aa2 Guillaume Clochard      Wed Jan 11 08:30:02 2017 +0100  Création main.pl
  */
 
 :- include('./instance.pl').

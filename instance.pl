@@ -1,17 +1,33 @@
 /* instance.pl
-
-@changelog
-f8e54ce Thomas Coquereau        Mon Jan 2 15:35:42 2017 +0100   ADD jours min et max pour le suiv
-837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
-569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
-47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
-9443ae1 Guillaume Clochard      Mon Jan 2 08:03:18 2017 +0100   Convertion # --> %
-00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
-a57af32 Guillaume Clochard      Mon Jan 2 06:38:22 2017 +0100   Ajout description prédicats
-88a4bd3 Guillaume Clochard      Sun Jan 1 21:28:08 2017 +0100   Fix casse des constantes
-7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
-935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
-a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
+ *
+ * @changelog
+ * 8b971e6 Thomas Coquereau        Fri Jan 13 15:56:15 2017 +0100  ADD séances anglais
+ * afe5b11 Thomas Coquereau        Fri Jan 13 12:20:03 2017 +0100  ADD ds pour chaque matiere
+ * 747e311 Guillaume Clochard      Fri Jan 13 07:50:34 2017 +0100  Optimisation x100 en utilisant dynamic
+ * e262376 Guillaume Clochard      Thu Jan 12 18:19:22 2017 +0100  Fix suitSeance/4 not used
+ * 0de7aaa Thomas Coquereau        Thu Jan 12 16:34:53 2017 +0100  STUB ptrans séances
+ * 57eefcd Thomas Coquereau        Thu Jan 12 15:09:00 2017 +0100  ADD projet C++ & patrons & génie logi seances
+ * a528e06 Guillaume Clochard      Thu Jan 12 13:54:45 2017 +0100  Fix nouvelles séances
+ * d41db47 Thomas Coquereau        Thu Jan 12 00:12:28 2017 +0100  ADD séances de Marketing
+ * 3ce2068 Thomas Coquereau        Wed Jan 11 23:50:12 2017 +0100  ADD séances traitement signal
+ * a016e83 Guillaume Clochard      Tue Jan 10 19:29:31 2017 +0100  Ajout déclaration de plusieurs profs par séances
+ * b16eeb0 Thomas Coquereau        Tue Jan 10 17:43:50 2017 +0100  ADD suit seance traitement image
+ * fc3124f Thomas Coquereau        Tue Jan 10 17:39:54 2017 +0100  STUB instanciation semestre complet
+ * 8802f99 Guillaume Clochard      Tue Jan 10 11:15:49 2017 +0100  Ordonnancement des séances
+ * 5f85b31 Guillaume Clochard      Tue Jan 10 08:44:36 2017 +0100  Fix tests sequencement
+ * c4631fc Guillaume Clochard      Tue Jan 10 05:35:55 2017 +0100  Affichage chronologique d'une solution
+ * ea7e1d8 Guillaume Clochard      Fri Jan 6 14:38:15 2017 +0100   Gestion d'une liste de profs
+ * 0a74c23 Guillaume Clochard      Tue Jan 3 14:41:09 2017 +0100   Add dateBefore/4
+ * b5cb411 Thomas Coquereau        Tue Jan 3 14:28:54 2017 +0100   FIX jour into date
+ * dcc9597 Guillaume Clochard      Tue Jan 3 14:22:06 2017 +0100   Simplification plage/3
+ * f8e54ce Thomas Coquereau        Mon Jan 2 15:35:42 2017 +0100   ADD jours min et max pour le suivi
+ * 837a2ac Guillaume Clochard      Mon Jan 2 11:37:16 2017 +0100   Ajout nom des séances
+ * 569cfb8 Guillaume Clochard      Mon Jan 2 10:09:13 2017 +0100   Ajout tests unitaires incompatibles/2
+ * 47400e0 Guillaume Clochard      Mon Jan 2 08:42:36 2017 +0100   Ajout incompatibles(Groupe1, Groupe2)
+ * 00c0db5 Guillaume Clochard      Mon Jan 2 07:44:25 2017 +0100   Ajout groupeSeance et profSeance
+ * 7c83339 Thomas Coquereau        Thu Dec 29 10:39:47 2016 +0100  ADD suit
+ * 935d80e Thomas Coquereau        Thu Dec 29 10:31:46 2016 +0100  ADD seances
+ * a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instanciation
 */
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

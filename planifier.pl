@@ -1,5 +1,24 @@
 /* planifier.pl
 
+* @changelog
+* e5737a6 Guillaume Clochard      Fri Jan 13 15:51:36 2017 +0100  Max 5 cours par jours
+* fc23e26 Guillaume Clochard      Fri Jan 13 15:07:01 2017 +0100  Éviter début et fin de journée
+* f1482a6 Guillaume Clochard      Fri Jan 13 14:51:27 2017 +0100  Limiter à un examen par jour max
+* e361335 Guillaume Clochard      Fri Jan 13 14:42:19 2017 +0100  Pas de cours le jeudi
+* 729b6b0 Guillaume Clochard      Fri Jan 13 12:07:00 2017 +0100  Ajout foncitionalité subsidiaire
+* ce446c3 Guillaume Clochard      Thu Jan 12 20:47:05 2017 +0100  Fix Sélection du moment avant la salle
+* 8802f99 Guillaume Clochard      Tue Jan 10 11:15:49 2017 +0100  Ordonnancement des séances
+* 5f85b31 Guillaume Clochard      Tue Jan 10 08:44:36 2017 +0100  Fix tests sequencement
+* ae2cb06 Guillaume Clochard      Tue Jan 10 05:42:32 2017 +0100  Ajout contrainte salle différente si même moment
+* c4631fc Guillaume Clochard      Tue Jan 10 05:35:55 2017 +0100  Affichage chronologique d'une solution
+* ca927e3 Guillaume Clochard      Fri Jan 6 16:36:36 2017 +0100   Optimisation ordre des tests
+* d8c51c6 Guillaume Clochard      Fri Jan 6 16:26:56 2017 +0100   Fix récursion planifier/2
+* ccf325a Guillaume Clochard      Fri Jan 6 15:00:18 2017 +0100   Fix gestion liste de groupes
+* ea7e1d8 Guillaume Clochard      Fri Jan 6 14:38:15 2017 +0100   Gestion d'une liste de profs
+* 845efc1 Guillaume Clochard      Fri Jan 6 14:15:54 2017 +0100   creneauValide
+* 37b8972 Thomas Coquereau        Fri Jan 6 11:29:11 2017 +0100   ADD test groupes compatibles and REFACTO profDisponibles
+* b927ab3 Guillaume Clochard      Tue Jan 3 17:21:46 2017 +0100   Ajout profDisponible/5
+* 2619d84 Guillaume Clochard      Tue Jan 3 17:20:55 2017 +0100   Ajout typesCoursIdentiques/2
 */
 
 /**
