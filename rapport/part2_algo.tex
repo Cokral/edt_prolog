@@ -98,7 +98,7 @@ pas trouvée.
 \subsubsection{Prédicats utilitaires}
 
 Des prédicats déterministes ont été implémentés afin de participer à la
-validation des post-conditions, à l'ajout d'un créneau potentiel.
+validation des post-conditions et à l'ajout d'un créneau potentiel.
 
 \begin{lstlisting}[language=Prolog, caption=creneauValide, captionpos=b,
 label={lst:creneauValide}]
@@ -124,7 +124,7 @@ creneauValide(S, Ps, Gs, H, J, M, L, [C|Cs]) :-
 \end{lstlisting}
 
 Le code du listing \ref{lst:creneauValide} montre la logique récursive de la
-validation d'une nouveau créneau.
+validation d'un nouveau créneau.
 
 \begin{lstlisting}[language=Prolog, caption=creneauValideCreneau, captionpos=b,
 label={lst:creneauValideCreneau}]
@@ -160,7 +160,7 @@ creneauValideCreneau(S, Ps, Gs, H, J, M, L, C) :-
 \end{lstlisting}
 
 Le code du listing \ref{lst:creneauValideCreneau} montre les tests effectués
-face à chaque créneau. Les autres prédicats déterministes sont documentés dans
+sur chaque créneau. Les autres prédicats déterministes sont documentés dans
 \texttt{planifier.pl} :
 
 \begin{itemize}
