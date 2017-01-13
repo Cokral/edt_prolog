@@ -252,7 +252,8 @@ planifier(Ss, Ds, [C|Cs]) :-
     seance(S, TypeS, _, _),
 
     date(J, M),     % une date
-    plage(H, _, _), % une plage horaire
+    member(H, [2, 3, 4, 5, 1, 6]), % une plage horaire
+                                   % évitons premier et dernier créneau
 
     \+ jeudiApresMidi(H, J),
 
