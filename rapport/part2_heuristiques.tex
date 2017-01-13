@@ -1,13 +1,18 @@
 
 \subsection{Ordonnancement et heuristique}
 
-TODO mentionner la logique de suite entre les séances donne une idée de l'ordre
-dans lequel placer les séances
+Il est important de remarquer que les séances peuvent être ordonnées avant de
+chercher une planification. Les séances d'une même matière se suivant, il est
+intéressant de commencer par planifier la première, puis la seconde, etc.
 
-TODO heuristique = indice de la séance dans l'arbre des séances qui se suivent
+Le prédicat \texttt{indiceSeance(+S, -I)} implémente donc l'heuristique
+retournant l'indice d'une séance dans l'arbre des séances séquencées. Cette
+heuristique nous permet de trier les séances à priori et de commencer la
+la planification des séances de plus petits indices. Elles doivent logiquement
+se dérouler en début de période scolaire.
 
-TODO puis tri => on place en premier les séances qui représentent les premiers
-cours de leur matière, puis celles qui représentent un second cours, etc.
+Cet ordonnancement nous permet de rapidement partir dans une branche
+relativement bonne. Sans ordonnancement, on peut trouver le moteur d'inférence
+ayant commencé par placer la dernière séance d'une matière sur le premier
+créneau de l'année, ce qui entraine alors de très nombreux retours arrières.
 
-TODO cela nous permet de trouver extrèmement plus vite la bonne branche dans
-l'arbre de recherche
