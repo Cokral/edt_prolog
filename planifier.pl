@@ -231,6 +231,19 @@ effectifGroupes([G|Gs], S) :-
     !.
 
 /**
+ * tropDeCoursCeJour(+J, +M, +Max, +Cs)
+ *
+ * @arg J   Jour
+ * @arg M   Mois
+ * @arg Max Nombre max de cours par jour
+ * @arg Cs  Liste de créneaux déjà planifiés
+ */
+tropDeCoursCeJour(J, M, Max, Cs) :-
+    findall(S, member([S, _, J, M, _], Cs), Csjour),
+    length(Csjour, X),
+    X > Max.
+
+/**
  * planifier(+Ss, +Ds, -Cs).
  *
  * @arg Ss  Listes des séances à planifier
@@ -252,7 +265,10 @@ planifier(Ss, Ds, [C|Cs]) :-
     seance(S, TypeS, _, _),
 
     date(J, M),     % une date
-    plage(H, _, _), % une plage horaire
+    \+ tropDeCoursCeJour(J, M, 5, Cs2), % max 5 cours par jour
+
+    member(H, [2, 3, 4, 5, 1, 6]), % une plage horaire
+                                   % évitons premier et dernier créneau
 
     \+ jeudiApresMidi(H, J),
 
