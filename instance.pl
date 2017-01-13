@@ -196,7 +196,7 @@ joursParMois(20).
 * @arg IdJour  Id du jour
 * @arg IdMois  Id du mois
 */
-date(J, M) :-   % TODO add tests
+date(J, M) :-
     mois(M),
     joursParMois(Max),
     between(1, Max, J).
@@ -280,7 +280,7 @@ salle(S, N) :- salle(S, N, _). % TODO add tests
  * @arg Salle       Nom d'une salle
  * @arg TypeCours   Type de cours que la salle accueille
  */
-accueille(S, T) :-  % TODO add tests
+accueille(S, T) :-
     salle(S, _, L),
     member(T, L).
 
@@ -941,18 +941,15 @@ seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, proje
 ]).
 
 
-
 /**
- * seances(Id, TypeCours, Matiere, Nom)
+ * seance(Id, TypeCours, Matiere, Nom)
  *
  * @arg Id          Id de la séance
  * @arg TypeCours   Type de cours de la séance
  * @arg Matiere     Matiere à laquelle la séance appartient
  * @arg Nom         Nom de la séance
- */
-seance(Id, Type, Mat, Nom) :- % TODO add tests
-    seances(Nom, Mat, _, Type, _, Ids),
-    member(Id, Ids).
+*/
+:- dynamic seance/4.
 
 /**
  * groupeSeance(Groupe, Seance)
@@ -962,9 +959,7 @@ seance(Id, Type, Mat, Nom) :- % TODO add tests
  * @arg Groupe      Nom du groupe
  * @arg Seance      Id de la séance
  */
-groupeSeance(Groupe, Seance) :- % TODO add tests
-    seances(_, _, _, _, Groupe, Ids),
-    member(Seance, Ids).
+:- dynamic groupeSeance/2.
 
 /**
  * profSeance(Prof, Seance)
@@ -974,15 +969,7 @@ groupeSeance(Groupe, Seance) :- % TODO add tests
  * @arg Prof        Nom de l'enseignant
  * @arg Seance      Id de la séance
  */
-profSeance(Prof, Seance) :- % TODO add tests
-    seances(_, _, Prof, _, _, Ids),
-    \+ is_list(Prof),
-    member(Seance, Ids).
-profSeance(Prof, Seance) :- % TODO add tests
-    seances(_, _, Profs, _, _, Ids),
-    is_list(Profs),
-    member(Prof, Profs),
-    member(Seance, Ids).
+:- dynamic profSeance/2.
 
 /**
  * suitSeancesListe(+S1, ?S2, +Liste).
@@ -993,9 +980,6 @@ profSeance(Prof, Seance) :- % TODO add tests
  * @arg S2      Id de séance
  * @arg Liste   Liste d'id de séances
  */
-suitSeancesListe(S2, S1, [S1, S2|_]) :- !. % TODO add tests
-suitSeancesListe(S2, S1, [_|Ss]) :-
-    suitSeancesListe(S2, S1, Ss).
 
 /**
  * suitSeance(+Seance_suivante, ?Seance_suivie)
@@ -1007,63 +991,59 @@ suitSeancesListe(S2, S1, [_|Ss]) :-
  * @arg Seance_suivante     Id de la séance qui suit
  * @arg Seance_suivie       Id de la séance suivit
  */
-suitSeance(td_bdd_id_1, cm_bdd_8) :- !.
-suitSeance(tp_bdd_id_1, cm_bdd_8) :- !.
-suitSeance(td_bdd_silr1_1, cm_bdd_8) :- !.
-suitSeance(tp_bdd_silr1_1, cm_bdd_8) :- !.
-suitSeance(td_bdd_silr2_1, cm_bdd_8) :- !.
-suitSeance(tp_bdd_silr2_1, cm_bdd_8) :- !.
-suitSeance(td_IA_silr2_1, cm_IA_6) :- !.
-suitSeance(td_IA_silr1_1, cm_IA_6) :- !.
-suitSeance(td_IA_id_1, cm_IA_6) :- !.
-suitSeance(tp_projet_ia_silr2_1, td_IA_silr2_3) :- !.
-suitSeance(tp_projet_ia_silr1_1, td_IA_silr1_3) :- !.
-suitSeance(tp_projet_ia_id_1, td_IA_id_3) :- !.
-suitSeance(tp_multimedia_1, cm_multimedia_8) :- !.
-suitSeance(tp_multimedia_1, cm_multimedia_4) :- !.
-suitSeance(tp_c_id_1, cm_IA_6) :- !.
-suitSeance(tp_c_silr1_1, cm_IA_6) :- !.
-suitSeance(tp_c_silr2_1, cm_IA_6) :- !.
-suitSeance(cm_projet_c_1, tp_c_id_10) :- !.
-suitSeance(cm_projet_c_1, tp_c_silr1_10) :- !.
-suitSeance(cm_projet_c_1, tp_c_silr2_10) :- !.
-suitSeance(tp_outils_ingenierie_silr2_1, cm_outils_ingenierie_silr_2) :- !.
-suitSeance(tp_outils_ingenierie_silr1_1, cm_outils_ingenierie_silr_2) :- !.
-suitSeance(td_analyse_donnees_1, cm_analyse_donnees_7) :- !.
-suitSeance(tp_analyse_donnees_1, td_analyse_donnees_3) :- !.
-suitSeance(td_archi_parallèle_1, cm_archi_parallèle_2) :- !.
-suitSeance(td_crypto_silr2_1, cm_crypto_6) :- !.
-suitSeance(td_crypto_silr1_1, cm_crypto_6) :- !.
-suitSeance(td_crypto_id_1, cm_crypto_6) :- !.
-suitSeance(tp_reseaux_silr1_1, cm_reseaux_7) :- !.
-suitSeance(tp_reseaux_silr2_1, cm_reseaux_7) :- !.
-suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12) :- !.
-suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12) :- !.
-suitSeance(td_traitement_signal_silr1_1, cm_traitement_signal_6) :- !.
-suitSeance(td_traitement_signal_silr2_1, cm_traitement_signal_6) :- !.
-suitSeance(tp_traitement_signal_silr1_1, cm_traitement_signal_6) :- !.
-suitSeance(tp_traitement_signal_silr2_1, cm_traitement_signal_6) :- !.
-suitSeance(cm_marketing_id_2, cm_marketing_id_1) :- !.
-suitSeance(cm_marketing_silr_2, cm_marketing_silr_1) :- !.
-suitSeance(td_marketing_id_1, cm_marketing_id_2) :- !.
-suitSeance(td_marketing_silr_1, cm_marketing_silr_2) :- !.
-suitSeance(tp_genie_logi_id_1, cm_genie_logi_6) :- !.
-suitSeance(tp_genie_logi_silr1_1, cm_genie_logi_6) :- !.
-suitSeance(tp_genie_logi_silr2_1, cm_genie_logi_6) :- !.
-suitSeance(td_patrons_id_1, cm_patrons_3) :- !.
-suitSeance(td_patrons_silr1_1, cm_patrons_3) :- !.
-suitSeance(td_patrons_silr2_1, cm_patrons_3) :- !.
-suitSeance(tp_patrons_id_1, td_patrons_id_2) :- !.
-suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2) :- !.
-suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2) :- !.
-suitSeance(cm_projet_transversal_2, cm_projet_transversal_1) :- !.
-suitSeance(projet_transversal_id_1, cm_projet_transversal_2) :- !.
-suitSeance(projet_transversal_silr_1, cm_projet_transversal_2) :- !.
-suitSeance(S2, S1) :-  % TODO tests
-    \+ suitSeance(S2, S1, _, _),
-    seances(_, _, _, _, _, Ids),
-    suitSeancesListe(S2, S1, Ids).
-
+:- dynamic suitSeance/2.
+suitSeance(td_bdd_id_1, cm_bdd_8).
+suitSeance(tp_bdd_id_1, cm_bdd_8).
+suitSeance(td_bdd_silr1_1, cm_bdd_8).
+suitSeance(tp_bdd_silr1_1, cm_bdd_8).
+suitSeance(td_bdd_silr2_1, cm_bdd_8).
+suitSeance(tp_bdd_silr2_1, cm_bdd_8).
+suitSeance(td_IA_silr2_1, cm_IA_6).
+suitSeance(td_IA_silr1_1, cm_IA_6).
+suitSeance(td_IA_id_1, cm_IA_6).
+suitSeance(tp_projet_ia_silr2_1, td_IA_silr2_3).
+suitSeance(tp_projet_ia_silr1_1, td_IA_silr1_3).
+suitSeance(tp_projet_ia_id_1, td_IA_id_3).
+suitSeance(tp_multimedia_1, cm_multimedia_8).
+suitSeance(tp_multimedia_1, cm_multimedia_4).
+suitSeance(tp_c_id_1, cm_IA_6).
+suitSeance(tp_c_silr1_1, cm_IA_6).
+suitSeance(tp_c_silr2_1, cm_IA_6).
+suitSeance(cm_projet_c_1, tp_c_id_10).
+suitSeance(cm_projet_c_1, tp_c_silr1_10).
+suitSeance(cm_projet_c_1, tp_c_silr2_10).
+suitSeance(tp_outils_ingenierie_silr2_1, cm_outils_ingenierie_silr_2).
+suitSeance(tp_outils_ingenierie_silr1_1, cm_outils_ingenierie_silr_2).
+suitSeance(td_analyse_donnees_1, cm_analyse_donnees_7).
+suitSeance(tp_analyse_donnees_1, td_analyse_donnees_3).
+suitSeance(td_archi_parallèle_1, cm_archi_parallèle_2).
+suitSeance(td_crypto_silr2_1, cm_crypto_6).
+suitSeance(td_crypto_silr1_1, cm_crypto_6).
+suitSeance(td_crypto_id_1, cm_crypto_6).
+suitSeance(tp_reseaux_silr1_1, cm_reseaux_7).
+suitSeance(tp_reseaux_silr2_1, cm_reseaux_7).
+suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12).
+suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12).
+suitSeance(td_traitement_signal_silr1_1, cm_traitement_signal_6).
+suitSeance(td_traitement_signal_silr2_1, cm_traitement_signal_6).
+suitSeance(tp_traitement_signal_silr1_1, cm_traitement_signal_6).
+suitSeance(tp_traitement_signal_silr2_1, cm_traitement_signal_6).
+suitSeance(cm_marketing_id_2, cm_marketing_id_1).
+suitSeance(cm_marketing_silr_2, cm_marketing_silr_1).
+suitSeance(td_marketing_id_1, cm_marketing_id_2).
+suitSeance(td_marketing_silr_1, cm_marketing_silr_2).
+suitSeance(tp_genie_logi_id_1, cm_genie_logi_6).
+suitSeance(tp_genie_logi_silr1_1, cm_genie_logi_6).
+suitSeance(tp_genie_logi_silr2_1, cm_genie_logi_6).
+suitSeance(td_patrons_id_1, cm_patrons_3).
+suitSeance(td_patrons_silr1_1, cm_patrons_3).
+suitSeance(td_patrons_silr2_1, cm_patrons_3).
+suitSeance(tp_patrons_id_1, td_patrons_id_2).
+suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2).
+suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2).
+suitSeance(cm_projet_transversal_2, cm_projet_transversal_1).
+suitSeance(projet_transversal_id_1, cm_projet_transversal_2).
+suitSeance(projet_transversal_silr_1, cm_projet_transversal_2).
 
 /**
  * suitSeance(Seance_suivante, Seance_suivie, tempsMin, tempsMax)
@@ -1074,3 +1054,28 @@ suitSeance(S2, S1) :-  % TODO tests
  * @arg tempsMax       		Nombre de jours max avant la prochaine séance
  */
 suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
+
+computeProfSeance(P, Seance) :-
+    \+ is_list(P),
+    assertz(profSeance(P, Seance)).
+computeProfSeance([], _).
+computeProfSeance([P|Profs], Seance) :- % si plusieurs profs par séance
+    computeProfSeance(P, Seance),
+    computeProfSeance(Profs, Seance).
+
+computeSeance(Nom, Mat, Profs, Type, Groupe, [X]) :-
+    computeProfSeance(Profs, X),
+    assertz(groupeSeance(Groupe, X)),
+    assertz(seance(X, Type, Mat, Nom)).
+computeSeance(Nom, Mat, Profs, Type, Groupe, [X, Y|S]) :-
+    (suitSeance(Y, X, _, _); assertz(suitSeance(Y, X))),
+    computeSeance(Nom, Mat, Profs, Type, Groupe, [X]),
+    computeSeance(Nom, Mat, Profs, Type, Groupe, [Y|S]).
+
+% On génère la base de donnée dynamique des séances et des prédicats en lien
+:- forall(
+    seances(Nom, Mat, Prof, Type, Groupe, Ids),
+    (
+        computeSeance(Nom, Mat, Prof, Type, Groupe, Ids)
+    )
+).
