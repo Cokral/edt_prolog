@@ -19,7 +19,7 @@ a4a8108 Guillaume Clochard      Thu Dec 15 12:55:21 2016 +0100  Début instancia
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * groupe(Groupe, Effectif)
+ * groupe(?Groupe, ?Effectif)
  *
  * @arg Groupe      Nom du groupe
  * @arg Effectif    Nombre d'étudiants dans le groupe
@@ -33,12 +33,10 @@ groupe(silr_para, 14).
 groupe(silr_code, 24).
 
 /**
- * incompatibles(Groupe1, Groupe2)
+ * incomp(-G1, -G2)
  *
- * Définit l'incompatibilité entre 2 groupes (si il y a des étudiants en commun)
- *
- * @arg Groupe1     Nom du groupe 1
- * @arg Groupe2     Nom du groupe 2
+ * @arg G1     Nom du groupe 1
+ * @arg G2     Nom du groupe 2
  */
 incomp(id, info).
 incomp(silr, info).
@@ -55,6 +53,14 @@ incomp(silr_code, silr2).
 incomp(silr_code, silr).
 incomp(silr_code, info).
 
+/**
+ * incompatibles(-Groupe1, -Groupe2)
+ *
+ * Définit l'incompatibilité entre 2 groupes (si il y a des étudiants en commun)
+ *
+ * @arg Groupe1     Nom du groupe 1
+ * @arg Groupe2     Nom du groupe 2
+ */
 % reflexive
 incompatibles(X, X) :- !.
 
@@ -67,7 +73,7 @@ incompatibles(X, Y) :- incomp(Y, X), !.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * matiere(Matiere)
+ * matiere(?Matiere)
  *
  * @arg Matiere     Nom de la matière
  **/
@@ -106,7 +112,7 @@ matiere(logiciel_meta_heuristique).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * prof(Prof)
+ * prof(?Prof)
  *
  * @arg Prof     Nom de l'enseignant
  **/
@@ -156,7 +162,7 @@ prof(prof_ptrans_silr).
 % Selon les conseils de M. Le Capitaine, nous avons modifié les plages horaires
 
 /**
- * plage(Id, Start:string, End:string)
+ * plage(?Id, -Start, -End)
  *
  * @arg Id      Id de la plage horaire
  * @arg Start   Heure de début de la plage
@@ -174,7 +180,7 @@ plage(6, '17h30', '19h00').
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * mois(IdMois).
+ * mois(?IdMois).
  *
  * @arg IdMois  Id du mois
  */
@@ -191,7 +197,7 @@ mois(4).
 joursParMois(20).
 
 /**
-* date(IdJour, IdMois)
+* date(?IdJour, ?IdMois)
 *
 * @arg IdJour  Id du jour
 * @arg IdMois  Id du mois
@@ -202,7 +208,7 @@ date(J, M) :-
     between(1, Max, J).
 
 /**
- * dateBefore(J1, M1, J2, M2)
+ * dateBefore(+J1, +M1, +J2, +M2)
  *
  * Test si date 1 < date 2
  * @arg J1  Jour date 1
@@ -219,7 +225,7 @@ dateBefore(J1, M1, J2, M2) :- M1 = M2, J1 < J2, !.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * typeCours(Type)
+ * typeCours(?Type)
  *
  * @arg Type  Un type de cours
  */
@@ -239,7 +245,7 @@ typeCours(anglais).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /**
- * salle(Nom, Effectif, Types)
+ * salle(?Nom, ?Effectif, ?Types)
  *
  * @arg Nom         Nom de la salle
  * @arg Effectif    Nombre de place disponibles
@@ -267,7 +273,7 @@ salle(maison_projet, 1000, [projet]).
 salle(maison_projet_2, 1000, [projet]).
 
 /**
- * salle(Nom, Effectif)
+ * salle(?Nom, ?Effectif)
  *
  * @arg Nom         Nom de la salle
  * @arg Effectif    Nombre de place disponibles
@@ -275,7 +281,7 @@ salle(maison_projet_2, 1000, [projet]).
 salle(S, N) :- salle(S, N, _). % TODO add tests
 
 /**
- * accueille(Salle, TypeCours)
+ * accueille(+Salle, ?TypeCours)
  *
  * @arg Salle       Nom d'une salle
  * @arg TypeCours   Type de cours que la salle accueille
@@ -289,7 +295,7 @@ accueille(S, T) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /*
- * seances(Nom, Mat, Prof, Type, Groupe, Ids).
+ * seances(?Nom, ?Mat, ?Prof, ?Type, ?Groupe, ?Ids).
  *
  * Définition de plusieurs séances à la volée
  *
@@ -1007,7 +1013,7 @@ seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, proje
 
 
 /**
- * seance(Id, TypeCours, Matiere, Nom)
+ * seance(?Id, ?TypeCours, ?Matiere, ?Nom)
  *
  * @arg Id          Id de la séance
  * @arg TypeCours   Type de cours de la séance
@@ -1017,7 +1023,7 @@ seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, proje
 :- dynamic seance/4.
 
 /**
- * groupeSeance(Groupe, Seance)
+ * groupeSeance(?Groupe, ?Seance)
  *
  * Définit la participation d'un groupe à une séance
  *
@@ -1027,7 +1033,7 @@ seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, proje
 :- dynamic groupeSeance/2.
 
 /**
- * profSeance(Prof, Seance)
+ * profSeance(?Prof, ?Seance)
  *
  * Définit la participation d'un enseignant à une séance
  *
@@ -1035,16 +1041,6 @@ seances('PROJET projet transversal', projet_transversal, prof_ptrans_silr, proje
  * @arg Seance      Id de la séance
  */
 :- dynamic profSeance/2.
-
-/**
- * suitSeancesListe(+S1, ?S2, +Liste).
- *
- * Est vrai si S1 et S2 se suivent dans Liste
- *
- * @arg S1      Id de séance
- * @arg S2      Id de séance
- * @arg Liste   Liste d'id de séances
- */
 
 /**
  * suitSeance(+Seance_suivante, ?Seance_suivie)
@@ -1130,7 +1126,7 @@ suitSeance(projet_transversal_id_1, cm_projet_transversal_2).
 suitSeance(projet_transversal_silr_1, cm_projet_transversal_2).
 
 /**
- * suitSeance(Seance_suivante, Seance_suivie, tempsMin, tempsMax)
+ * suitSeance(?Seance_suivante, ?Seance_suivie, ?tempsMin, ?tempsMax)
  *
  * @arg Seance_suivante     Id de la séance qui suit
  * @arg Seance_suivie       Id de la séance suivit
@@ -1191,6 +1187,16 @@ suitSeance(ds_patrons, tp_patrons_silr2_2, 7, 12).
 
 suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
 
+% Écriture dynamique de la base de donnée -------------------------------------
+
+/**
+ * computeProfSeance(+P, +Seance)
+ *
+ * assert profSeance
+ *
+ * @arg P       Un enseignant ou une liste d'enseignants
+ * @arg Seance  Une séance
+ */
 computeProfSeance(P, Seance) :-
     \+ is_list(P),
     assertz(profSeance(P, Seance)).
@@ -1199,6 +1205,16 @@ computeProfSeance([P|Profs], Seance) :- % si plusieurs profs par séance
     computeProfSeance(P, Seance),
     computeProfSeance(Profs, Seance).
 
+/**
+ * computeSeance(+Nom, +Mat, +Profs, +Type, +Groupe, +S)
+ *
+ * @arg Nom     Nom de la séance
+ * @arg Mat     Matière
+ * @arg Profs   Enseignant ou liste d'enseignants
+ * @arg Type    Type de cours
+ * @arg Groupe
+ * @arg Ss      Listes d'id de séances
+ */
 computeSeance(Nom, Mat, Profs, Type, Groupe, [X]) :-
     computeProfSeance(Profs, X),
     assertz(groupeSeance(Groupe, X)),

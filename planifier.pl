@@ -200,18 +200,21 @@ effectifGroupes([G|Gs], S) :-
     !.
 
 /**
- * planifier(+Ss, -Cs).
+ * planifier(+Ss, +Ds, -Cs).
  *
- * @arg S   Listes des séances à planifier
- * @arg C   Listes des créneaux construits
+ * @arg Ss  Listes des séances à planifier
+ * @arg Ds  Listes des créneaux déjà planifié
+ * @arg Cs  Listes des créneaux construits
  */
-planifier([], []) :- !.
-planifier(Ss, [C|Cs]) :-
+planifier([], _, []) :- !.
+planifier(Ss, Ds, [C|Cs]) :-
 
     member(S, Ss),      % La séance courante
     delete(Ss, S, Ss2), % On l'enlève de la liste
 
-    planifier(Ss2, Cs), % on traite le sous-problème
+    planifier(Ss2, Ds, Cs), % on traite le sous-problème
+
+    append(Ds, Cs, Cs2), % on crée une liste qui regroupe les créneaux existants
 
     % Création du créneau et tests ---------------------------------------------
 
@@ -233,9 +236,10 @@ planifier(Ss, [C|Cs]) :-
 
     % test des contraintes (profs, incompatibilité groupes, séquencement)
     % sur cette proposition de créneau
-    creneauValide(S, Ps, Gs, H, J, M, L, Cs),
+    creneauValide(S, Ps, Gs, H, J, M, L, Cs2),
 
     % Fin création du créneau et tests -----------------------------------------
 
     C = [S, H, J, M, L].
 
+planifier(Ss, Cs) :- planifier(Ss, [], Cs).
