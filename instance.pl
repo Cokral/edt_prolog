@@ -74,16 +74,16 @@ incompatibles(X, Y) :- incomp(Y, X), !.
 matiere(projet_genie_logiciel).
 matiere(projet_transversal).
 
-matiere(hes_anglais).
+matiere(hes_anglais). % TO ADD
 matiere(hes_gestion_projet).
 matiere(hes_marketing).
-matiere(hes_jeu).
-matiere(hes_sante_securite).
+matiere(hes_jeu). % TO ADD
+matiere(hes_sante_securite). % TO ADD
 
 matiere(connaissances_bdd).
 matiere(connaissances_projet_ia).
 matiere(connaissances_ia).
-matiere(connaissances_organisation).
+matiere(connaissances_organisation). % TO ADD
 
 matiere(math_analyse_donnees).
 matiere(math_compta).
@@ -362,6 +362,10 @@ seances('TP BDD', connaissances_bdd, nachouki, tp, silr2, [
     tp_bdd_silr2_6
 ]).
 
+seances('DS BDD', connaissances_bdd, raschia, ds, info, [
+    ds_bdd
+]).
+
 seances('TP mini projet IA', connaissances_projet_ia, lecapitaine, tp, id, [
     tp_projet_ia_id_1,
     tp_projet_ia_id_2,
@@ -416,6 +420,11 @@ seances('TD IA', connaissances_ia, raschia, td, silr2, [
     td_IA_silr2_3
 ]).
 
+seances('DS IA', connaissances_ia, martinez, ds, info, [
+    ds_ia
+]).
+
+
 /*
  * Ingenierie logicielle
  * INFO
@@ -444,6 +453,10 @@ seances('TP multimédia', logiciel_multimedia, gelgon, tp, id, [
     tp_multimedia_6
 ]).
 
+seances('DS multimedia', logiciel_multimedia, [jpeg, gelgon], ds, info, [
+    ds_multimedia
+]).
+
 seances('CM optimisation et meta heuristique', logiciel_meta_heuristique, kuntz, cm, id, [
     cm_meta_heuristique_1,
     cm_meta_heuristique_2,
@@ -454,17 +467,21 @@ seances('CM optimisation et meta heuristique', logiciel_meta_heuristique, kuntz,
     cm_meta_heuristique_7
 ]).
 
+seances('DS optimisation et meta heuristique', logiciel_meta_heuristique, kuntz, ds, id, [
+    ds_meta_heuristique
+]).
+
 seances('CM C++', logiciel_c, picarougne, cm, info, [
-    tp_c_1,
-    tp_c_2,
-    tp_c_3,
-    tp_c_4,
-    tp_c_5,
-    tp_c_6,
-    tp_c_7,
-    tp_c_8,
-    tp_c_9,
-    tp_c_10
+    cm_c_1,
+    cm_c_2,
+    cm_c_3,
+    cm_c_4,
+    cm_c_5,
+    cm_c_6,
+    cm_c_7,
+    cm_c_8,
+    cm_c_9,
+    cm_c_10
 ]).
 
 seances('TP C++', logiciel_c, soufiane, tp, id, [
@@ -506,6 +523,10 @@ seances('TP C++', logiciel_c, picarougne, tp, silr2, [
     tp_c_silr2_10
 ]).
 
+seances('DS C++', logiciel_c, picarougne, ds, info, [
+    ds_c
+]).
+
 seances('CM Mini-Projet C++', logiciel_projet_c, picarougne, cm, info, [
     cm_projet_c_1,
     cm_projet_c_2
@@ -532,6 +553,10 @@ seances('TP outils ingénierie logiciel', logiciel_outils, vigier, tp, silr2, [
     tp_outils_ingenierie_silr2_4,
     tp_outils_ingenierie_silr2_5,
     tp_outils_ingenierie_silr2_6
+]).
+
+seances('DS outils ingénierie logiciel', logiciel_outils, cohen, ds, silr, [
+    ds_outils_ingenierie
 ]).
 
 /*
@@ -564,6 +589,10 @@ seances('TP analyse de données', math_analyse_donnees, [lecapitaine, peter], tp
     tp_analyse_donnees_6
 ]).
 
+seances('DS analyse de données', math_analyse_donnees, kuntz, ds, id, [
+    ds_analyse_donnees
+]).
+
 seances('CM architecture para et parallélisation de données', math_archi_parallèle, martinez, cm, id, [
     cm_archi_parallèle_1,
     cm_archi_parallèle_2
@@ -572,6 +601,10 @@ seances('CM architecture para et parallélisation de données', math_archi_paral
 seances('TD architecture para et parallélisation de données', math_archi_parallèle, martinez, td, id, [
     td_archi_parallèle_1,
     td_archi_parallèle_2
+]).
+
+seances('DS architecture para et parallélisation de données', math_archi_parallèle, martinez, ds, id, [
+    ds_archi_parallèle
 ]).
 
 seances('TD comptabilite', math_compta, goncalves, td, id, [
@@ -584,6 +617,15 @@ seances('TD comptabilite', math_compta, goncalves, td, id, [
     td_compta_7
 ]).
 
+seances('DS comptabilite', math_compta, goncalves, ds, id, [
+    ds_compta
+]).
+
+/*
+ * Mathématiques de la décision & réseau
+ * Info
+ */
+
 seances('CM crypto', math_crypto, parrein, cm, info, [
     cm_crypto_1,
     cm_crypto_2,
@@ -592,11 +634,6 @@ seances('CM crypto', math_crypto, parrein, cm, info, [
     cm_crypto_5,
     cm_crypto_6
 ]).
-
-/*
- * Mathématiques de la décision & réseau
- * Info
- */
 
 seances('TD crypto', math_crypto, raschia, td, id, [
     td_crypto_id_1,
@@ -619,6 +656,10 @@ seances('TD crypto', math_crypto, parrein, td, silr2, [
     td_crypto_silr2_4
 ]).
 
+seances('DS crypto', math_crypto, parrein, ds, info, [
+    ds_crypto
+]).
+
 /*
  * Réseaux, multimédias 1
  * Silr
@@ -634,7 +675,7 @@ seances('CM réseaux', logiciel_reseau, lehn, cm, silr, [
     cm_reseaux_7
 ]).
 
-seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr1, [
+seances('TP réseaux', logiciel_reseau, [leman, parrein], tp, silr1, [
     tp_reseaux_silr1_1,
     tp_reseaux_silr1_2,
     tp_reseaux_silr1_3,
@@ -645,7 +686,7 @@ seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr1, [
     tp_reseaux_silr1_8
 ]).
 
-seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr2, [
+seances('TP réseaux', logiciel_reseau, [leman, parrein], tp, silr2, [
     tp_reseaux_silr2_1,
     tp_reseaux_silr2_2,
     tp_reseaux_silr2_3,
@@ -654,6 +695,10 @@ seances('TPréseaux', logiciel_reseau, [leman, parrein], tp, silr2, [
     tp_reseaux_silr2_6,
     tp_reseaux_silr2_7,
     tp_reseaux_silr2_8
+]).
+
+seances('DS réseaux', logiciel_reseau, lehn, ds, silr, [
+    ds_reseaux
 ]).
 
 seances('CM traitement d\'image', logiciel_traitement_image, jpeg, cm, silr, [
@@ -689,6 +734,10 @@ seances('TP traitement d\'image', logiciel_traitement_image, marcus, tp, silr2, 
     tp_traitement_image_silr2_5,
     tp_traitement_image_silr2_6,
     tp_traitement_image_silr2_7
+]).
+
+seances('DS traitement d\'image', logiciel_traitement_image, jpeg, ds, silr, [
+    ds_traitement_image
 ]).
 
 seances('CM traitement du signal', logiciel_signal, le_callet, cm, silr, [
@@ -736,6 +785,10 @@ seances('TP traitement du signal', logiciel_signal, ricordel, tp, silr2, [
     tp_traitement_signal_silr2_6
 ]).
 
+seances('DS traitement du signal', logiciel_signal, le_callet, ds, silr, [
+    ds_traitement_signal
+]).
+
 /*
  * HES
  * Info
@@ -775,6 +828,10 @@ seances('TD marketing', hes_marketing, oili, cm, id, [
     td_marketing_id_5,
     td_marketing_id_6,
     td_marketing_id_7
+]).
+
+seances('DS marketing', hes_marketing, [moreau, oili], ds, info, [
+    ds_marketing
 ]).
 
 /*
@@ -824,6 +881,10 @@ seances('TP génie logiciel gestion projets', projet_genie_logiciel, marcus, tp,
     tp_genie_logi_silr2_1
 ]).
 
+seances('DS génie logiciel gestion projets', projet_genie_logiciel, [marcus, prie], ds, info, [
+    ds_genie_logi
+]).
+
 seances('CM patrons conception', logiciel_patrons, pigeau, cm, info, [
     cm_patrons_1,
     cm_patrons_2,
@@ -858,6 +919,10 @@ seances('TP patrons conception', logiciel_patrons, prie, tp, silr1, [
 seances('TP patrons conception', logiciel_patrons, pigeau, tp, silr2, [
     tp_patrons_silr2_1,
     tp_patrons_silr2_2
+]).
+
+seances('DS patrons conception', logiciel_patrons, pigeau, ds, info, [
+    ds_patrons
 ]).
 
 seances('CM projet transversal', projet_transversal, jpeg, cm, info, [
@@ -998,49 +1063,68 @@ suitSeance(td_bdd_silr1_1, cm_bdd_8).
 suitSeance(tp_bdd_silr1_1, cm_bdd_8).
 suitSeance(td_bdd_silr2_1, cm_bdd_8).
 suitSeance(tp_bdd_silr2_1, cm_bdd_8).
+
 suitSeance(td_IA_silr2_1, cm_IA_6).
 suitSeance(td_IA_silr1_1, cm_IA_6).
 suitSeance(td_IA_id_1, cm_IA_6).
+
 suitSeance(tp_projet_ia_silr2_1, td_IA_silr2_3).
 suitSeance(tp_projet_ia_silr1_1, td_IA_silr1_3).
 suitSeance(tp_projet_ia_id_1, td_IA_id_3).
+
 suitSeance(tp_multimedia_1, cm_multimedia_8).
 suitSeance(tp_multimedia_1, cm_multimedia_4).
-suitSeance(tp_c_id_1, cm_IA_6).
-suitSeance(tp_c_silr1_1, cm_IA_6).
-suitSeance(tp_c_silr2_1, cm_IA_6).
+
+suitSeance(tp_c_id_1, cm_c_10).
+suitSeance(tp_c_silr1_1, cm_c_10).
+suitSeance(tp_c_silr2_1, cm_c_10).
+
 suitSeance(cm_projet_c_1, tp_c_id_10).
 suitSeance(cm_projet_c_1, tp_c_silr1_10).
 suitSeance(cm_projet_c_1, tp_c_silr2_10).
+
 suitSeance(tp_outils_ingenierie_silr2_1, cm_outils_ingenierie_silr_2).
 suitSeance(tp_outils_ingenierie_silr1_1, cm_outils_ingenierie_silr_2).
+
 suitSeance(td_analyse_donnees_1, cm_analyse_donnees_7).
 suitSeance(tp_analyse_donnees_1, td_analyse_donnees_3).
+
 suitSeance(td_archi_parallèle_1, cm_archi_parallèle_2).
+
 suitSeance(td_crypto_silr2_1, cm_crypto_6).
 suitSeance(td_crypto_silr1_1, cm_crypto_6).
 suitSeance(td_crypto_id_1, cm_crypto_6).
+
 suitSeance(tp_reseaux_silr1_1, cm_reseaux_7).
 suitSeance(tp_reseaux_silr2_1, cm_reseaux_7).
+
 suitSeance(tp_traitement_image_silr2_1, cm_traitement_image_12).
 suitSeance(tp_traitement_image_silr1_1, cm_traitement_image_12).
+
 suitSeance(td_traitement_signal_silr1_1, cm_traitement_signal_6).
 suitSeance(td_traitement_signal_silr2_1, cm_traitement_signal_6).
 suitSeance(tp_traitement_signal_silr1_1, cm_traitement_signal_6).
 suitSeance(tp_traitement_signal_silr2_1, cm_traitement_signal_6).
+
 suitSeance(cm_marketing_id_2, cm_marketing_id_1).
 suitSeance(cm_marketing_silr_2, cm_marketing_silr_1).
 suitSeance(td_marketing_id_1, cm_marketing_id_2).
 suitSeance(td_marketing_silr_1, cm_marketing_silr_2).
+
+suitSeance(td_genie_logi_id_1, cm_genie_logi_6).
+suitSeance(td_genie_logi_silr1_1, cm_genie_logi_6).
+suitSeance(td_genie_logi_silr2_1, cm_genie_logi_6).
 suitSeance(tp_genie_logi_id_1, cm_genie_logi_6).
 suitSeance(tp_genie_logi_silr1_1, cm_genie_logi_6).
 suitSeance(tp_genie_logi_silr2_1, cm_genie_logi_6).
+
 suitSeance(td_patrons_id_1, cm_patrons_3).
 suitSeance(td_patrons_silr1_1, cm_patrons_3).
 suitSeance(td_patrons_silr2_1, cm_patrons_3).
 suitSeance(tp_patrons_id_1, td_patrons_id_2).
 suitSeance(tp_patrons_silr1_1, td_patrons_silr1_2).
 suitSeance(tp_patrons_silr2_1, td_patrons_silr2_2).
+
 suitSeance(cm_projet_transversal_2, cm_projet_transversal_1).
 suitSeance(projet_transversal_id_1, cm_projet_transversal_2).
 suitSeance(projet_transversal_silr_1, cm_projet_transversal_2).
@@ -1053,6 +1137,58 @@ suitSeance(projet_transversal_silr_1, cm_projet_transversal_2).
  * @arg tempsMin     		Nombre de jours min avant la prochaine séance
  * @arg tempsMax       		Nombre de jours max avant la prochaine séance
  */
+suitSeance(ds_bdd, tp_bdd_id_6, 7, 12).
+suitSeance(ds_bdd, tp_bdd_silr1_6, 7, 12).
+suitSeance(ds_bdd, tp_bdd_silr2_6, 7, 12).
+
+suitSeance(ds_ia, td_IA_id_3, 7, 12).
+suitSeance(ds_ia, td_IA_silr1_3, 7, 12).
+suitSeance(ds_ia, td_IA_silr2_3, 7, 12).
+
+suitSeance(ds_multimedia, tp_multimedia_6, 7, 12).
+
+suitSeance(ds_meta_heuristique, cm_meta_heuristique_7, 7, 12).
+
+suitSeance(ds_c, tp_c_id_10, 7, 12).
+suitSeance(ds_c, tp_c_silr2_10, 7, 12).
+suitSeance(ds_c, tp_c_silr1_10, 7, 12).
+
+suitSeance(ds_outils_ingenierie, tp_outils_ingenierie_silr2_6, 7, 12).
+suitSeance(ds_outils_ingenierie, tp_outils_ingenierie_silr1_6, 7, 12).
+
+suitSeance(ds_analyse_donnees, tp_analyse_donnees_6, 7, 12).
+
+suitSeance(ds_archi_parallèle, td_archi_parallèle_2, 7, 12).
+
+suitSeance(ds_compta, td_compta_7, 7, 12).
+
+suitSeance(ds_crypto, td_crypto_id_4, 7, 12).
+suitSeance(ds_crypto, td_crypto_silr1_4, 7, 12).
+suitSeance(ds_crypto, td_crypto_silr2_4, 7, 12).
+
+suitSeance(ds_reseaux, tp_reseaux_silr1_8, 7, 12).
+suitSeance(ds_reseaux, tp_reseaux_silr2_8, 7, 12).
+
+suitSeance(ds_traitement_image, tp_traitement_image_silr1_7, 7, 12).
+suitSeance(ds_traitement_image, tp_traitement_image_silr2_7, 7, 12).
+
+suitSeance(ds_traitement_signal, tp_traitement_signal_silr1_6, 7, 12).
+suitSeance(ds_traitement_signal, tp_traitement_signal_silr2_6, 7, 12).
+
+suitSeance(ds_marketing, td_marketing_id_7, 7, 12).
+suitSeance(ds_marketing, td_marketing_silr_7, 7, 12).
+
+suitSeance(ds_genie_logi, td_genie_logi_id_3, 5, 20).
+suitSeance(ds_genie_logi, td_genie_logi_silr1_3, 5, 20).
+suitSeance(ds_genie_logi, td_genie_logi_silr2_3, 5, 20).
+suitSeance(ds_genie_logi, tp_genie_logi_id_1, 5, 20).
+suitSeance(ds_genie_logi, tp_genie_logi_silr1_1, 5, 20).
+suitSeance(ds_genie_logi, tp_genie_logi_silr2_1, 5, 20).
+
+suitSeance(ds_patrons, tp_patrons_id_2, 7, 12).
+suitSeance(ds_patrons, tp_patrons_silr1_2, 7, 12).
+suitSeance(ds_patrons, tp_patrons_silr2_2, 7, 12).
+
 suitSeance(cm_projet_c_2, cm_projet_c_1, 7, 12).
 
 computeProfSeance(P, Seance) :-
